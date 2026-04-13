@@ -4,6 +4,21 @@ import './style.css';
 // TT & More — Premium Interactions
 // =========================================================
 
+// ---- Cinematic Hero Slideshow ----
+const heroSlides = document.querySelectorAll('.hero-slide');
+if (heroSlides.length > 0) {
+  let currentSlide = 0;
+  const slideInterval = 6000; // 6 seconds per slide
+
+  function nextSlide() {
+    heroSlides[currentSlide].classList.remove('hero-slide--active');
+    currentSlide = (currentSlide + 1) % heroSlides.length;
+    heroSlides[currentSlide].classList.add('hero-slide--active');
+  }
+
+  setInterval(nextSlide, slideInterval);
+}
+
 // ---- Sticky header scroll effect ----
 const header = document.querySelector('.header');
 if (header) {
