@@ -210,6 +210,37 @@
 
   <a href="https://wa.me/529983000307" class="whatsapp-float" target="_blank" rel="noopener"><div class="whatsapp-float__btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.116.553 4.105 1.516 5.832L.051 23.579a.5.5 0 00.62.62l5.747-1.465A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></div></a>
 
+  <!-- AI Chat Widget -->
+  <div class="chat-widget" id="chat-widget">
+    <div class="chat-window">
+      <div class="chat-header">
+        <div class="chat-header__avatar">🤖</div>
+        <div class="chat-header__info">
+          <div class="chat-header__name">TT &amp; More AI Concierge</div>
+          <div class="chat-header__status">Online — Ready to help</div>
+        </div>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-msg chat-msg--bot">Hi! 👋 I'm your AI concierge. I can help you book shuttles, tours, or answer any questions about our services. How can I help?</div>
+      </div>
+      <div class="chat-quick-actions" id="chat-quick-actions">
+        <button class="chat-quick-btn" data-msg="What are shuttle prices?">💰 Prices</button>
+        <button class="chat-quick-btn" data-msg="I want to book a shuttle">🚐 Book Shuttle</button>
+        <button class="chat-quick-btn" data-msg="What tours do you offer?">🏛️ Tours</button>
+        <button class="chat-quick-btn" data-msg="I need a group quote">👥 Groups</button>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" class="chat-input" id="chat-input" placeholder="Type your message..." autocomplete="off">
+        <button class="chat-send-btn" id="chat-send" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+      </div>
+      <div class="chat-powered">Powered by <a href="https://jegodigital.com" target="_blank">JegoDigital</a> AI</div>
+    </div>
+    <button class="chat-widget__trigger" id="chat-toggle" aria-label="Open AI chat">
+      <div class="chat-widget__badge"></div>
+      <svg class="chat-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      <svg class="chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
   <script type="module" src="/src/main.js"></script>
 </body>
 </html>

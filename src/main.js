@@ -179,8 +179,132 @@ bookingForms.forEach(form => {
     if (data.notes) message += `📝 Notes: ${data.notes}\n`;
     
     const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/529981666981?text=${encoded}`, '_blank');
+    window.open(`https://wa.me/529983000307?text=${encoded}`, '_blank');
   });
 });
+
+// =========================================================
+// AI Chat Widget — Gemini-powered Concierge
+// =========================================================
+const chatWidget = document.getElementById('chat-widget');
+const chatToggle = document.getElementById('chat-toggle');
+const chatMessages = document.getElementById('chat-messages');
+const chatInput = document.getElementById('chat-input');
+const chatSend = document.getElementById('chat-send');
+const chatQuickActions = document.getElementById('chat-quick-actions');
+
+if (chatToggle && chatWidget) {
+  let conversationHistory = [];
+  let isLoading = false;
+
+  // Toggle chat open/close
+  chatToggle.addEventListener('click', () => {
+    chatWidget.classList.toggle('active');
+    if (chatWidget.classList.contains('active')) {
+      setTimeout(() => chatInput?.focus(), 300);
+    }
+  });
+
+  // Send message
+  async function sendMessage(text) {
+    if (!text.trim() || isLoading) return;
+
+    // Hide quick actions after first message
+    if (chatQuickActions) chatQuickActions.style.display = 'none';
+
+    // Add user message
+    appendMessage(text, 'user');
+    conversationHistory.push({ role: 'user', text });
+
+    // Clear input
+    if (chatInput) chatInput.value = '';
+
+    // Show typing indicator
+    isLoading = true;
+    const typingEl = showTyping();
+
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          history: conversationHistory.slice(-10) // Keep last 10 messages for context
+        })
+      });
+
+      const data = await response.json();
+      removeTyping(typingEl);
+
+      if (data.reply) {
+        appendMessage(data.reply, 'bot');
+        conversationHistory.push({ role: 'model', text: data.reply });
+      } else if (data.error) {
+        appendMessage(data.error, 'bot');
+      }
+    } catch (error) {
+      removeTyping(typingEl);
+      appendMessage("I'm having trouble connecting. Please try again or contact us via WhatsApp at +52 998 300 0307. 📱", 'bot');
+    }
+
+    isLoading = false;
+  }
+
+  // Append message bubble
+  function appendMessage(text, type) {
+    const msgEl = document.createElement('div');
+    msgEl.className = `chat-msg chat-msg--${type}`;
+    // Convert markdown-like formatting
+    msgEl.innerHTML = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/\n/g, '<br>')
+      .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank">$1</a>')
+      .replace(/(\+52[\s\d]+)/g, '<a href="tel:$1">$1</a>');
+
+    chatMessages.appendChild(msgEl);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Typing indicator
+  function showTyping() {
+    const typingEl = document.createElement('div');
+    typingEl.className = 'chat-typing';
+    typingEl.innerHTML = '<span></span><span></span><span></span>';
+    chatMessages.appendChild(typingEl);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return typingEl;
+  }
+
+  function removeTyping(el) {
+    if (el && el.parentNode) el.parentNode.removeChild(el);
+  }
+
+  // Send button click
+  if (chatSend) {
+    chatSend.addEventListener('click', () => {
+      sendMessage(chatInput.value);
+    });
+  }
+
+  // Enter to send
+  if (chatInput) {
+    chatInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage(chatInput.value);
+      }
+    });
+  }
+
+  // Quick action buttons
+  if (chatQuickActions) {
+    chatQuickActions.querySelectorAll('.chat-quick-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sendMessage(btn.dataset.msg);
+      });
+    });
+  }
+}
 
 console.log('TT & More — Premium Site Loaded ✨');
