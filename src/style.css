@@ -379,7 +379,7 @@ button {
 }
 
 .header__logo img {
-  height: 52px;
+  height: 85px;
   width: auto;
   transition: transform var(--transition-base);
 }
@@ -1546,7 +1546,7 @@ button {
 }
 
 .footer__brand img {
-  height: 48px;
+  height: 80px;
 }
 
 .footer__title {
