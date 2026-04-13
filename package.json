@@ -1,0 +1,15 @@
+{
+  "name": "ttandmore",
+  "version": "1.0.0",
+  "description": "TT & More - Premium Cancun Airport Transportation & Tours",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^8.0.4"
+  }
+}
