@@ -613,6 +613,44 @@ button {
   margin: 0;
 }
 
+/* Mobile menu language switcher */
+.mobile-menu__lang {
+  margin-top: 16px;
+  padding: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+.mobile-menu__lang-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-muted, #888);
+  margin-bottom: 10px;
+}
+.mobile-menu__lang-switch {
+  display: flex;
+  gap: 8px;
+}
+.mobile-menu__lang-switch a {
+  flex: 1;
+  text-align: center;
+  padding: 12px 8px;
+  background: #f5f7fb;
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #222);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.mobile-menu__lang-switch a.is-active {
+  background: var(--brand-primary, #FFC107);
+  border-color: var(--brand-primary, #FFC107);
+  color: #000;
+}
+
 /* Pricing OW/RT Toggle */
 .price-toggle__btn {
   padding: 10px 22px;

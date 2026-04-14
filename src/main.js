@@ -59,6 +59,26 @@ if (mobileToggle && mobileMenu) {
     mobileMenu.insertBefore(bar, mobileMenu.firstChild);
   }
 
+  // Inject language switcher at bottom of menu (once)
+  if (!mobileMenu.querySelector('.mobile-menu__lang')) {
+    const inner = mobileMenu.querySelector('.mobile-menu__inner') || mobileMenu;
+    const isES = window.location.pathname.startsWith('/es/') || window.location.pathname === '/es';
+    const langWrap = document.createElement('div');
+    langWrap.className = 'mobile-menu__lang';
+    // Map current page to its counterpart in the other language
+    const path = window.location.pathname;
+    const enPath = isES ? path.replace(/^\/es\/?/, '/') : path;
+    const esPath = isES ? path : '/es' + (path === '/' ? '/' : path);
+    langWrap.innerHTML = `
+      <span class="mobile-menu__lang-label">Language / Idioma</span>
+      <div class="mobile-menu__lang-switch">
+        <a href="${enPath}" class="${isES ? '' : 'is-active'}">🇺🇸 English</a>
+        <a href="${esPath}" class="${isES ? 'is-active' : ''}">🇲🇽 Español</a>
+      </div>
+    `;
+    inner.appendChild(langWrap);
+  }
+
   const closeMenu = () => {
     mobileToggle.classList.remove('active');
     mobileMenu.classList.remove('active');
