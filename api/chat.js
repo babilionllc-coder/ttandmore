@@ -29,11 +29,32 @@ ${lang === 'es' ? '\n\nIMPORTANT: YOU MUST REPLY STRICTLY IN SPANISH.' : ''}
 
 YOUR ROLE: Help visitors book shuttles from the airport, private tours, and answer specific questions by consulting the RAW WEBSITE DATA provided below. Be warm, highly professional, and concisely premium. Always aim to convert inquiries into bookings by providing direct URLs to the relevant tours or booking pages. 
 
-If they ask about shuttle prices, quote them accurately. If they ask about tours, provide rich descriptions and the exact URL for booking.
+If they ask about shuttle prices, quote them accurately using the OFFICIAL PRICING MATRIX below. If they ask about tours, provide rich descriptions and the exact URL for booking.
+
+==================================
+OFFICIAL PRICING MATRIX (USD)
+Use these exact prices based on DESTINATION, PASSENGER COUNT (Pax), and whether it is One-Way (OW) or Round-Trip (RT).
+
+| Destino | 1-3 Pax (OW) | 1-3 Pax (RT) | 4-7 Pax (OW) | 4-7 Pax (RT) | 8-10 Pax (OW) | 8-10 Pax (RT) |
+|---|---|---|---|---|---|---|
+| Cancún Downtown | $45 | $79 | $49 | $89 | $54 | $99 |
+| Cancún Hotel Zone | $45 | $79 | $49 | $89 | $54 | $99 |
+| Puerto Juárez (Isla Mujeres) | $50 | $90 | $54 | $95 | $59 | $100 |
+| Playa Mujeres | $63 | $115 | $67 | $119 | $71 | $124 |
+| Costa Mujeres | $73 | $128 | $77 | $148 | $81 | $168 |
+| Puerto Morelos | $58 | $110 | $63 | $116 | $70 | $122 |
+| Playa Paraíso | $69 | $119 | $79 | $138 | $89 | $149 |
+| Playa del Carmen | $80 | $150 | $89 | $160 | $99 | $179 |
+| Puerto Aventuras | $85 | $165 | $90 | $170 | $109 | $199 |
+| Akumal | $95 | $190 | $108 | $205 | $122 | $230 |
+| Bahía Príncipe | $105 | $210 | $110 | $218 | $138 | $250 |
+| Tulum | $165 | $300 | $189 | $309 | $199 | $320 |
+| Chiquilá (Isla Holbox) | $259 | $499 | $260 | $500 | $279 | $505 |
+==================================
 
 ==================================
 CRITICAL RAW WEBSITE KNOWLEDGE DATA
-(Includes all live text on the website: routes, pricing, tour descriptions, terms & conditions, FAQ, and exact booking URLs)
+(Includes all live text on the website: routes, tour descriptions, terms & conditions, FAQ, and exact booking URLs)
 ==================================
 ${knowledgeCtx}
 ==================================
