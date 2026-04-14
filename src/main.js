@@ -87,6 +87,23 @@ if (mobileToggle && mobileMenu) {
   });
 }
 
+// ---- Pricing OW/RT Toggle (book pages) ----
+document.querySelectorAll('.price-toggle').forEach(toggleWrap => {
+  const table = toggleWrap.parentElement.querySelector('.pricing-table[data-trip]');
+  if (!table) return;
+  toggleWrap.querySelectorAll('.price-toggle__btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const trip = btn.dataset.trip; // "ow" or "rt"
+      toggleWrap.querySelectorAll('.price-toggle__btn').forEach(b => b.classList.toggle('is-active', b === btn));
+      table.setAttribute('data-trip', trip);
+      table.querySelectorAll('td.price').forEach(cell => {
+        const val = cell.dataset[trip];
+        if (val) cell.textContent = val;
+      });
+    });
+  });
+});
+
 // ---- FAQ Accordion ----
 document.querySelectorAll('.faq-item__question').forEach(question => {
   question.addEventListener('click', () => {

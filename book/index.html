@@ -253,8 +253,12 @@
         <div style="margin-top:var(--space-16);" class="reveal">
           <div class="row">
             <div class="col-12" style="overflow-x: auto;">
-              <p style="text-align: center; margin-bottom: 2rem; color: #666;">Prices are per vehicle (one way in USD), not per person. Contact us or use the AI Chat for Round-Trip discounts.</p>
-              <table class="pricing-table">
+              <p style="text-align: center; margin-bottom: 1rem; color: #666;">Prices are per vehicle (USD), not per person. All vehicles include flight monitoring, bottled water, and fully insured drivers.</p>
+              <div class="price-toggle" style="display:flex;justify-content:center;gap:8px;margin-bottom:1.5rem;">
+                <button type="button" class="price-toggle__btn is-active" data-trip="ow">One Way</button>
+                <button type="button" class="price-toggle__btn" data-trip="rt">Round Trip</button>
+              </div>
+              <table class="pricing-table" data-trip="ow">
                 <thead>
                   <tr>
                     <th>Destination</th>
@@ -265,19 +269,19 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td>Cancún Downtown</td><td class="price">$45</td><td class="price">$49</td><td class="price">$54</td><td>~20 min</td></tr>
-                  <tr><td>Cancún Hotel Zone</td><td class="price">$45</td><td class="price">$49</td><td class="price">$54</td><td>~25 min</td></tr>
-                  <tr><td>Puerto Juárez / Isla Mujeres</td><td class="price">$50</td><td class="price">$54</td><td class="price">$59</td><td>~30 min</td></tr>
-                  <tr><td>Playa Mujeres</td><td class="price">$63</td><td class="price">$67</td><td class="price">$71</td><td>~30 min</td></tr>
-                  <tr><td>Costa Mujeres</td><td class="price">$73</td><td class="price">$77</td><td class="price">$81</td><td>~35 min</td></tr>
-                  <tr><td>Puerto Morelos</td><td class="price">$58</td><td class="price">$63</td><td class="price">$70</td><td>~35 min</td></tr>
-                  <tr><td>Playa Paraíso</td><td class="price">$69</td><td class="price">$79</td><td class="price">$89</td><td>~40 min</td></tr>
-                  <tr><td>Playa del Carmen</td><td class="price">$80</td><td class="price">$89</td><td class="price">$99</td><td>~55 min</td></tr>
-                  <tr><td>Puerto Aventuras</td><td class="price">$85</td><td class="price">$90</td><td class="price">$109</td><td>~1h 10min</td></tr>
-                  <tr><td>Akumal</td><td class="price">$95</td><td class="price">$108</td><td class="price">$122</td><td>~1h 20min</td></tr>
-                  <tr><td>Bahía Príncipe</td><td class="price">$105</td><td class="price">$110</td><td class="price">$138</td><td>~1h 30min</td></tr>
-                  <tr><td>Tulum</td><td class="price">$165</td><td class="price">$189</td><td class="price">$199</td><td>~1h 45min</td></tr>
-                  <tr><td>Chiquilá (Isla Holbox)</td><td class="price">$259</td><td class="price">$260</td><td class="price">$279</td><td>~2h</td></tr>
+                  <tr><td>Cancún Downtown</td><td class="price" data-ow="$45" data-rt="$79">$45</td><td class="price" data-ow="$49" data-rt="$89">$49</td><td class="price" data-ow="$54" data-rt="$99">$54</td><td>~20 min</td></tr>
+                  <tr><td>Cancún Hotel Zone</td><td class="price" data-ow="$45" data-rt="$79">$45</td><td class="price" data-ow="$49" data-rt="$89">$49</td><td class="price" data-ow="$54" data-rt="$99">$54</td><td>~25 min</td></tr>
+                  <tr><td>Puerto Juárez / Isla Mujeres</td><td class="price" data-ow="$50" data-rt="$90">$50</td><td class="price" data-ow="$54" data-rt="$95">$54</td><td class="price" data-ow="$59" data-rt="$100">$59</td><td>~30 min</td></tr>
+                  <tr><td>Playa Mujeres</td><td class="price" data-ow="$63" data-rt="$115">$63</td><td class="price" data-ow="$67" data-rt="$119">$67</td><td class="price" data-ow="$71" data-rt="$124">$71</td><td>~30 min</td></tr>
+                  <tr><td>Costa Mujeres</td><td class="price" data-ow="$73" data-rt="$128">$73</td><td class="price" data-ow="$77" data-rt="$148">$77</td><td class="price" data-ow="$81" data-rt="$168">$81</td><td>~35 min</td></tr>
+                  <tr><td>Puerto Morelos</td><td class="price" data-ow="$58" data-rt="$110">$58</td><td class="price" data-ow="$63" data-rt="$116">$63</td><td class="price" data-ow="$70" data-rt="$122">$70</td><td>~35 min</td></tr>
+                  <tr><td>Playa Paraíso</td><td class="price" data-ow="$69" data-rt="$119">$69</td><td class="price" data-ow="$79" data-rt="$138">$79</td><td class="price" data-ow="$89" data-rt="$149">$89</td><td>~40 min</td></tr>
+                  <tr><td>Playa del Carmen</td><td class="price" data-ow="$80" data-rt="$150">$80</td><td class="price" data-ow="$89" data-rt="$160">$89</td><td class="price" data-ow="$99" data-rt="$179">$99</td><td>~55 min</td></tr>
+                  <tr><td>Puerto Aventuras</td><td class="price" data-ow="$85" data-rt="$165">$85</td><td class="price" data-ow="$90" data-rt="$170">$90</td><td class="price" data-ow="$109" data-rt="$199">$109</td><td>~1h 10min</td></tr>
+                  <tr><td>Akumal</td><td class="price" data-ow="$95" data-rt="$190">$95</td><td class="price" data-ow="$108" data-rt="$205">$108</td><td class="price" data-ow="$122" data-rt="$230">$122</td><td>~1h 20min</td></tr>
+                  <tr><td>Bahía Príncipe</td><td class="price" data-ow="$105" data-rt="$210">$105</td><td class="price" data-ow="$110" data-rt="$218">$110</td><td class="price" data-ow="$138" data-rt="$250">$138</td><td>~1h 30min</td></tr>
+                  <tr><td>Tulum</td><td class="price" data-ow="$165" data-rt="$300">$165</td><td class="price" data-ow="$189" data-rt="$309">$189</td><td class="price" data-ow="$199" data-rt="$320">$199</td><td>~1h 45min</td></tr>
+                  <tr><td>Chiquilá (Isla Holbox)</td><td class="price" data-ow="$259" data-rt="$499">$259</td><td class="price" data-ow="$260" data-rt="$500">$260</td><td class="price" data-ow="$279" data-rt="$505">$279</td><td>~2h</td></tr>
                 </tbody>
               </table>
             </div>
