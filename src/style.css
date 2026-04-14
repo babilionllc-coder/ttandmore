@@ -2596,6 +2596,13 @@ button {
   overflow: hidden;
   box-shadow: var(--shadow-xl);
   border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  cursor: pointer;
+}
+
+.promo__container:hover .promo__play-btn {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(var(--brand-primary-rgb), 0.9);
 }
 
 .promo__video {
@@ -2604,4 +2611,36 @@ button {
   display: block;
   object-fit: cover;
   background: #000;
+}
+
+.promo__play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.promo__play-btn svg {
+  width: 32px;
+  height: 32px;
+  margin-left: 4px; /* Optical optical alignment */
+}
+
+.promo__play-btn.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.8);
 }

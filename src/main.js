@@ -323,3 +323,26 @@ if (chatToggle && chatWidget) {
 }
 
 console.log('TT & More — Premium Site Loaded ✨');
+
+// Promo Video Play Logic
+const promoContainer = document.getElementById('promoContainer');
+const promoVideo = document.getElementById('promoVideo');
+const promoPlayBtn = document.getElementById('promoPlayBtn');
+
+if (promoContainer && promoVideo && promoPlayBtn) {
+  promoContainer.addEventListener('click', () => {
+    if (promoVideo.paused) {
+      promoVideo.play();
+      promoVideo.setAttribute('controls', 'true');
+      promoPlayBtn.classList.add('is-hidden');
+    } else {
+      promoVideo.pause();
+      promoPlayBtn.classList.remove('is-hidden');
+    }
+  });
+
+  promoVideo.addEventListener('ended', () => {
+    promoPlayBtn.classList.remove('is-hidden');
+    promoVideo.removeAttribute('controls');
+  });
+}

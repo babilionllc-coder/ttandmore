@@ -204,11 +204,16 @@
     <section class="promo" id="promo">
       <div class="container">
         <h2 class="section-title">Conoce <span>TT & More</span></h2>
-        <div class="promo__container">
-          <video class="promo__video" controls poster="/video-assets/promo-thumb.png" preload="none">
+        <div class="promo__container" id="promoContainer">
+          <video class="promo__video" id="promoVideo" poster="/video-assets/promo-thumb.png" preload="none">
             <source src="/video-assets/ttandmore-promo-es.mp4" type="video/mp4">
             Tu navegador no soporta el formato de video.
           </video>
+          <button class="promo__play-btn" id="promoPlayBtn" aria-label="Reproducir Promo de TT & More">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="6 4 20 12 6 20 6 4"></polygon>
+            </svg>
+          </button>
         </div>
       </div>
     </section>
