@@ -229,9 +229,28 @@ if (chatToggle && chatWidget) {
   let isLoading = false;
 
   // Toggle chat open/close
+  let welcomeAnimated = false;
+  
   chatToggle.addEventListener('click', () => {
     chatWidget.classList.toggle('active');
-    if (chatWidget.classList.contains('active')) {
+    const isVisible = chatWidget.classList.contains('active');
+    
+    if (isVisible) {
+      if (!welcomeAnimated) {
+        welcomeAnimated = true;
+        const welcomeEl = document.getElementById('initial-welcome-msg');
+        if (welcomeEl) {
+          const originalText = welcomeEl.textContent;
+          welcomeEl.textContent = '';
+          let i = 0;
+          const typeWriter = setInterval(() => {
+            welcomeEl.textContent += originalText.charAt(i);
+            i++;
+            if (i >= originalText.length) clearInterval(typeWriter);
+            if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+          }, 25);
+        }
+      }
       setTimeout(() => chatInput?.focus(), 300);
     }
   });
