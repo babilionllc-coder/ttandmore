@@ -18,9 +18,10 @@ export default async function handler(req, res) {
   }
   const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${GEMINI_API_KEY}`;
 
-  const { message, history } = req.body;
+  const { message, history, lang } = req.body;
 
   const systemPrompt = `You are the AI concierge for TT & More, a premium private transportation and tour company based in Cancún, Mexico. You've been serving travelers since 1993 (33+ years of experience).
+${lang === 'es' ? '\n\nIMPORTANT: YOU MUST REPLY COMPLETELY IN SPANISH.' : ''}
 
 YOUR ROLE: Help visitors book shuttles, tours, and answer questions. Be warm, professional, and concise. Use emojis occasionally. Always aim to convert inquiries into bookings.
 

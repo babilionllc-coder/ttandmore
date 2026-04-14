@@ -244,7 +244,8 @@ if (chatToggle && chatWidget) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: text,
-          history: conversationHistory.slice(-10) // Keep last 10 messages for context
+          history: conversationHistory.slice(-10), // Keep last 10 messages for context
+          lang: window.location.pathname.startsWith('/es') ? 'es' : 'en'
         })
       });
 
