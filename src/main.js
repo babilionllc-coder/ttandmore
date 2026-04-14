@@ -46,6 +46,19 @@ if (mobileToggle && mobileMenu) {
     document.body.appendChild(mobileMenu);
   }
 
+  // Inject sticky header bar with logo + close X (once)
+  if (!mobileMenu.querySelector('.mobile-menu__header')) {
+    const bar = document.createElement('div');
+    bar.className = 'mobile-menu__header';
+    bar.innerHTML = `
+      <span class="mobile-menu__brand">TT&amp;More</span>
+      <button class="mobile-menu__close" aria-label="Close menu" type="button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    `;
+    mobileMenu.insertBefore(bar, mobileMenu.firstChild);
+  }
+
   const closeMenu = () => {
     mobileToggle.classList.remove('active');
     mobileMenu.classList.remove('active');
@@ -58,6 +71,10 @@ if (mobileToggle && mobileMenu) {
     mobileMenu.classList.toggle('active');
     document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
   });
+
+  // Close button
+  const closeBtn = mobileMenu.querySelector('.mobile-menu__close');
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
 
   // Close on link click
   mobileMenu.querySelectorAll('a').forEach(link => {
