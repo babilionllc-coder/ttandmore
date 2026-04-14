@@ -335,19 +335,104 @@ if (chatToggle && chatWidget) {
     isLoading = false;
   }
 
+  // Escape HTML to prevent injection when rendering bot text
+  function escapeHtml(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // Render a markdown pipe-table into <table class="chat-table">
+  function renderTable(tableText) {
+    const lines = tableText.trim().split('\n').filter(l => l.trim().startsWith('|'));
+    if (lines.length < 2) return escapeHtml(tableText);
+    const rows = lines
+      .filter(l => !/^\|\s*-+/.test(l.replace(/\|/g, '|').trim().split('|').slice(1,2).join('')))
+      .map(l => l.replace(/^\||\|$/g, '').split('|').map(c => c.trim()));
+    if (rows.length < 1) return escapeHtml(tableText);
+    const [head, ...body] = rows;
+    const th = head.map(c => `<th>${escapeHtml(c)}</th>`).join('');
+    const tb = body.map(r => '<tr>' + r.map(c => `<td>${escapeHtml(c)}</td>`).join('') + '</tr>').join('');
+    return `<table class="chat-table"><thead><tr>${th}</tr></thead><tbody>${tb}</tbody></table>`;
+  }
+
+  // Parse [btn:label|action] and [qr:text] markers, return { html, quickReplies[] }
+  function parseDSL(raw) {
+    const quickReplies = [];
+    let text = raw;
+
+    // Extract [qr:...] first (pull them all out of text, render separately)
+    text = text.replace(/\[qr:([^\]]+)\]/g, (_m, label) => {
+      quickReplies.push(label.trim());
+      return '';
+    });
+
+    // Extract markdown tables into placeholders
+    const tables = [];
+    text = text.replace(/(?:^|\n)(\|[^\n]+\|(?:\n\|[^\n]+\|)+)/g, (_m, tbl) => {
+      tables.push(renderTable(tbl));
+      return `\n{{TABLE_${tables.length - 1}}}\n`;
+    });
+
+    // Escape the rest
+    let html = escapeHtml(text);
+
+    // Reinsert tables
+    html = html.replace(/\{\{TABLE_(\d+)\}\}/g, (_m, i) => tables[+i] || '');
+
+    // [btn:label|action] → button
+    html = html.replace(/\[btn:([^|\]]+)\|([^\]]+)\]/g, (_m, label, action) => {
+      const act = action.trim();
+      const lbl = escapeHtml(label.trim());
+      if (act.startsWith('wa:')) {
+        const msg = encodeURIComponent(act.slice(3).trim());
+        return `<a class="chat-btn chat-btn--wa" href="https://wa.me/529983000307?text=${msg}" target="_blank" rel="noopener">${lbl}</a>`;
+      }
+      const safe = act.startsWith('/') || act.startsWith('http') ? act : '/' + act;
+      return `<a class="chat-btn" href="${escapeHtml(safe)}" target="_blank" rel="noopener">${lbl}</a>`;
+    });
+
+    // Basic markdown
+    html = html
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/(^|[^"'>])(https?:\/\/[^\s<]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>')
+      .replace(/(\+52[\s\d]+)/g, '<a href="tel:$1">$1</a>')
+      .replace(/\n{2,}/g, '</p><p>')
+      .replace(/\n/g, '<br>');
+
+    return { html: `<p>${html}</p>`, quickReplies };
+  }
+
   // Append message bubble
   function appendMessage(text, type) {
     const msgEl = document.createElement('div');
     msgEl.className = `chat-msg chat-msg--${type}`;
-    // Convert markdown-like formatting
-    msgEl.innerHTML = text
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/\n/g, '<br>')
-      .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank">$1</a>')
-      .replace(/(\+52[\s\d]+)/g, '<a href="tel:$1">$1</a>');
 
-    chatMessages.appendChild(msgEl);
+    if (type === 'bot') {
+      const { html, quickReplies } = parseDSL(text);
+      msgEl.innerHTML = html;
+      chatMessages.appendChild(msgEl);
+
+      if (quickReplies.length > 0) {
+        const qrWrap = document.createElement('div');
+        qrWrap.className = 'chat-qr-wrap';
+        quickReplies.forEach(qr => {
+          const b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'chat-qr';
+          b.textContent = qr;
+          b.addEventListener('click', () => {
+            qrWrap.remove();
+            sendMessage(qr);
+          });
+          qrWrap.appendChild(b);
+        });
+        chatMessages.appendChild(qrWrap);
+      }
+    } else {
+      msgEl.textContent = text;
+      chatMessages.appendChild(msgEl);
+    }
+
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
