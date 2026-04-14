@@ -183,68 +183,83 @@
             </div>
           </div>
 
-          <!-- Quick Booking Card -->
-          <div class="hero__booking">
-            <h2 class="hero__booking-title">Quick <span>Booking</span></h2>
-            <form class="booking-form" id="hero-booking">
-              <div class="form-group">
-                <label class="form-label" for="hero-service">Service Type</label>
-                <select class="form-select" id="hero-service" name="service">
-                  <option value="">Select service...</option>
-                  <option value="Airport Shuttle">Airport Shuttle</option>
-                  <option value="Hotel to Hotel">Hotel to Hotel</option>
-                  <option value="Tour">Tour</option>
-                </select>
-              </div>
+          <!-- Instant Quote Widget -->
+          <div class="hero__booking quote-widget" data-lang="en">
+            <div class="quote-widget__head">
+              <h2 class="hero__booking-title">Instant <span>Quote</span></h2>
+              <p class="quote-widget__sub">See your exact price in 10 seconds</p>
+            </div>
+
+            <!-- Trip type pill toggle -->
+            <div class="quote-widget__trip" role="tablist" aria-label="Trip type">
+              <button type="button" class="quote-widget__trip-btn is-active" data-trip="ow" role="tab">One Way</button>
+              <button type="button" class="quote-widget__trip-btn" data-trip="rt" role="tab">Round Trip</button>
+            </div>
+
+            <form class="booking-form" id="hero-booking" novalidate>
               <div class="form-group">
                 <label class="form-label" for="hero-dest">Destination</label>
-                <select class="form-select" id="hero-dest" name="destination">
-                  <option value="">Select destination...</option>
-                  <option value="Cancún Hotel Zone - $45 USD">Cancún Hotel Zone — $45</option>
-                  <option value="Cancún Downtown - $45 USD">Cancún Downtown — $45</option>
-                  <option value="Puerto Juárez / Isla Mujeres - $50 USD">Puerto Juárez — $50</option>
-                  <option value="Puerto Morelos - $58 USD">Puerto Morelos — $58</option>
-                  <option value="Playa Mujeres - $63 USD">Playa Mujeres — $63</option>
-                  <option value="Playa Paraíso - $69 USD">Playa Paraíso — $69</option>
-                  <option value="Costa Mujeres - $73 USD">Costa Mujeres — $73</option>
-                  <option value="Playa del Carmen - $80 USD">Playa del Carmen — $80</option>
-                  <option value="Puerto Aventuras - $85 USD">Puerto Aventuras — $85</option>
-                  <option value="Akumal - $95 USD">Akumal — $95</option>
-                  <option value="Bahía Príncipe - $105 USD">Bahía Príncipe — $105</option>
-                  <option value="Tulum Downtown - $165 USD">Tulum Downtown — $165</option>
-                  <option value="Chiquilá / Isla Holbox - $259 USD">Chiquilá / Holbox — $259</option>
+                <select class="form-select" id="hero-dest" name="destination" required>
+                  <option value="">Select your destination…</option>
+                  <option value="Cancún Downtown">Cancún Downtown</option>
+                  <option value="Cancún Hotel Zone">Cancún Hotel Zone</option>
+                  <option value="Puerto Juárez / Isla Mujeres">Puerto Juárez / Isla Mujeres</option>
+                  <option value="Playa Mujeres">Playa Mujeres</option>
+                  <option value="Costa Mujeres">Costa Mujeres</option>
+                  <option value="Puerto Morelos">Puerto Morelos</option>
+                  <option value="Playa Paraíso">Playa Paraíso</option>
+                  <option value="Playa del Carmen">Playa del Carmen</option>
+                  <option value="Puerto Aventuras">Puerto Aventuras</option>
+                  <option value="Akumal">Akumal</option>
+                  <option value="Bahía Príncipe">Bahía Príncipe</option>
+                  <option value="Tulum">Tulum</option>
+                  <option value="Chiquilá (Isla Holbox)">Chiquilá / Holbox</option>
                 </select>
               </div>
               <div class="form-row">
                 <div class="form-group">
-                  <label class="form-label" for="hero-date">Travel Date</label>
-                  <input type="date" class="form-input" id="hero-date" name="date">
-                </div>
-                <div class="form-group">
                   <label class="form-label" for="hero-pax">Passengers</label>
                   <select class="form-select" id="hero-pax" name="passengers">
-                    <option value="1">1 Passenger</option>
-                    <option value="2">2 Passengers</option>
-                    <option value="3">3 Passengers</option>
-                    <option value="4">4 Passengers</option>
-                    <option value="5">5 Passengers</option>
-                    <option value="6">6 Passengers</option>
-                    <option value="7">7 Passengers</option>
-                    <option value="8">8 Passengers</option>
-                    <option value="9">9 Passengers</option>
-                    <option value="10">10 Passengers</option>
+                    <option value="1">1 passenger</option>
+                    <option value="2" selected>2 passengers</option>
+                    <option value="3">3 passengers</option>
+                    <option value="4">4 passengers</option>
+                    <option value="5">5 passengers</option>
+                    <option value="6">6 passengers</option>
+                    <option value="7">7 passengers</option>
+                    <option value="8">8 passengers</option>
+                    <option value="9">9 passengers</option>
+                    <option value="10">10 passengers</option>
                   </select>
                 </div>
+                <div class="form-group">
+                  <label class="form-label" for="hero-date">Travel date</label>
+                  <input type="date" class="form-input" id="hero-date" name="date">
+                </div>
               </div>
-              <button type="submit" class="btn btn--primary btn--lg" style="width:100%;margin-top:var(--space-4);">
-                Get Quote via WhatsApp
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.553 4.105 1.516 5.832L.051 23.579a.5.5 0 00.62.62l5.747-1.465A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.39-1.576l-.386-.232-3.412.87.886-3.412-.252-.4A9.935 9.935 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+
+              <!-- Live price readout -->
+              <div class="quote-widget__price" id="quotePrice" aria-live="polite">
+                <div class="quote-widget__price-row">
+                  <span class="quote-widget__price-label" id="quoteLabel">Private transfer</span>
+                  <span class="quote-widget__price-amount" id="quoteAmount">—</span>
+                </div>
+                <div class="quote-widget__price-meta">
+                  <span id="quoteMeta">Select a destination to see your price</span>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn--primary btn--lg quote-widget__cta" id="quoteCta">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.553 4.105 1.516 5.832L.051 23.579a.5.5 0 00.62.62l5.747-1.465A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.94 9.94 0 01-5.39-1.576l-.386-.232-3.412.87.886-3.412-.252-.4A9.935 9.935 0 012 12c0-5.514 4.486-10 10-10s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                <span>Reserve on WhatsApp</span>
               </button>
             </form>
 
-            <p style="text-align:center;font-size:var(--text-xs);color:var(--text-muted);margin-top:var(--space-3);">
-              Site validated by PayPal and Mercado Pago for your security.
-            </p>
+            <ul class="quote-widget__trust">
+              <li>✓ Flight tracking included</li>
+              <li>✓ Private vehicle — no shared stops</li>
+              <li>✓ Free cancel up to 24h</li>
+            </ul>
           </div>
         </div>
       </div>

@@ -243,28 +243,127 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ---- Booking form WhatsApp redirect ----
-const bookingForms = document.querySelectorAll('.booking-form');
-bookingForms.forEach(form => {
+// ---- Instant Quote Widget (pricing engine + WhatsApp handoff) ----
+// Pricing matrix — per vehicle (USD). Keys match <option value> on hero-dest select.
+const QUOTE_PRICING = {
+  'Cancún Downtown':            { t1:{ow:45, rt:79},  t2:{ow:49, rt:89},  t3:{ow:54, rt:99},  time:'~20 min' },
+  'Cancún Hotel Zone':          { t1:{ow:45, rt:79},  t2:{ow:49, rt:89},  t3:{ow:54, rt:99},  time:'~25 min' },
+  'Puerto Juárez / Isla Mujeres':{ t1:{ow:50, rt:90},  t2:{ow:54, rt:95},  t3:{ow:59, rt:100}, time:'~30 min' },
+  'Playa Mujeres':              { t1:{ow:63, rt:115}, t2:{ow:67, rt:119}, t3:{ow:71, rt:124}, time:'~30 min' },
+  'Costa Mujeres':              { t1:{ow:73, rt:128}, t2:{ow:77, rt:148}, t3:{ow:81, rt:168}, time:'~35 min' },
+  'Puerto Morelos':             { t1:{ow:58, rt:110}, t2:{ow:63, rt:116}, t3:{ow:70, rt:122}, time:'~35 min' },
+  'Playa Paraíso':              { t1:{ow:69, rt:119}, t2:{ow:79, rt:138}, t3:{ow:89, rt:149}, time:'~40 min' },
+  'Playa del Carmen':           { t1:{ow:80, rt:150}, t2:{ow:89, rt:160}, t3:{ow:99, rt:179}, time:'~55 min' },
+  'Puerto Aventuras':           { t1:{ow:85, rt:165}, t2:{ow:90, rt:170}, t3:{ow:109,rt:199}, time:'~1h 10min' },
+  'Akumal':                     { t1:{ow:95, rt:190}, t2:{ow:108,rt:205}, t3:{ow:122,rt:230}, time:'~1h 20min' },
+  'Bahía Príncipe':             { t1:{ow:105,rt:210}, t2:{ow:110,rt:218}, t3:{ow:138,rt:250}, time:'~1h 30min' },
+  'Tulum':                      { t1:{ow:165,rt:300}, t2:{ow:189,rt:309}, t3:{ow:199,rt:320}, time:'~1h 45min' },
+  'Chiquilá (Isla Holbox)':     { t1:{ow:259,rt:499}, t2:{ow:260,rt:500}, t3:{ow:279,rt:505}, time:'~2h' },
+};
+
+const quoteWidget = document.querySelector('.quote-widget');
+if (quoteWidget) {
+  const lang = quoteWidget.dataset.lang || 'en';
+  const T = lang === 'es' ? {
+    oneWay: 'Sencillo', roundTrip: 'Viaje Redondo',
+    transfer: 'Transfer privado', selectDest: 'Selecciona un destino para ver tu precio',
+    vehicleFor: 'Vehículo para', pax: 'pax', travelTime: 'Tiempo',
+    perVehicle: 'Precio total por vehículo · USD',
+    reserveFull: 'Reservar', seePrice: 'Ver precio',
+    waIntro: '🚐 *Solicitud de Reserva TT&More*'
+  } : {
+    oneWay: 'One Way', roundTrip: 'Round Trip',
+    transfer: 'Private transfer', selectDest: 'Select a destination to see your price',
+    vehicleFor: 'Vehicle for', pax: 'pax', travelTime: 'Travel time',
+    perVehicle: 'Total per vehicle · USD',
+    reserveFull: 'Reserve', seePrice: 'See price',
+    waIntro: '🚐 *TT&More Booking Request*'
+  };
+
+  const destEl = quoteWidget.querySelector('#hero-dest');
+  const paxEl = quoteWidget.querySelector('#hero-pax');
+  const dateEl = quoteWidget.querySelector('#hero-date');
+  const tripBtns = quoteWidget.querySelectorAll('.quote-widget__trip-btn');
+  const amountEl = quoteWidget.querySelector('#quoteAmount');
+  const labelEl = quoteWidget.querySelector('#quoteLabel');
+  const metaEl = quoteWidget.querySelector('#quoteMeta');
+  const priceBox = quoteWidget.querySelector('#quotePrice');
+  const ctaEl = quoteWidget.querySelector('#quoteCta');
+  const form = quoteWidget.querySelector('form');
+
+  let trip = 'ow';
+
+  function paxToTier(pax) {
+    const n = parseInt(pax, 10) || 1;
+    if (n <= 3) return 't1';
+    if (n <= 7) return 't2';
+    return 't3';
+  }
+
+  function updateQuote() {
+    const dest = destEl.value;
+    const pax = paxEl.value;
+    if (!dest || !QUOTE_PRICING[dest]) {
+      amountEl.textContent = '—';
+      metaEl.textContent = T.selectDest;
+      priceBox.classList.remove('is-active');
+      return;
+    }
+    const p = QUOTE_PRICING[dest];
+    const tier = paxToTier(pax);
+    const price = p[tier][trip];
+    amountEl.textContent = `$${price}`;
+    labelEl.textContent = `${T.vehicleFor} ${pax} ${T.pax} · ${trip === 'ow' ? T.oneWay : T.roundTrip}`;
+    metaEl.textContent = `${T.travelTime}: ${p.time} · ${T.perVehicle}`;
+    priceBox.classList.add('is-active');
+  }
+
+  tripBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tripBtns.forEach(b => b.classList.toggle('is-active', b === btn));
+      trip = btn.dataset.trip;
+      updateQuote();
+    });
+  });
+
+  destEl.addEventListener('change', updateQuote);
+  paxEl.addEventListener('change', updateQuote);
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-    
-    let message = `🚐 *TT & More Booking Request*\n\n`;
-    if (data.service) message += `📋 Service: ${data.service}\n`;
-    if (data.destination) message += `📍 Destination: ${data.destination}\n`;
-    if (data.date) message += `📅 Date: ${data.date}\n`;
-    if (data.passengers) message += `👥 Passengers: ${data.passengers}\n`;
-    if (data.hotel) message += `🏨 Hotel: ${data.hotel}\n`;
-    if (data.flight) message += `✈️ Flight: ${data.flight}\n`;
-    if (data.name) message += `👤 Name: ${data.name}\n`;
-    if (data.email) message += `📧 Email: ${data.email}\n`;
-    if (data.phone) message += `📱 Phone: ${data.phone}\n`;
-    if (data.notes) message += `📝 Notes: ${data.notes}\n`;
-    
-    const encoded = encodeURIComponent(message);
-    window.open(`https://wa.me/529983000307?text=${encoded}`, '_blank');
+    const dest = destEl.value;
+    const pax = paxEl.value;
+    const date = dateEl.value;
+    const tripLabel = trip === 'ow' ? T.oneWay : T.roundTrip;
+
+    let msg = `${T.waIntro}\n\n`;
+    if (dest && QUOTE_PRICING[dest]) {
+      const price = QUOTE_PRICING[dest][paxToTier(pax)][trip];
+      msg += `📍 ${dest}\n`;
+      msg += `🔁 ${tripLabel}\n`;
+      msg += `👥 ${pax} ${T.pax}\n`;
+      if (date) msg += `📅 ${date}\n`;
+      msg += `💰 $${price} USD\n`;
+    } else {
+      msg += (lang === 'es' ? 'Hola, quiero una cotización.' : 'Hi, I would like a quote.');
+    }
+
+    window.open(`https://wa.me/529983000307?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+
+  // Init
+  updateQuote();
+}
+
+// ---- Legacy booking forms (non-hero) WhatsApp fallback ----
+document.querySelectorAll('.booking-form').forEach(form => {
+  if (form.closest('.quote-widget')) return; // handled above
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(form).entries());
+    let m = `🚐 *TT & More Booking Request*\n\n`;
+    Object.entries(data).forEach(([k, v]) => { if (v) m += `${k}: ${v}\n`; });
+    window.open(`https://wa.me/529983000307?text=${encodeURIComponent(m)}`, '_blank');
   });
 });
 
