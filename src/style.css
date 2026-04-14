@@ -2582,3 +2582,26 @@ button {
     font-size: var(--text-3xl);
   }
 }
+
+/* ==================== PROMO VIDEO ==================== */
+.promo {
+  padding: var(--space-20) 0 var(--space-8);
+  background: var(--surface-1);
+}
+
+.promo__container {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.promo__video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  object-fit: cover;
+  background: #000;
+}

@@ -144,14 +144,14 @@ IMPORTANT RULES:
     }
 
     const data = await response.json();
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text ||
       "I'm sorry, I couldn't process that. Please try again or contact us at +52 998 300 0307.";
 
     return res.status(200).json({ reply });
   } catch (error) {
     console.error('Chat API error:', error);
-    return res.status(500).json({ 
-      error: 'Service temporarily unavailable. Please contact us via WhatsApp at +52 998 300 0307.' 
+    return res.status(500).json({
+      error: 'Service temporarily unavailable. Please contact us via WhatsApp at +52 998 300 0307.'
     });
   }
 }
