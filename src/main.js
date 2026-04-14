@@ -38,7 +38,22 @@ if (header) {
 const mobileToggle = document.querySelector('.mobile-toggle');
 const mobileMenu = document.querySelector('.mobile-menu');
 if (mobileToggle && mobileMenu) {
-  mobileToggle.addEventListener('click', () => {
+  // CRITICAL: The .header uses backdrop-filter which creates a new containing block
+  // for position:fixed descendants. If .mobile-menu stays inside .header, it gets
+  // clipped to the header's box (~70px tall) and appears broken on mobile.
+  // Portal it to <body> so position:fixed anchors to the viewport.
+  if (mobileMenu.parentElement !== document.body) {
+    document.body.appendChild(mobileMenu);
+  }
+
+  const closeMenu = () => {
+    mobileToggle.classList.remove('active');
+    mobileMenu.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  mobileToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
     mobileToggle.classList.toggle('active');
     mobileMenu.classList.toggle('active');
     document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
@@ -46,11 +61,12 @@ if (mobileToggle && mobileMenu) {
 
   // Close on link click
   mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileToggle.classList.remove('active');
-      mobileMenu.classList.remove('active');
-      document.body.style.overflow = '';
-    });
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('active')) closeMenu();
   });
 }
 
