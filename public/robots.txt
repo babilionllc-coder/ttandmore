@@ -1,0 +1,36 @@
+# robots.txt for ttandmore.com
+# Cancun airport transportation & Riviera Maya tours
+
+User-agent: *
+Allow: /
+
+# Block build/internal directories
+Disallow: /api/
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /dist/
+
+# AI crawlers — allow (we WANT AI engines to cite us)
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Sitemap
+Sitemap: https://ttandmore.com/sitemap.xml
+
+# Host preference
+Host: https://ttandmore.com
