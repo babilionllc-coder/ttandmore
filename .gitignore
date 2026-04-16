@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Google Auto-Indexing
+*service_account*.json
+.agents/scripts/logs/

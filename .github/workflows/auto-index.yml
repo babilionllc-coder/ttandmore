@@ -1,0 +1,48 @@
+name: Auto-Index URLs
+
+# Fires on every push to main. Regenerates sitemap, submits URLs to
+# Google Indexing API v3 + IndexNow (Bing/Yandex/Seznam/Naver).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:  # allow manual trigger from Actions tab
+
+permissions:
+  contents: read
+
+jobs:
+  index:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install googleapis@^144.0.0 node-fetch@^3.3.2
+
+      - name: Regenerate sitemap.xml
+        run: node .agents/scripts/auto_sitemap.js
+
+      - name: Submit URLs to Google + IndexNow
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+          INDEXNOW_KEY: ca7c6a94b42842e5985b351469cfce82
+          DOMAIN: ttandmore.com
+        run: node .agents/scripts/force_index.js
+
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: indexing-logs
+          path: .agents/scripts/logs/
+          retention-days: 30
+          if-no-files-found: ignore
