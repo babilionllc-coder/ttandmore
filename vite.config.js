@@ -41,11 +41,13 @@ export default defineConfig({
         blogAirportGuide: resolve(__dirname, 'blog/cancun-airport-transportation-guide/index.html'),
         blogPlayaDelCarmen: resolve(__dirname, 'blog/cancun-airport-to-playa-del-carmen/index.html'),
         blogChichenItzaTours: resolve(__dirname, 'blog/best-chichen-itza-tours-from-cancun/index.html'),
+        blogAirportToTulum: resolve(__dirname, 'blog/cancun-airport-to-tulum/index.html'),
         // Blog pages (ES)
         esBlog: resolve(__dirname, 'es/blog/index.html'),
         esBlogAirportGuide: resolve(__dirname, 'es/blog/cancun-airport-transportation-guide/index.html'),
         esBlogPlayaDelCarmen: resolve(__dirname, 'es/blog/cancun-airport-to-playa-del-carmen/index.html'),
         esBlogChichenItzaTours: resolve(__dirname, 'es/blog/best-chichen-itza-tours-from-cancun/index.html'),
+        esBlogAirportToTulum: resolve(__dirname, 'es/blog/cancun-airport-to-tulum/index.html'),
       },
     },
   },
