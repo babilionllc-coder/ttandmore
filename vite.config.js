@@ -36,6 +36,16 @@ export default defineConfig({
         esCoba: resolve(__dirname, 'es/coba/index.html'),
         esEkBalamCenoteXcanche: resolve(__dirname, 'es/ek-balam-cenote-xcanche/index.html'),
         esTulumGranCenoteTulum: resolve(__dirname, 'es/tulum-gran-cenote-tulum/index.html'),
+        // Blog pages (EN)
+        blog: resolve(__dirname, 'blog/index.html'),
+        blogAirportGuide: resolve(__dirname, 'blog/cancun-airport-transportation-guide/index.html'),
+        blogPlayaDelCarmen: resolve(__dirname, 'blog/cancun-airport-to-playa-del-carmen/index.html'),
+        blogChichenItzaTours: resolve(__dirname, 'blog/best-chichen-itza-tours-from-cancun/index.html'),
+        // Blog pages (ES)
+        esBlog: resolve(__dirname, 'es/blog/index.html'),
+        esBlogAirportGuide: resolve(__dirname, 'es/blog/cancun-airport-transportation-guide/index.html'),
+        esBlogPlayaDelCarmen: resolve(__dirname, 'es/blog/cancun-airport-to-playa-del-carmen/index.html'),
+        esBlogChichenItzaTours: resolve(__dirname, 'es/blog/best-chichen-itza-tours-from-cancun/index.html'),
       },
     },
   },
