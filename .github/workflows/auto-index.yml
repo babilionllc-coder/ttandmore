@@ -28,21 +28,61 @@ jobs:
       - name: Install dependencies
         run: npm install googleapis@^144.0.0 node-fetch@^3.3.2
 
+      - name: Verify secret presence + format
+        env:
+          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
+        run: |
+          if [ -z "$GOOGLE_SERVICE_ACCOUNT_KEY" ]; then
+            echo "::error::GOOGLE_SERVICE_ACCOUNT_KEY secret is EMPTY or missing in repo Settings → Secrets"
+            exit 1
+          fi
+          echo "Secret length: $(echo -n "$GOOGLE_SERVICE_ACCOUNT_KEY" | wc -c) chars"
+          echo "$GOOGLE_SERVICE_ACCOUNT_KEY" | python3 -c "
+          import sys, json
+          try:
+              d = json.load(sys.stdin)
+              print('client_email:', d.get('client_email','MISSING'))
+              print('project_id :', d.get('project_id','MISSING'))
+              print('type       :', d.get('type','MISSING'))
+              has_pk = bool(d.get('private_key'))
+              print('private_key:', 'present' if has_pk else 'MISSING')
+          except Exception as e:
+              print('ERROR parsing JSON:', e)
+              sys.exit(1)
+          "
+
       - name: Regenerate sitemap.xml
         run: node .agents/scripts/auto_sitemap.js
 
       - name: Submit URLs to Google + IndexNow
+        id: submit
+        continue-on-error: true
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
           INDEXNOW_KEY: ca7c6a94b42842e5985b351469cfce82
           DOMAIN: ttandmore.com
-        run: node .agents/scripts/force_index.js
+        run: node .agents/scripts/force_index.js 2>&1 | tee /tmp/indexing-output.log
 
-      - name: Upload logs
+      - name: Print ALL log output (visible without auth)
         if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: indexing-logs
-          path: .agents/scripts/logs/
-          retention-days: 30
-          if-no-files-found: ignore
+        run: |
+          echo "::group::Indexing script stdout/stderr"
+          cat /tmp/indexing-output.log 2>/dev/null || echo "No output file"
+          echo "::endgroup::"
+          echo "::group::Log files in .agents/scripts/logs/"
+          for f in .agents/scripts/logs/*.log; do
+            [ -f "$f" ] && { echo "--- $f ---"; cat "$f"; }
+          done
+          echo "::endgroup::"
+
+      - name: Write summary
+        if: always()
+        run: |
+          echo "## Auto-Indexing Run" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat /tmp/indexing-output.log 2>/dev/null | tail -50 >> $GITHUB_STEP_SUMMARY || echo "no output" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+
+      - name: Fail job if submit failed
+        if: steps.submit.outcome == 'failure'
+        run: exit 1
