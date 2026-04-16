@@ -64,8 +64,10 @@ async function submitToGoogle() {
   let credentials;
   try {
     credentials = JSON.parse(SERVICE_ACCOUNT_JSON);
+    log(`Using service account: ${credentials.client_email}`);
   } catch (e) {
     log(`ERROR: Invalid GOOGLE_SERVICE_ACCOUNT_KEY JSON: ${e.message}`);
+    log(`First 80 chars of secret: ${SERVICE_ACCOUNT_JSON.slice(0, 80)}...`);
     return { submitted: 0, failed: urls.length };
   }
 
@@ -76,8 +78,14 @@ async function submitToGoogle() {
     ['https://www.googleapis.com/auth/indexing']
   );
 
-  await jwtClient.authorize();
-  log('Authorized with Google Indexing API');
+  try {
+    await jwtClient.authorize();
+    log('✓ Authorized with Google Indexing API');
+  } catch (authErr) {
+    log(`✗ Google auth failed: ${authErr.message}`);
+    log(`  Hint: check service account has Owner role in Search Console property`);
+    return { submitted: 0, failed: urls.length };
+  }
 
   // Limit is 200 URLs/day — hard-cap here
   const urlsToSubmit = urls.slice(0, 200);
@@ -124,7 +132,7 @@ async function submitToGoogle() {
 // 3. Submit to IndexNow (Bing/Yandex/Seznam/Naver in one call)
 // -------------------------------------------------------------------------
 async function submitToIndexNow() {
-  if (!INDEXNOW_KEY || INDEXNOW_KEY === 'ca7c6a94b42842e5985b351469cfce82') {
+  if (!INDEXNOW_KEY || INDEXNOW_KEY.includes('PLACEHOLDER')) {
     log('SKIP: INDEXNOW_KEY not set — skipping IndexNow');
     return { submitted: 0, failed: urls.length };
   }
