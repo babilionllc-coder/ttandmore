@@ -52,6 +52,11 @@ jobs:
           "
 
       - name: Regenerate sitemap.xml
+        env:
+          DOMAIN: ttandmore.com
+          SOURCE_DIR: .             # repo root IS the Vite src for this project
+          OUTPUT_DIR: public
+          SECONDARY_LANG_PREFIX: es
         run: node .agents/scripts/auto_sitemap.js
 
       - name: Submit URLs to Google + IndexNow

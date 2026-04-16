@@ -21,11 +21,13 @@ const SOURCE_DIR = process.env.SOURCE_DIR || 'src';
 const OUTPUT_DIR = process.env.OUTPUT_DIR || 'public';
 const SECONDARY_LANG_PREFIX = process.env.SECONDARY_LANG_PREFIX ?? 'es';
 
-// Directories to SKIP during walk (build output, deps, config)
+// Directories to SKIP during walk (build output, deps, config, agent scripts)
 const SKIP_DIRS = new Set([
   'node_modules', '.git', 'dist', 'build', '.next', 'coverage',
   'public', 'assets', 'images', 'api', '.vercel', '.firebase',
-  SOURCE_DIR === 'src' ? 'src/src' : null  // Vite's src/src edge case
+  '.agents', '.github', '.claude', 'scraped_html', 'reports', 'reference',
+  'content', 'results', 'src',  // the inner Vite src dir that contains main.js/style.css
+  SOURCE_DIR === 'src' ? 'src/src' : null
 ].filter(Boolean));
 
 // -------------------------------------------------------------------------
