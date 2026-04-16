@@ -276,6 +276,35 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/cancun-airport-to-tulum/"/>
   </url>
 
+  <url>
+    <loc>https://ttandmore.com/blog/cancun-airport-pickup-guide/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/cancun-airport-pickup-guide/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/cancun-airport-pickup-guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/cancun-airport-pickup-guide/"/>
+  </url>
+  <url>
+    <loc>https://ttandmore.com/es/blog/cancun-airport-pickup-guide/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/cancun-airport-pickup-guide/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/cancun-airport-pickup-guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/cancun-airport-pickup-guide/"/>
+  </url>
+  <url>
+    <loc>https://ttandmore.com/blog/where-to-stay-cancun-riviera-maya/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/where-to-stay-cancun-riviera-maya/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/where-to-stay-cancun-riviera-maya/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/where-to-stay-cancun-riviera-maya/"/>
+  </url>
+  <url>
+    <loc>https://ttandmore.com/es/blog/where-to-stay-cancun-riviera-maya/</loc>
+    <lastmod>2026-04-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/where-to-stay-cancun-riviera-maya/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/where-to-stay-cancun-riviera-maya/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/where-to-stay-cancun-riviera-maya/"/>
+  </url>
+
   <!-- ============ TERMS ============ -->
   <url>
     <loc>https://ttandmore.com/terms-and-conditions/</loc>
