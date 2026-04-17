@@ -3,6 +3,10 @@
     {
       "path": "/api/email-reminders",
       "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/welcome-drip",
+      "schedule": "0 8 * * *"
     }
   ]
 }
