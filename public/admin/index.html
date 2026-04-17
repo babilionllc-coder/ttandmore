@@ -553,7 +553,7 @@ function getLinkedName(tableKey, linkedIds) {
 function quickAssignDriver(reservaId) {
   const conductores = (CACHE.conductores || []).filter(c => f(c,'Estado') !== 'Inactivo');
   const body = `<div style="display:grid;gap:8px">${conductores.map(c =>
-    `<button class="btn btn-outline" style="justify-content:space-between;width:100%" onclick="doQuickAssign('${reservaId}','Conductor',['${c.id}'])">
+    `<button class="btn btn-outline" style="justify-content:space-between;width:100%" onclick="doQuickAssign('${reservaId}','Conductor Asignado',['${c.id}'])">
       <span>${f(c,'Nombre completo')}</span>
       <span class="badge ${f(c,'Estado')==='Disponible'?'badge-green':'badge-blue'}">${f(c,'Estado')}</span>
     </button>`
@@ -564,7 +564,7 @@ function quickAssignDriver(reservaId) {
 function quickAssignVehicle(reservaId) {
   const vehiculos = (CACHE.vehiculos || []).filter(v => f(v,'Estado del Vehículo') !== 'Fuera de servicio');
   const body = `<div style="display:grid;gap:8px">${vehiculos.map(v =>
-    `<button class="btn btn-outline" style="justify-content:space-between;width:100%" onclick="doQuickAssign('${reservaId}','Vehículo',['${v.id}'])">
+    `<button class="btn btn-outline" style="justify-content:space-between;width:100%" onclick="doQuickAssign('${reservaId}','Vehículo Asignado',['${v.id}'])">
       <span>${f(v,'Nombre del Vehículo')} — ${f(v,'Tipo de Vehículo')} (${f(v,'Capacidad de Pasajeros')} pax)</span>
       <span class="badge ${f(v,'Estado del Vehículo')==='Disponible'?'badge-green':'badge-blue'}">${f(v,'Estado del Vehículo')}</span>
     </button>`
@@ -677,7 +677,7 @@ function renderDashboard(el) {
   const upcoming = reservas.filter(r => isFuture(f(r,'Arrival Date Time'))).sort((a,b) => new Date(f(a,'Arrival Date Time')) - new Date(f(b,'Arrival Date Time')));
   const confirmed = reservas.filter(r => f(r,'Estado del Servicio') === 'Confirmado').length;
   const pending = reservas.filter(r => f(r,'Estado del Servicio') === 'Pendiente').length;
-  const unassigned = upcoming.filter(r => !f(r,'Conductor') || !(f(r,'Conductor')).length).length;
+  const unassigned = upcoming.filter(r => !f(r,'Conductor Asignado') || !(f(r,'Conductor Asignado')).length).length;
   const activeDrivers = conductores.filter(r => f(r,'Estado') === 'Disponible' || f(r,'Estado') === 'En servicio').length;
   const idleDrivers = conductores.filter(r => f(r,'Estado') === 'Disponible').length;
   const availableVehicles = vehiculos.filter(r => f(r,'Estado del Vehículo') === 'Disponible').length;
@@ -744,7 +744,7 @@ function renderDashboard(el) {
           : (today.length > 0 ? today : next24h).sort((a,b) => new Date(f(a,'Arrival Date Time')) - new Date(f(b,'Arrival Date Time'))).map(r => {
             const phone = (f(r,'Telefono Titular')+'').replace(/\D/g,'');
             const waNum = phone ? (phone.startsWith('52')?phone:'52'+phone) : '';
-            const driverName = getLinkedName('conductores', f(r,'Conductor'));
+            const driverName = getLinkedName('conductores', f(r,'Conductor Asignado'));
             return `
           <div class="schedule-item" style="flex-wrap:wrap">
             <div class="schedule-time">${fmtTime(f(r,'Arrival Date Time'))}</div>
@@ -771,7 +771,7 @@ function renderDashboard(el) {
           <span class="badge badge-blue">${upcoming.length} queued</span>
         </div>
         ${upcoming.slice(0,8).map(r => {
-          const driverName = getLinkedName('conductores', f(r,'Conductor'));
+          const driverName = getLinkedName('conductores', f(r,'Conductor Asignado'));
           return `
           <div class="schedule-item">
             <div class="schedule-time">${fmtDate(f(r,'Arrival Date Time'))}</div>
@@ -920,8 +920,8 @@ function filterReservas() {
       <tbody>
         ${records.length === 0 ? '<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--text3)">No reservations found</td></tr>' :
           records.map(r => {
-            const driverName = getLinkedName('conductores', f(r,'Conductor'));
-            const vehicleName = getLinkedName('vehiculos', f(r,'Vehículo'));
+            const driverName = getLinkedName('conductores', f(r,'Conductor Asignado'));
+            const vehicleName = getLinkedName('vehiculos', f(r,'Vehículo Asignado'));
             const wa = waLink(r);
             return `<tr class="${rowClass(r)}">
             <td><strong>${f(r,'Reserva')}</strong></td>
@@ -950,8 +950,8 @@ function filterReservas() {
   document.getElementById('resCards').innerHTML = records.length === 0
     ? '<div style="text-align:center;padding:40px;color:var(--text3)">No reservations found</div>'
     : records.map(r => {
-      const driverName = getLinkedName('conductores', f(r,'Conductor'));
-      const vehicleName = getLinkedName('vehiculos', f(r,'Vehículo'));
+      const driverName = getLinkedName('conductores', f(r,'Conductor Asignado'));
+      const vehicleName = getLinkedName('vehiculos', f(r,'Vehículo Asignado'));
       const wa = waLink(r);
       const cardClass = rowClass(r) === 'row-soon' ? 'card-soon' : rowClass(r) === 'row-past' ? 'card-past' : '';
       return `<div class="res-card ${cardClass}">
@@ -1065,7 +1065,7 @@ function openReservaModal(record) {
         <select id="rf_driver">
           <option value="">— Not assigned —</option>
           ${conductores.filter(c => f(c,'Estado') !== 'Inactivo').map(c => {
-            const sel = (f(r,'Conductor')||[]).includes(c.id) ? 'selected' : '';
+            const sel = (f(r,'Conductor Asignado')||[]).includes(c.id) ? 'selected' : '';
             return `<option value="${c.id}" ${sel}>${f(c,'Nombre completo')} (${f(c,'Estado')})</option>`;
           }).join('')}
         </select>
@@ -1074,7 +1074,7 @@ function openReservaModal(record) {
         <select id="rf_vehicle">
           <option value="">— Not assigned —</option>
           ${vehiculos.filter(v => f(v,'Estado del Vehículo') !== 'Fuera de servicio').map(v => {
-            const sel = (f(r,'Vehículo')||[]).includes(v.id) ? 'selected' : '';
+            const sel = (f(r,'Vehículo Asignado')||[]).includes(v.id) ? 'selected' : '';
             return `<option value="${v.id}" ${sel}>${f(v,'Nombre del Vehículo')} — ${f(v,'Tipo de Vehículo')} (${f(v,'Capacidad de Pasajeros')} pax)</option>`;
           }).join('')}
         </select>
@@ -1158,8 +1158,8 @@ async function saveReserva(recordId) {
     'Notas Adicionales': document.getElementById('rf_notes').value,
   };
   // Driver/Vehicle assignment
-  if (driverVal) fields['Conductor'] = [driverVal];
-  if (vehicleVal) fields['Vehículo'] = [vehicleVal];
+  if (driverVal) fields['Conductor Asignado'] = [driverVal];
+  if (vehicleVal) fields['Vehículo Asignado'] = [vehicleVal];
   // Return trip fields
   const retEl = document.getElementById('rf_return');
   if (retEl && retEl.value) fields['Return Date Time'] = new Date(retEl.value).toISOString();
@@ -1193,8 +1193,8 @@ function viewReserva(id) {
   if (!r) return;
   const phone = (f(r,'Telefono Titular')+'').replace(/\D/g,'');
   const waNum = phone.startsWith('52') ? phone : '52'+phone;
-  const driverName = getLinkedName('conductores', f(r,'Conductor'));
-  const vehicleName = getLinkedName('vehiculos', f(r,'Vehículo'));
+  const driverName = getLinkedName('conductores', f(r,'Conductor Asignado'));
+  const vehicleName = getLinkedName('vehiculos', f(r,'Vehículo Asignado'));
   const body = `
     <div style="display:grid;gap:12px">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
