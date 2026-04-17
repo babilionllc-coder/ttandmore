@@ -521,10 +521,17 @@
             if (fields[k] === undefined || fields[k] === '' || fields[k] === null) delete fields[k];
           });
 
-          const resp = await fetch('/api/airtable?table=Reservas', {
+          const resp = await fetch("/api/booking", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ fields }),
+            body: JSON.stringify({
+              fields,
+              email,
+              clientName: name,
+              destination: dest,
+              date,
+              phone,
+            }),
           });
 
           if (!resp.ok) {
@@ -546,7 +553,7 @@
                 Thank you, <strong>${firstName}</strong>! Your transfer to <strong>${dest}</strong> on <strong>${date}</strong> has been received.
               </p>
               <p style="color:var(--text-secondary);margin-bottom:var(--space-8);">
-                We'll confirm your booking shortly via ${phone ? 'WhatsApp' : 'email'}. If you have questions, reach us anytime:
+                A confirmation email has been sent${email ? ' to ' + email : ''}. We'll also reach out via ${phone ? 'WhatsApp' : 'email'} with driver details. If you have questions, reach us anytime:
               </p>
               <div style="display:flex;gap:var(--space-4);justify-content:center;flex-wrap:wrap;">
                 <a href="https://wa.me/529983000307?text=${encodeURIComponent('Hi! I just booked a transfer to ' + dest + ' on ' + date + '. Booking ref: ' + (result.id || ''))}" target="_blank" class="btn btn--primary" style="display:inline-flex;align-items:center;gap:8px;">
