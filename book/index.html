@@ -444,6 +444,19 @@
         return m ? '$' + m[1] + ' USD' : '';
       }
 
+      // Map form values to Airtable select options
+      function mapService(s) {
+        if (s.includes('Round Trip')) return 'Round Trip';
+        if (s.includes('Hotel → Airport') || s.includes('Hotel →') || s.toLowerCase().includes('departure')) return 'One Way Departure';
+        return 'One Way Arrival';
+      }
+      function mapPax(n) {
+        const num = parseInt(n) || 1;
+        if (num <= 3) return '1-3';
+        if (num <= 7) return '4-7';
+        return '8-10';
+      }
+
       // Intercept form submit
       const formEl = form.tagName === 'FORM' ? form : form.querySelector('form');
       if (!formEl) return;
@@ -501,10 +514,10 @@
             'Titular Name': firstName,
             'Titular Last Name': lastName,
             'Telefono Titular': phone,
-            'Tipo de Traslado': service,
+            'Tipo de Traslado': mapService(service),
             'Destino - Tarifa': dest,
             'Arrival Date Time': arrivalISO || undefined,
-            'Passengers - Selector': pax,
+            'Passengers - Selector': mapPax(pax),
             'Adultos': parseInt(pax) - parseInt(children || 0),
             'Hotel': hotel,
             'Airline': '',
