@@ -565,6 +565,8 @@
 
           // Show success — replace wizard with confirmation
           const wizard = document.querySelector('.booking-wizard');
+
+          gtag('event', 'booking_submit', { event_category: 'conversion', event_label: dest, value: 1 });
           wizard.innerHTML = `
             <div style="text-align:center;padding:var(--space-12) var(--space-6);">
               <div style="width:80px;height:80px;border-radius:50%;background:var(--brand-primary);display:inline-flex;align-items:center;justify-content:center;margin-bottom:var(--space-6);">
