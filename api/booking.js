@@ -39,7 +39,37 @@ export default async function handler(req, res) {
       return res.status(atResp.status).json(atData);
     }
 
-    // ── 2. Send confirmation email via Brevo ──
+    // ── 2. Add contact to Brevo list ──
+    let contactAdded = false;
+    if (BREVO_KEY && email) {
+      try {
+        const nameParts = (clientName || 'Guest').split(' ');
+        await fetch('https://api.brevo.com/v3/contacts', {
+          method: 'POST',
+          headers: { 'api-key': BREVO_KEY, 'content-type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            attributes: {
+              FIRSTNAME: nameParts[0] || '',
+              LASTNAME: nameParts.slice(1).join(' ') || '',
+              SMS: phone || '',
+              DESTINATION: destination || fields['Destino - Tarifa'] || '',
+              BOOKING_DATE: date || '',
+              HOTEL: fields['Hotel'] || '',
+              SERVICE_TYPE: fields['Tipo de Traslado'] || '',
+              BOOKING_ID: atData.id || '',
+            },
+            listIds: [2], // TT&More Clients list
+            updateEnabled: true,
+          }),
+        });
+        contactAdded = true;
+      } catch (e) {
+        console.error('Brevo contact error:', e.message);
+      }
+    }
+
+    // ── 3. Send confirmation email via Brevo ──
     let emailSent = false;
     if (BREVO_KEY && email) {
       try {
@@ -87,6 +117,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       ...atData,
       emailSent,
+      contactAdded,
     });
 
   } catch (err) {
