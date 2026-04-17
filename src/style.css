@@ -2728,6 +2728,10 @@ button {
   100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 @keyframes slideInRight {
   from {
     opacity: 0;
