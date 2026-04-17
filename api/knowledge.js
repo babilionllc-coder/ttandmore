@@ -124,3 +124,21 @@ export const KNOWLEDGE_BASE = {
     }
   ]
 };
+
+// API handler — allows /api/knowledge to return the knowledge base as JSON
+export default function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+
+  const lang = req.query.lang || 'en';
+  const key = lang === 'es' ? 'Spanish Site' : 'English Site';
+  const data = KNOWLEDGE_BASE[key] || KNOWLEDGE_BASE['English Site'];
+
+  return res.status(200).json({
+    language: lang,
+    pages: data.length,
+    knowledge: data,
+  });
+}
