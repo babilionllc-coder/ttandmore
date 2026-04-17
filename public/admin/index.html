@@ -145,6 +145,39 @@ tr:hover td{background:rgba(147,51,234,.03)}
 
 /* Section title */
 .section-title{font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin:24px 0 12px;font-weight:600}
+
+/* WhatsApp button */
+.wa-btn{display:inline-flex;align-items:center;gap:4px;background:#25D366;color:#fff;border:none;padding:4px 10px;border-radius:16px;font-size:.7rem;font-weight:600;cursor:pointer;transition:opacity .2s;text-decoration:none}
+.wa-btn:hover{opacity:.85}
+
+/* Date filter */
+.date-filter{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.date-filter input[type="date"]{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:5px 10px;color:var(--text);font-size:.8rem;font-family:inherit}
+.date-filter input[type="date"]:focus{outline:none;border-color:var(--purple)}
+.date-quick{padding:4px 10px;border-radius:16px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.7rem;cursor:pointer;transition:all .2s}
+.date-quick:hover,.date-quick.active{border-color:var(--teal);color:var(--teal);background:rgba(14,165,233,.1)}
+
+/* Assign badge */
+.assign-badge{display:inline-flex;align-items:center;gap:4px;font-size:.75rem;color:var(--text2);background:var(--bg3);padding:2px 8px;border-radius:12px}
+.assign-badge.assigned{color:var(--green);background:rgba(34,197,94,.1)}
+
+/* Auto-refresh indicator */
+.auto-refresh-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* Form required */
+.form-group.required label::after{content:' *';color:var(--red)}
+.form-error{border-color:var(--red) !important}
+
+/* Print reservation */
+@media print{
+  .sidebar,.topbar,.modal-overlay,.toast{display:none !important}
+  .app{display:block}
+  .content{padding:0}
+  body{background:#fff;color:#000}
+  .stat-card,.schedule-card,.table-wrap{border:1px solid #ccc;background:#fff}
+  .badge{border:1px solid #ccc}
+}
 </style>
 </head>
 <body>
@@ -204,6 +237,7 @@ tr:hover td{background:rgba(147,51,234,.03)}
       </div>
       <div class="topbar-right">
         <button class="btn btn-outline btn-sm" onclick="refreshData()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg> Refresh</button>
+        <span style="display:flex;align-items:center;gap:4px;font-size:.7rem;color:var(--text3)"><span class="auto-refresh-dot"></span> Live</span>
         <span id="lastSync" style="font-size:.7rem;color:var(--text3)"></span>
       </div>
     </header>
@@ -431,6 +465,106 @@ function isFuture(iso) {
   return new Date(iso) > new Date();
 }
 
+function getLinkedName(tableKey, linkedIds) {
+  if (!linkedIds || !linkedIds.length) return '—';
+  const records = CACHE[tableKey] || [];
+  const rec = records.find(r => r.id === linkedIds[0]);
+  if (!rec) return '—';
+  if (tableKey === 'conductores') return f(rec, 'Nombre completo') || '—';
+  if (tableKey === 'vehiculos') return f(rec, 'Nombre del Vehículo') || '—';
+  return '—';
+}
+
+function quickAssignDriver(reservaId) {
+  const conductores = (CACHE.conductores || []).filter(c => f(c,'Estado') !== 'Inactivo');
+  const body = `<div style="display:grid;gap:8px">${conductores.map(c =>
+    `<button class="btn btn-outline" style="justify-content:space-between;width:100%" onclick="doQuickAssign('${reservaId}','Conductor',['${c.id}'])">
+      <span>${f(c,'Nombre completo')}</span>
+      <span class="badge ${f(c,'Estado')==='Disponible'?'badge-green':'badge-blue'}">${f(c,'Estado')}</span>
+    </button>`
+  ).join('')}</div>`;
+  openModal('Assign Driver', body, `<button class="btn btn-outline" onclick="closeModal()">Cancel</button>`);
+}
+
+function quickAssignVehicle(reservaId) {
+  const vehiculos = (CACHE.vehiculos || []).filter(v => f(v,'Estado del Vehículo') !== 'Fuera de servicio');
+  const body = `<div style="display:grid;gap:8px">${vehiculos.map(v =>
+    `<button class="btn btn-outline" style="justify-content:space-between;width:100%" onclick="doQuickAssign('${reservaId}','Vehículo',['${v.id}'])">
+      <span>${f(v,'Nombre del Vehículo')} — ${f(v,'Tipo de Vehículo')} (${f(v,'Capacidad de Pasajeros')} pax)</span>
+      <span class="badge ${f(v,'Estado del Vehículo')==='Disponible'?'badge-green':'badge-blue'}">${f(v,'Estado del Vehículo')}</span>
+    </button>`
+  ).join('')}</div>`;
+  openModal('Assign Vehicle', body, `<button class="btn btn-outline" onclick="closeModal()">Cancel</button>`);
+}
+
+async function doQuickAssign(reservaId, field, value) {
+  try {
+    await updateRecord('reservas', reservaId, { [field]: value });
+    closeModal();
+    toast(`${field} assigned!`);
+    await refreshData();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+// Date filter helpers
+let dateFilterStart = '';
+let dateFilterEnd = '';
+
+function setDateRange(preset) {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const fmt = d => d.toISOString().slice(0,10);
+
+  document.querySelectorAll('.date-quick').forEach(b => b.classList.remove('active'));
+  const clicked = document.querySelector(`.date-quick[data-range="${preset}"]`);
+  if (clicked) clicked.classList.add('active');
+
+  switch(preset) {
+    case 'today':
+      dateFilterStart = fmt(today);
+      dateFilterEnd = fmt(today);
+      break;
+    case 'week': {
+      const end = new Date(today);
+      end.setDate(end.getDate() + 6);
+      dateFilterStart = fmt(today);
+      dateFilterEnd = fmt(end);
+      break;
+    }
+    case 'month': {
+      const start = new Date(today.getFullYear(), today.getMonth(), 1);
+      const end = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      dateFilterStart = fmt(start);
+      dateFilterEnd = fmt(end);
+      break;
+    }
+    case 'all':
+      dateFilterStart = '';
+      dateFilterEnd = '';
+      break;
+  }
+  document.getElementById('dateStart').value = dateFilterStart;
+  document.getElementById('dateEnd').value = dateFilterEnd;
+  filterReservas();
+}
+
+function onDateInputChange() {
+  dateFilterStart = document.getElementById('dateStart').value;
+  dateFilterEnd = document.getElementById('dateEnd').value;
+  document.querySelectorAll('.date-quick').forEach(b => b.classList.remove('active'));
+  filterReservas();
+}
+
+// Auto-refresh
+let autoRefreshInterval = null;
+function startAutoRefresh() {
+  if (autoRefreshInterval) clearInterval(autoRefreshInterval);
+  autoRefreshInterval = setInterval(async () => {
+    await loadAllData();
+    renderPage(currentPage);
+  }, 60000);
+}
+
 // ============================================================
 // DASHBOARD
 // ============================================================
@@ -445,7 +579,9 @@ function renderDashboard(el) {
   const confirmed = reservas.filter(r => f(r,'Estado del Servicio') === 'Confirmado').length;
   const pending = reservas.filter(r => f(r,'Estado del Servicio') === 'Pendiente').length;
   const activeDrivers = conductores.filter(r => f(r,'Estado') === 'Disponible' || f(r,'Estado') === 'En servicio').length;
+  const idleDrivers = conductores.filter(r => f(r,'Estado') === 'Disponible').length;
   const availableVehicles = vehiculos.filter(r => f(r,'Estado del Vehículo') === 'Disponible').length;
+  const activeVehicles = vehiculos.filter(r => f(r,'Estado del Vehículo') !== 'Fuera de servicio').length;
   
   // Revenue calc
   let totalRevenue = 0;
@@ -466,7 +602,7 @@ function renderDashboard(el) {
       <div class="stat-card teal">
         <div class="label">Active Fleet</div>
         <div class="value">${activeDrivers} / ${conductores.length}</div>
-        <div class="sub">${availableVehicles} vehicles available</div>
+        <div class="sub">${idleDrivers} drivers idle · ${availableVehicles}/${activeVehicles} vehicles free</div>
       </div>
       <div class="stat-card green">
         <div class="label">Revenue (All Time)</div>
@@ -555,6 +691,18 @@ function renderReservas(el) {
           <button class="btn btn-primary btn-sm" onclick="openReservaModal()">+ New</button>
         </div>
       </div>
+      <div style="padding:8px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+        <span style="font-size:.75rem;color:var(--text3)">Date:</span>
+        <button class="date-quick" data-range="today" onclick="setDateRange('today')">Today</button>
+        <button class="date-quick" data-range="week" onclick="setDateRange('week')">This Week</button>
+        <button class="date-quick" data-range="month" onclick="setDateRange('month')">This Month</button>
+        <button class="date-quick active" data-range="all" onclick="setDateRange('all')">All Time</button>
+        <span style="color:var(--border)">|</span>
+        <input type="date" id="dateStart" value="" onchange="onDateInputChange()" style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:4px 8px;color:var(--text);font-size:.75rem">
+        <span style="font-size:.75rem;color:var(--text3)">to</span>
+        <input type="date" id="dateEnd" value="" onchange="onDateInputChange()" style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:4px 8px;color:var(--text);font-size:.75rem">
+        <span id="dateResultCount" style="font-size:.7rem;color:var(--text3);margin-left:auto"></span>
+      </div>
       <div class="table-scroll" id="resTableBody"></div>
     </div>
   `;
@@ -571,33 +719,55 @@ function setResFilter(filter) {
 function filterReservas() {
   const search = (document.getElementById('resSearch')?.value || '').toLowerCase();
   let records = CACHE.reservas || [];
-  
+
   if (currentFilter !== 'all') records = records.filter(r => f(r,'Estado del Servicio') === currentFilter);
-  if (search) records = records.filter(r => 
+  if (search) records = records.filter(r =>
     `${f(r,'Titular Name')} ${f(r,'Titular Last Name')} ${f(r,'Hotel')} ${f(r,'Airline')} ${f(r,'Flight #')} ${f(r,'Destino - Tarifa')}`.toLowerCase().includes(search)
   );
+  // Date range filter
+  if (dateFilterStart) {
+    const start = new Date(dateFilterStart + 'T00:00:00');
+    records = records.filter(r => { const d = f(r,'Arrival Date Time'); return d && new Date(d) >= start; });
+  }
+  if (dateFilterEnd) {
+    const end = new Date(dateFilterEnd + 'T23:59:59');
+    records = records.filter(r => { const d = f(r,'Arrival Date Time'); return d && new Date(d) <= end; });
+  }
+  // Update count
+  const countEl = document.getElementById('dateResultCount');
+  if (countEl) countEl.textContent = `${records.length} reservation${records.length!==1?'s':''}`;
+
   
   document.getElementById('resTableBody').innerHTML = `
     <table>
-      <thead><tr><th>#</th><th>Client</th><th>Type</th><th>Destination</th><th>Hotel</th><th>Date/Time</th><th>Flight</th><th>Pax</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
+      <thead><tr><th>#</th><th>Client</th><th>Type</th><th>Destination</th><th>Date/Time</th><th>Flight</th><th>Driver</th><th>Vehicle</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
       <tbody>
         ${records.length === 0 ? '<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--text3)">No reservations found</td></tr>' :
-          records.map(r => `<tr>
+          records.map(r => {
+            const phone = (f(r,'Telefono Titular')+'').replace(/\D/g,'');
+            const driverName = getLinkedName('conductores', f(r,'Conductor'));
+            const vehicleName = getLinkedName('vehiculos', f(r,'Vehículo'));
+            return `<tr>
             <td><strong>${f(r,'Reserva')}</strong></td>
-            <td>${f(r,'Titular Name')} ${f(r,'Titular Last Name')}</td>
+            <td>
+              ${f(r,'Titular Name')} ${f(r,'Titular Last Name')}
+              ${phone ? `<br><a class="wa-btn" href="https://wa.me/${phone.startsWith('52')?phone:'52'+phone}?text=${encodeURIComponent('Hola! Confirmamos su traslado con TT&More para el '+fmtDate(f(r,'Arrival Date Time'))+'. ¿Alguna pregunta?')}" target="_blank">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.387 0-4.588-.822-6.328-2.2l-.442-.36-3.276 1.098 1.098-3.276-.36-.442A9.935 9.935 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+                WA</a>` : ''}
+            </td>
             <td><span class="badge badge-blue">${f(r,'Tipo de Traslado')}</span></td>
             <td>${f(r,'Destino - Tarifa') || '—'}</td>
-            <td>${f(r,'Hotel') || '—'}</td>
             <td>${fmtDate(f(r,'Arrival Date Time'))}</td>
             <td>${f(r,'Airline')} ${f(r,'Flight #')}</td>
-            <td>${f(r,'Passengers') || f(r,'Adultos') || '—'}</td>
+            <td>${driverName !== '—' ? `<span class="assign-badge assigned">${driverName}</span>` : `<button class="btn btn-outline btn-sm" style="font-size:.65rem;padding:2px 8px" onclick="quickAssignDriver('${r.id}')">Assign</button>`}</td>
+            <td>${vehicleName !== '—' ? `<span class="assign-badge assigned">${vehicleName}</span>` : `<button class="btn btn-outline btn-sm" style="font-size:.65rem;padding:2px 8px" onclick="quickAssignVehicle('${r.id}')">Assign</button>`}</td>
             <td>$${f(r,'Total') || '0'}</td>
             <td>${statusBadge(f(r,'Estado del Servicio'))}</td>
             <td class="row-actions">
               <button onclick="viewReserva('${r.id}')" title="View">👁</button>
               <button onclick="editReserva('${r.id}')" title="Edit">✏️</button>
             </td>
-          </tr>`).join('')}
+          </tr>`}).join('')}
       </tbody>
     </table>
   `;
@@ -663,6 +833,46 @@ function openReservaModal(record) {
       <div class="form-group"><label>Adults</label><input id="rf_adults" type="number" value="${f(r,'Adultos')}"></div>
       <div class="form-group"><label>Children</label><input id="rf_children" type="number" value="${f(r,'Niños')}"></div>
     </div>
+    <div style="height:1px;background:var(--border);margin:16px 0"></div>
+    <div style="font-size:.8rem;font-weight:600;color:var(--teal);margin-bottom:12px">ASSIGNMENT</div>
+    <div class="form-row">
+      <div class="form-group"><label>Driver</label>
+        <select id="rf_driver">
+          <option value="">— Not assigned —</option>
+          ${conductores.filter(c => f(c,'Estado') !== 'Inactivo').map(c => {
+            const sel = (f(r,'Conductor')||[]).includes(c.id) ? 'selected' : '';
+            return `<option value="${c.id}" ${sel}>${f(c,'Nombre completo')} (${f(c,'Estado')})</option>`;
+          }).join('')}
+        </select>
+      </div>
+      <div class="form-group"><label>Vehicle</label>
+        <select id="rf_vehicle">
+          <option value="">— Not assigned —</option>
+          ${vehiculos.filter(v => f(v,'Estado del Vehículo') !== 'Fuera de servicio').map(v => {
+            const sel = (f(r,'Vehículo')||[]).includes(v.id) ? 'selected' : '';
+            return `<option value="${v.id}" ${sel}>${f(v,'Nombre del Vehículo')} — ${f(v,'Tipo de Vehículo')} (${f(v,'Capacidad de Pasajeros')} pax)</option>`;
+          }).join('')}
+        </select>
+      </div>
+    </div>
+    ${f(r,'Tipo de Traslado') === 'Round Trip' || !isEdit ? `
+    <div style="height:1px;background:var(--border);margin:16px 0"></div>
+    <div style="font-size:.8rem;font-weight:600;color:var(--gold);margin-bottom:12px">RETURN TRIP (Round Trip only)</div>
+    <div class="form-row">
+      <div class="form-group"><label>Return Date/Time</label><input id="rf_return" type="datetime-local" value="${f(r,'Return Date Time') ? new Date(f(r,'Return Date Time')).toISOString().slice(0,16) : ''}"></div>
+      <div class="form-group"><label>Return Terminal</label>
+        <select id="rf_return_terminal">
+          <option value="">Select...</option>
+          ${['T1','T2','T3','T4'].map(o => `<option ${f(r,'Return Terminal')===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Return Airline</label><input id="rf_return_airline" value="${f(r,'Return Airline') || ''}"></div>
+      <div class="form-group"><label>Return Flight #</label><input id="rf_return_flight" value="${f(r,'Return Flight #') || ''}"></div>
+    </div>
+    ` : ''}
+    <div style="height:1px;background:var(--border);margin:16px 0"></div>
     <div class="form-group"><label>Special Request</label><textarea id="rf_special">${f(r,'Special Request')}</textarea></div>
     <div class="form-group"><label>Notes</label><textarea id="rf_notes">${f(r,'Notas Adicionales')}</textarea></div>
   `;
@@ -677,16 +887,27 @@ function openReservaModal(record) {
 }
 
 async function saveReserva(recordId) {
+  // Basic validation
+  const name = document.getElementById('rf_name').value.trim();
+  const dest = document.getElementById('rf_dest').value;
+  const arrival = document.getElementById('rf_arrival').value;
+  if (!name) { toast('Client name is required', 'error'); document.getElementById('rf_name').classList.add('form-error'); return; }
+  if (!dest) { toast('Destination is required', 'error'); return; }
+  if (!arrival) { toast('Arrival date/time is required', 'error'); return; }
+
+  const driverVal = document.getElementById('rf_driver').value;
+  const vehicleVal = document.getElementById('rf_vehicle').value;
+
   const fields = {
-    'Titular Name': document.getElementById('rf_name').value,
+    'Titular Name': name,
     'Titular Last Name': document.getElementById('rf_lastname').value,
     'Telefono Titular': document.getElementById('rf_phone').value,
     'Total': document.getElementById('rf_total').value,
     'Tipo de Traslado': document.getElementById('rf_type').value || undefined,
     'Estado del Servicio': document.getElementById('rf_status').value || undefined,
-    'Destino - Tarifa': document.getElementById('rf_dest').value || undefined,
+    'Destino - Tarifa': dest || undefined,
     'Terminal': document.getElementById('rf_terminal').value || undefined,
-    'Arrival Date Time': document.getElementById('rf_arrival').value ? new Date(document.getElementById('rf_arrival').value).toISOString() : undefined,
+    'Arrival Date Time': arrival ? new Date(arrival).toISOString() : undefined,
     'Passengers - Selector': document.getElementById('rf_pax').value || undefined,
     'Airline': document.getElementById('rf_airline').value,
     'Flight #': document.getElementById('rf_flight').value,
@@ -696,6 +917,18 @@ async function saveReserva(recordId) {
     'Special Request': document.getElementById('rf_special').value,
     'Notas Adicionales': document.getElementById('rf_notes').value,
   };
+  // Driver/Vehicle assignment
+  if (driverVal) fields['Conductor'] = [driverVal];
+  if (vehicleVal) fields['Vehículo'] = [vehicleVal];
+  // Return trip fields
+  const retEl = document.getElementById('rf_return');
+  if (retEl && retEl.value) fields['Return Date Time'] = new Date(retEl.value).toISOString();
+  const retAirline = document.getElementById('rf_return_airline');
+  if (retAirline && retAirline.value) fields['Return Airline'] = retAirline.value;
+  const retFlight = document.getElementById('rf_return_flight');
+  if (retFlight && retFlight.value) fields['Return Flight #'] = retFlight.value;
+  const retTerminal = document.getElementById('rf_return_terminal');
+  if (retTerminal && retTerminal.value) fields['Return Terminal'] = retTerminal.value;
   // Remove undefined
   Object.keys(fields).forEach(k => fields[k] === undefined && delete fields[k]);
   
@@ -718,6 +951,10 @@ function editReserva(id) {
 function viewReserva(id) {
   const r = (CACHE.reservas || []).find(rec => rec.id === id);
   if (!r) return;
+  const phone = (f(r,'Telefono Titular')+'').replace(/\D/g,'');
+  const waNum = phone.startsWith('52') ? phone : '52'+phone;
+  const driverName = getLinkedName('conductores', f(r,'Conductor'));
+  const vehicleName = getLinkedName('vehiculos', f(r,'Vehículo'));
   const body = `
     <div style="display:grid;gap:12px">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -726,8 +963,13 @@ function viewReserva(id) {
       </div>
       <div style="height:1px;background:var(--border)"></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div><span style="color:var(--text3);font-size:.75rem">Client</span><div>${f(r,'Titular Name')} ${f(r,'Titular Last Name')}</div></div>
+        <div><span style="color:var(--text3);font-size:.75rem">Client</span><div>${f(r,'Titular Name')} ${f(r,'Titular Last Name')}
+          ${phone ? ` <a class="wa-btn" href="https://wa.me/${waNum}?text=${encodeURIComponent('Hola! Confirmamos su traslado con TT&More. ¿Alguna pregunta?')}" target="_blank"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.387 0-4.588-.822-6.328-2.2l-.442-.36-3.276 1.098 1.098-3.276-.36-.442A9.935 9.935 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg> WhatsApp</a>` : ''}</div></div>
         <div><span style="color:var(--text3);font-size:.75rem">Phone</span><div>${f(r,'Telefono Titular') || '—'}</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div><span style="color:var(--text3);font-size:.75rem">Driver</span><div>${driverName !== '—' ? `<span class="assign-badge assigned">${driverName}</span>` : '<span style="color:var(--text3)">Not assigned</span>'}</div></div>
+        <div><span style="color:var(--text3);font-size:.75rem">Vehicle</span><div>${vehicleName !== '—' ? `<span class="assign-badge assigned">${vehicleName}</span>` : '<span style="color:var(--text3)">Not assigned</span>'}</div></div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
         <div><span style="color:var(--text3);font-size:.75rem">Transfer Type</span><div>${f(r,'Tipo de Traslado')}</div></div>
@@ -1063,7 +1305,7 @@ function renderSettings(el) {
       <div class="schedule-card" style="margin-top:16px">
         <div class="card-header">Quick Actions</div>
         <div style="padding:20px;display:flex;flex-wrap:wrap;gap:8px">
-          <button class="btn btn-outline btn-sm" onclick="window.open('https://airtable.com/${CONFIG.baseId}','_blank')">Open in Airtable</button>
+          <button class="btn btn-outline btn-sm" onclick="window.open('https://airtable.com/${CONFIG.baseId}/','_blank')">Open in Airtable</button>
           <button class="btn btn-outline btn-sm" onclick="refreshData()">Force Refresh</button>
           <button class="btn btn-outline btn-sm" onclick="exportCSV()">Export Reservas CSV</button>
         </div>
@@ -1117,6 +1359,7 @@ async function init() {
   const ok = await loadAllData();
   if (ok) {
     renderPage(currentPage);
+    startAutoRefresh();
   } else {
     document.getElementById('content').innerHTML = `
       <div class="empty-state" style="padding:80px 20px">
