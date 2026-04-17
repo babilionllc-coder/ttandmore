@@ -1126,11 +1126,25 @@ async function init() {
   
   if (!TOKEN) {
     document.getElementById('content').innerHTML = `
-      <div class="empty-state" style="padding:80px 20px">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-        <h3 style="margin-bottom:8px">Welcome to TT & More Admin</h3>
-        <p>Connect your Airtable to get started</p>
-        <button class="btn btn-primary" style="margin-top:16px" onclick="navigate('settings')">Open Settings</button>
+      <div style="max-width:480px;margin:60px auto;text-align:center">
+        <h3 style="margin-bottom:8px;font-family:'DM Serif Display',serif;font-size:1.4rem">Welcome to TT & More Admin</h3>
+        <p style="color:var(--text2);margin-bottom:24px">Paste your Airtable Personal Access Token to connect</p>
+        <div class="schedule-card" style="text-align:left">
+          <div style="padding:20px">
+            <div class="form-group">
+              <label>Airtable Token</label>
+              <input id="setup_token" type="password" placeholder="patXXXXX.XXXXXXX" style="font-size:1rem;padding:12px">
+            </div>
+            <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" onclick="
+              const t=document.getElementById('setup_token').value.trim();
+              if(!t){toast('Please paste your token','error');return;}
+              TOKEN=t;
+              localStorage.setItem('ttm_airtable_token',t);
+              init();
+            ">Connect to Airtable</button>
+            <p style="font-size:.7rem;color:var(--text3);margin-top:12px;text-align:center">Find your token at airtable.com/create/tokens · Base ID is pre-configured</p>
+          </div>
+        </div>
       </div>
     `;
     updateConnectionStatus(false);
@@ -1143,14 +1157,12 @@ async function init() {
   if (ok) {
     renderPage(currentPage);
   } else {
-    document.getElementById('content').innerHTML = `
-      <div class="empty-state" style="padding:80px 20px">
-        <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-        <h3 style="margin-bottom:8px;color:var(--red)">Connection Failed</h3>
-        <p>Check your Airtable token and base ID</p>
-        <button class="btn btn-primary" style="margin-top:16px" onclick="navigate('settings')">Open Settings</button>
-      </div>
-    `;
+    // Connection failed — go straight to Settings so user can fix token
+    currentPage = 'settings';
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.page === 'settings'));
+    document.getElementById('pageTitle').textContent = 'Settings';
+    renderSettings(document.getElementById('content'));
+    toast('Connection failed — check your Airtable token below', 'error');
   }
 }
 
