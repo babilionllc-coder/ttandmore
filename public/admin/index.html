@@ -242,28 +242,28 @@ const CONFIG = {
   }
 };
 
-let TOKEN = localStorage.getItem('ttm_airtable_token') || '';
 let CACHE = {};
 let currentPage = 'dashboard';
 let currentFilter = 'all';
 
 // ============================================================
-// AIRTABLE API
+// AIRTABLE API (via server proxy — no token needed in browser)
 // ============================================================
 async function airtableFetch(tableKey, options = {}) {
   const table = CONFIG.tables[tableKey];
-  if (!table || !TOKEN) return null;
-  const url = new URL(`https://api.airtable.com/v0/${CONFIG.baseId}/${encodeURIComponent(table.name)}`);
-  if (options.recordId) url.pathname += '/' + options.recordId;
-  if (options.params) Object.entries(options.params).forEach(([k,v]) => url.searchParams.set(k,v));
-  
+  if (!table) return null;
+
+  const params = new URLSearchParams({ table: table.name });
+  if (options.recordId) params.set('recordId', options.recordId);
+  if (options.params) Object.entries(options.params).forEach(([k,v]) => params.set(k, v));
+
   const fetchOpts = {
-    headers: { 'Authorization': 'Bearer ' + TOKEN, 'Content-Type': 'application/json' }
+    method: options.method || 'GET',
+    headers: { 'Content-Type': 'application/json' }
   };
-  if (options.method) fetchOpts.method = options.method;
   if (options.body) fetchOpts.body = JSON.stringify(options.body);
-  
-  const res = await fetch(url.toString(), fetchOpts);
+
+  const res = await fetch(`/api/airtable?${params.toString()}`, fetchOpts);
   if (!res.ok) throw new Error(`Airtable error: ${res.status}`);
   return res.json();
 }
@@ -1041,20 +1041,12 @@ function renderSettings(el) {
       <div class="schedule-card">
         <div class="card-header">Airtable Connection</div>
         <div style="padding:20px">
-          <div class="form-group">
-            <label>Personal Access Token</label>
-            <input id="set_token" type="password" value="${TOKEN}" placeholder="patXXXXXX.XXXXX">
-            <div style="font-size:.7rem;color:var(--text3);margin-top:4px">Your Airtable PAT with read/write access</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+            <span class="connection-dot" id="settingsConnDot"></span>
+            <span id="settingsConnText" style="font-size:.85rem">Checking...</span>
           </div>
-          <div class="form-group">
-            <label>Base ID</label>
-            <input id="set_base" value="${CONFIG.baseId}" placeholder="appXXXXXXXXXXX">
-            <div style="font-size:.7rem;color:var(--text3);margin-top:4px">Found in your Airtable base URL</div>
-          </div>
-          <div style="display:flex;gap:8px">
-            <button class="btn btn-primary" onclick="saveSettings()">Save & Connect</button>
-            <button class="btn btn-outline" onclick="testConnection()">Test Connection</button>
-          </div>
+          <p style="font-size:.8rem;color:var(--text2);margin-bottom:12px">Connected via server proxy — no token needed in browser. Token is stored securely in Vercel environment variables.</p>
+          <button class="btn btn-outline btn-sm" onclick="testConnection()">Test Connection</button>
         </div>
       </div>
 
@@ -1078,15 +1070,15 @@ function renderSettings(el) {
       </div>
     </div>
   `;
+  // Update connection dot on settings page
+  const dot = document.getElementById('settingsConnDot');
+  const txt = document.getElementById('settingsConnText');
+  if ((CACHE.reservas||[]).length > 0) { dot.className='connection-dot connected'; txt.textContent='Connected to Airtable'; }
+  else { dot.className='connection-dot disconnected'; txt.textContent='Not connected — check Vercel env vars'; }
 }
 
 function saveSettings() {
-  TOKEN = document.getElementById('set_token').value.trim();
-  CONFIG.baseId = document.getElementById('set_base').value.trim();
-  localStorage.setItem('ttm_airtable_token', TOKEN);
-  localStorage.setItem('ttm_airtable_base', CONFIG.baseId);
-  toast('Settings saved! Reconnecting...');
-  init();
+  toast('Settings are managed via Vercel environment variables');
 }
 
 async function testConnection() {
@@ -1120,49 +1112,20 @@ function exportCSV() {
 // INIT
 // ============================================================
 async function init() {
-  // Load saved config
-  const savedBase = localStorage.getItem('ttm_airtable_base');
-  if (savedBase) CONFIG.baseId = savedBase;
-  
-  if (!TOKEN) {
-    document.getElementById('content').innerHTML = `
-      <div style="max-width:480px;margin:60px auto;text-align:center">
-        <h3 style="margin-bottom:8px;font-family:'DM Serif Display',serif;font-size:1.4rem">Welcome to TT & More Admin</h3>
-        <p style="color:var(--text2);margin-bottom:24px">Paste your Airtable Personal Access Token to connect</p>
-        <div class="schedule-card" style="text-align:left">
-          <div style="padding:20px">
-            <div class="form-group">
-              <label>Airtable Token</label>
-              <input id="setup_token" type="password" placeholder="patXXXXX.XXXXXXX" style="font-size:1rem;padding:12px">
-            </div>
-            <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px" onclick="
-              const t=document.getElementById('setup_token').value.trim();
-              if(!t){toast('Please paste your token','error');return;}
-              TOKEN=t;
-              localStorage.setItem('ttm_airtable_token',t);
-              init();
-            ">Connect to Airtable</button>
-            <p style="font-size:.7rem;color:var(--text3);margin-top:12px;text-align:center">Find your token at airtable.com/create/tokens · Base ID is pre-configured</p>
-          </div>
-        </div>
-      </div>
-    `;
-    updateConnectionStatus(false);
-    return;
-  }
-  
   document.getElementById('content').innerHTML = '<div class="loading-state"><div class="spinner"></div><p style="margin-top:12px">Loading data from Airtable...</p></div>';
-  
+
   const ok = await loadAllData();
   if (ok) {
     renderPage(currentPage);
   } else {
-    // Connection failed — go straight to Settings so user can fix token
-    currentPage = 'settings';
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.page === 'settings'));
-    document.getElementById('pageTitle').textContent = 'Settings';
-    renderSettings(document.getElementById('content'));
-    toast('Connection failed — check your Airtable token below', 'error');
+    document.getElementById('content').innerHTML = `
+      <div class="empty-state" style="padding:80px 20px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        <h3 style="margin-bottom:8px;color:var(--red)">Connection Failed</h3>
+        <p style="color:var(--text2)">The AIRTABLE_API_KEY environment variable may not be set in Vercel.</p>
+        <button class="btn btn-outline" style="margin-top:16px" onclick="refreshData()">Retry</button>
+      </div>
+    `;
   }
 }
 
