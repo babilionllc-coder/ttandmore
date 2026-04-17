@@ -95,7 +95,7 @@ export default async function handler(req, res) {
             'content-type': 'application/json',
           },
           body: JSON.stringify({
-            sender: { name: 'TT & More', email: 'bookings@ttandmore.com' },
+            sender: { name: 'TT & More', email: 'info@jegodigital.com' },
             to: [{ email, name: clientName || 'Guest' }],
             replyTo: { email: 'contact@ttandmore.com', name: 'TT & More' },
             subject: `Booking Confirmed — ${destination || 'Your Transfer'} | TT & More`,
@@ -132,48 +132,48 @@ function buildConfirmationEmail({ clientName, destination, date, phone, bookingI
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f4f4f7;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f7;padding:40px 20px;">
+<body style="margin:0;padding:0;background:#f0eff4;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f0eff4;padding:40px 20px;">
 <tr><td align="center">
-<table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+<table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(147,51,234,0.12);">
 
-<!-- Header -->
-<tr><td style="background:#0a0a12;padding:32px 40px;text-align:center;">
-  <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">TT <span style="color:#22c55e;">&</span> More</h1>
-  <p style="margin:8px 0 0;color:rgba(255,255,255,0.7);font-size:14px;">Private Airport Transportation</p>
+<!-- Header with logo -->
+<tr><td style="background:#1A1A2E;padding:28px 40px;text-align:center;">
+  <img src="https://ttandmore.com/ttlogo1.png" alt="TT & More" width="200" style="display:block;margin:0 auto 12px;max-width:200px;height:auto;">
+  <p style="margin:0;color:rgba(255,255,255,0.6);font-size:13px;letter-spacing:0.5px;">Private Airport Transportation</p>
 </td></tr>
 
-<!-- Green check bar -->
-<tr><td style="background:#22c55e;padding:16px 40px;text-align:center;">
+<!-- Purple accent bar -->
+<tr><td style="background:linear-gradient(135deg,#9333EA,#A855F7);padding:16px 40px;text-align:center;">
   <p style="margin:0;color:#ffffff;font-size:18px;font-weight:700;">Booking Confirmed!</p>
 </td></tr>
 
 <!-- Body -->
 <tr><td style="padding:32px 40px;">
-  <p style="margin:0 0 20px;font-size:16px;color:#333;">Hello <strong>${clientName}</strong>,</p>
+  <p style="margin:0 0 20px;font-size:16px;color:#1A1A2E;">Hello <strong>${clientName}</strong>,</p>
   <p style="margin:0 0 24px;font-size:15px;color:#555;line-height:1.6;">
-    Thank you for choosing TT & More! Your private transfer has been received and our team will confirm your driver assignment shortly.
+    Thank you for choosing TT &amp; More! Your private transfer has been received and our team will confirm your driver assignment shortly.
   </p>
 
   <!-- Booking details card -->
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f8f9fa;border-radius:8px;border:1px solid #e9ecef;margin-bottom:24px;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#FAF5FF;border-radius:8px;border:1px solid #E9D5FF;margin-bottom:24px;">
     <tr><td style="padding:20px 24px;">
-      <p style="margin:0 0 12px;font-size:13px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:0.5px;">Booking Details</p>
+      <p style="margin:0 0 12px;font-size:13px;font-weight:600;color:#9333EA;text-transform:uppercase;letter-spacing:0.5px;">Booking Details</p>
       <table width="100%" cellpadding="0" cellspacing="0">
-        ${serviceType ? `<tr><td style="padding:6px 0;color:#666;font-size:14px;width:130px;">Service</td><td style="padding:6px 0;color:#333;font-size:14px;font-weight:600;">${serviceType}</td></tr>` : ''}
-        <tr><td style="padding:6px 0;color:#666;font-size:14px;width:130px;">Destination</td><td style="padding:6px 0;color:#333;font-size:14px;font-weight:600;">${destination}</td></tr>
-        <tr><td style="padding:6px 0;color:#666;font-size:14px;">Date</td><td style="padding:6px 0;color:#333;font-size:14px;font-weight:600;">${date}</td></tr>
-        ${hotel ? `<tr><td style="padding:6px 0;color:#666;font-size:14px;">Hotel</td><td style="padding:6px 0;color:#333;font-size:14px;font-weight:600;">${hotel}</td></tr>` : ''}
-        ${passengers ? `<tr><td style="padding:6px 0;color:#666;font-size:14px;">Passengers</td><td style="padding:6px 0;color:#333;font-size:14px;font-weight:600;">${passengers}</td></tr>` : ''}
-        ${flight ? `<tr><td style="padding:6px 0;color:#666;font-size:14px;">Flight</td><td style="padding:6px 0;color:#333;font-size:14px;font-weight:600;">${flight}</td></tr>` : ''}
-        ${price ? `<tr><td style="padding:6px 0;color:#666;font-size:14px;">Price</td><td style="padding:6px 0;color:#22c55e;font-size:16px;font-weight:700;">${price}</td></tr>` : ''}
+        ${serviceType ? `<tr><td style="padding:6px 0;color:#666;font-size:14px;width:130px;">Service</td><td style="padding:6px 0;color:#1A1A2E;font-size:14px;font-weight:600;">${serviceType}</td></tr>` : ''}
+        <tr><td style="padding:6px 0;color:#666;font-size:14px;width:130px;">Destination</td><td style="padding:6px 0;color:#1A1A2E;font-size:14px;font-weight:600;">${destination}</td></tr>
+        <tr><td style="padding:6px 0;color:#666;font-size:14px;">Date</td><td style="padding:6px 0;color:#1A1A2E;font-size:14px;font-weight:600;">${date}</td></tr>
+        ${hotel ? `<tr><td style="padding:6px 0;color:#666;font-size:14px;">Hotel</td><td style="padding:6px 0;color:#1A1A2E;font-size:14px;font-weight:600;">${hotel}</td></tr>` : ''}
+        ${passengers ? `<tr><td style="padding:6px 0;color:#666;font-size:14px;">Passengers</td><td style="padding:6px 0;color:#1A1A2E;font-size:14px;font-weight:600;">${passengers}</td></tr>` : ''}
+        ${flight ? `<tr><td style="padding:6px 0;color:#666;font-size:14px;">Flight</td><td style="padding:6px 0;color:#1A1A2E;font-size:14px;font-weight:600;">${flight}</td></tr>` : ''}
+        ${price ? `<tr><td style="padding:6px 0;color:#666;font-size:14px;">Price</td><td style="padding:6px 0;color:#9333EA;font-size:16px;font-weight:700;">${price}</td></tr>` : ''}
       </table>
-      <p style="margin:12px 0 0;padding-top:12px;border-top:1px solid #e9ecef;font-size:12px;color:#999;">Booking ID: ${bookingId}</p>
+      <p style="margin:12px 0 0;padding-top:12px;border-top:1px solid #E9D5FF;font-size:12px;color:#999;">Booking ID: ${bookingId}</p>
     </td></tr>
   </table>
 
   <!-- What's next -->
-  <p style="margin:0 0 8px;font-size:15px;font-weight:600;color:#333;">What happens next?</p>
+  <p style="margin:0 0 8px;font-size:15px;font-weight:600;color:#1A1A2E;">What happens next?</p>
   <p style="margin:0 0 24px;font-size:14px;color:#555;line-height:1.6;">
     Our team will assign a driver to your transfer and you will receive your driver's details before your trip. On the day of service, your driver will be waiting for you at the airport with a sign displaying your name.
   </p>
@@ -181,23 +181,33 @@ function buildConfirmationEmail({ clientName, destination, date, phone, bookingI
   <!-- CTA buttons -->
   <table width="100%" cellpadding="0" cellspacing="0">
     <tr>
-      <td align="center" style="padding:0 0 16px;">
-        <a href="${whatsappLink}" target="_blank" style="display:inline-block;background:#25d366;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:15px;font-weight:600;">
-          Chat with us on WhatsApp
+      <td align="center" style="padding:0 0 12px;">
+        <a href="${whatsappLink}" target="_blank" style="display:inline-block;background:#FACC15;color:#1A1A2E;text-decoration:none;padding:14px 32px;border-radius:8px;font-size:15px;font-weight:700;">
+          Chat with Us on WhatsApp
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" style="padding:4px 0 0;">
+        <a href="https://ttandmore.com" style="display:inline-block;background:#9333EA;color:#ffffff;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:13px;font-weight:600;">
+          Visit Our Website
         </a>
       </td>
     </tr>
   </table>
 
-  <p style="margin:0;font-size:13px;color:#999;text-align:center;">
-    Questions? Call us at <a href="tel:+529983000307" style="color:#2563eb;">+52 (998) 300 0307</a> or email <a href="mailto:contact@ttandmore.com" style="color:#2563eb;">contact@ttandmore.com</a>
+  <p style="margin:20px 0 0;font-size:13px;color:#999;text-align:center;">
+    Questions? Call <a href="tel:+529983000307" style="color:#9333EA;">+52 (998) 300 0307</a> or email <a href="mailto:contact@ttandmore.com" style="color:#9333EA;">contact@ttandmore.com</a>
   </p>
 </td></tr>
 
 <!-- Footer -->
-<tr><td style="background:#f8f9fa;padding:24px 40px;text-align:center;border-top:1px solid #e9ecef;">
-  <p style="margin:0 0 4px;font-size:13px;color:#999;">TT & More — Reliable Cancun Airport Transportation Since 1993</p>
-  <p style="margin:0;font-size:12px;color:#bbb;">Cancun, Quintana Roo, Mexico</p>
+<tr><td style="background:#1A1A2E;padding:24px 40px;text-align:center;">
+  <p style="margin:0 0 6px;font-size:13px;color:rgba(255,255,255,0.7);">TT &amp; More — Reliable Cancun Airport Transportation Since 1993</p>
+  <p style="margin:0 0 8px;font-size:12px;color:rgba(255,255,255,0.4);">Cancun, Quintana Roo, Mexico</p>
+  <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.3);">
+    <a href="https://ttandmore.com" style="color:#FACC15;text-decoration:none;">ttandmore.com</a>
+  </p>
 </td></tr>
 
 </table>

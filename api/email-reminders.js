@@ -161,7 +161,7 @@ async function sendBrevoEmail({ to, toName, subject, html }) {
       'content-type': 'application/json',
     },
     body: JSON.stringify({
-      sender: { name: 'TT & More', email: 'bookings@ttandmore.com' },
+      sender: { name: 'TT & More', email: 'info@jegodigital.com' },
       to: [{ email: to, name: toName }],
       replyTo: { email: 'contact@ttandmore.com', name: 'TT & More' },
       subject,
@@ -186,8 +186,8 @@ function buildPreTripEmail({ clientName, destination, hotel, flight, date, drive
 <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
 
 <!-- Header -->
-<tr><td style="background:#0a0a12;padding:32px 40px;text-align:center;">
-  <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">TT <span style="color:#22c55e;">&</span> More</h1>
+<tr><td style="background:#1A1A2E;padding:32px 40px;text-align:center;">
+  <img src="https://ttandmore.com/ttlogo1.png" alt="TT &amp; More" width="180" style="display:block;margin:0 auto 8px;max-width:180px;height:auto;">
   <p style="margin:8px 0 0;color:rgba(255,255,255,0.7);font-size:14px;">Private Airport Transportation</p>
 </td></tr>
 
@@ -235,15 +235,15 @@ function buildPreTripEmail({ clientName, destination, hotel, flight, date, drive
     </td></tr>
   </table>
 
-  <p style="margin:0;font-size:13px;color:#999;text-align:center;">
+  <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.7);text-align:center;">
     Call us: <a href="tel:+529983000307" style="color:#2563eb;">+52 (998) 300 0307</a> · <a href="mailto:contact@ttandmore.com" style="color:#2563eb;">contact@ttandmore.com</a>
   </p>
 </td></tr>
 
 <!-- Footer -->
-<tr><td style="background:#f8f9fa;padding:24px 40px;text-align:center;border-top:1px solid #e9ecef;">
-  <p style="margin:0 0 4px;font-size:13px;color:#999;">TT & More — Reliable Cancun Airport Transportation Since 1993</p>
-  <p style="margin:0;font-size:12px;color:#bbb;">Cancun, Quintana Roo, Mexico</p>
+<tr><td style="background:#1A1A2E;padding:24px 40px;text-align:center;">
+  <p style="margin:0 0 4px;font-size:13px;color:rgba(255,255,255,0.7);">TT & More — Reliable Cancun Airport Transportation Since 1993</p>
+  <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.4);">Cancun, Quintana Roo, Mexico</p>
 </td></tr>
 
 </table></td></tr></table></body></html>`;
@@ -262,8 +262,8 @@ function buildReviewRequestEmail({ clientName, destination, bookingId }) {
 <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
 
 <!-- Header -->
-<tr><td style="background:#0a0a12;padding:32px 40px;text-align:center;">
-  <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">TT <span style="color:#22c55e;">&</span> More</h1>
+<tr><td style="background:#1A1A2E;padding:32px 40px;text-align:center;">
+  <img src="https://ttandmore.com/ttlogo1.png" alt="TT &amp; More" width="180" style="display:block;margin:0 auto 8px;max-width:180px;height:auto;">
   <p style="margin:8px 0 0;color:rgba(255,255,255,0.7);font-size:14px;">Private Airport Transportation</p>
 </td></tr>
 
@@ -294,28 +294,28 @@ function buildReviewRequestEmail({ clientName, destination, bookingId }) {
     </td></tr>
   </table>
 
-  <p style="margin:0 0 24px;font-size:13px;color:#999;text-align:center;">It takes less than 30 seconds and helps us greatly</p>
+  <p style="margin:0 0 24px;font-size:13px;color:rgba(255,255,255,0.7);text-align:center;">It takes less than 30 seconds and helps us greatly</p>
 
   <!-- Coming back? -->
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;margin-bottom:24px;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#FAF5FF;border-radius:8px;border:1px solid #E9D5FF;margin-bottom:24px;">
     <tr><td style="padding:20px 24px;text-align:center;">
       <p style="margin:0 0 8px;font-size:15px;font-weight:600;color:#166534;">Coming Back to Cancun?</p>
       <p style="margin:0 0 16px;font-size:14px;color:#555;">Book your next transfer now and get <strong>10% off</strong> as a returning customer.</p>
-      <a href="https://ttandmore.com/book/?returning=true" target="_blank" style="display:inline-block;background:#22c55e;color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:600;">
+      <a href="https://ttandmore.com/book/?returning=true" target="_blank" style="display:inline-block;background:#9333EA;color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:600;">
         Book Again — 10% Off
       </a>
     </td></tr>
   </table>
 
-  <p style="margin:0;font-size:13px;color:#999;text-align:center;">
+  <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.7);text-align:center;">
     Questions? <a href="${whatsappLink}" style="color:#25d366;font-weight:600;">WhatsApp us</a> · <a href="tel:+529983000307" style="color:#2563eb;">+52 (998) 300 0307</a>
   </p>
 </td></tr>
 
 <!-- Footer -->
-<tr><td style="background:#f8f9fa;padding:24px 40px;text-align:center;border-top:1px solid #e9ecef;">
-  <p style="margin:0 0 4px;font-size:13px;color:#999;">TT & More — Reliable Cancun Airport Transportation Since 1993</p>
-  <p style="margin:0;font-size:12px;color:#bbb;">Cancun, Quintana Roo, Mexico</p>
+<tr><td style="background:#1A1A2E;padding:24px 40px;text-align:center;">
+  <p style="margin:0 0 4px;font-size:13px;color:rgba(255,255,255,0.7);">TT & More — Reliable Cancun Airport Transportation Since 1993</p>
+  <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.4);">Cancun, Quintana Roo, Mexico</p>
 </td></tr>
 
 </table></td></tr></table></body></html>`;

@@ -117,7 +117,7 @@ async function sendBrevoEmail({ to, toName, subject, html }) {
       'content-type': 'application/json',
     },
     body: JSON.stringify({
-      sender: { name: 'TT & More', email: 'bookings@ttandmore.com' },
+      sender: { name: 'TT & More', email: 'info@jegodigital.com' },
       to: [{ email: to, name: toName }],
       replyTo: { email: 'contact@ttandmore.com', name: 'TT & More' },
       subject,
@@ -145,8 +145,8 @@ function buildEmail2({ firstName, destination, hotel }) {
 <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
 
 <!-- Header -->
-<tr><td style="background:#0a0a12;padding:32px 40px;text-align:center;">
-  <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">TT <span style="color:#22c55e;">&</span> More</h1>
+<tr><td style="background:#1A1A2E;padding:32px 40px;text-align:center;">
+  <img src="https://ttandmore.com/ttlogo1.png" alt="TT &amp; More" width="180" style="display:block;margin:0 auto 8px;max-width:180px;height:auto;">
   <p style="margin:8px 0 0;color:rgba(255,255,255,0.7);font-size:14px;">Your Cancún Travel Companion</p>
 </td></tr>
 
@@ -158,9 +158,9 @@ function buildEmail2({ firstName, destination, hotel }) {
   </p>
 
   <!-- Tips -->
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;margin-bottom:24px;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#FAF5FF;border-radius:8px;border:1px solid #E9D5FF;margin-bottom:24px;">
   <tr><td style="padding:20px 24px;">
-    <p style="margin:0 0 12px;font-size:13px;font-weight:600;color:#16a34a;text-transform:uppercase;letter-spacing:0.5px;">Insider Tips</p>
+    <p style="margin:0 0 12px;font-size:13px;font-weight:600;color:#7E22CE;text-transform:uppercase;letter-spacing:0.5px;">Insider Tips</p>
     <table width="100%" cellpadding="0" cellspacing="0">
       <tr><td style="padding:6px 0;color:#333;font-size:14px;line-height:1.5;"><strong>1.</strong> Bring pesos for small purchases — you'll get better prices than paying in USD at shops and restaurants.</td></tr>
       <tr><td style="padding:6px 0;color:#333;font-size:14px;line-height:1.5;"><strong>2.</strong> Pack reef-safe sunscreen — regular sunscreen is banned at cenotes and eco-parks.</td></tr>
@@ -189,7 +189,7 @@ function buildEmail2({ firstName, destination, hotel }) {
         <td style="padding:4px 0;"><a href="https://ttandmore.com/tulum-akumal-snorkel/" style="color:#2563eb;text-decoration:none;font-size:14px;">Akumal Snorkel</a> — <span style="color:#666;font-size:13px;">Swim with sea turtles</span></td>
       </tr>
     </table>
-    <p style="margin:12px 0 0;font-size:13px;color:#999;">All tours include hotel pickup, bilingual driver, and A/C transport.</p>
+    <p style="margin:12px 0 0;font-size:13px;color:rgba(255,255,255,0.7);">All tours include hotel pickup, bilingual driver, and A/C transport.</p>
   </td></tr>
   </table>
 
@@ -207,9 +207,9 @@ function buildEmail2({ firstName, destination, hotel }) {
 </td></tr>
 
 <!-- Footer -->
-<tr><td style="background:#f8f9fa;padding:24px 40px;text-align:center;border-top:1px solid #e9ecef;">
-  <p style="margin:0 0 4px;font-size:13px;color:#999;">TT & More — Reliable Cancun Airport Transportation Since 1993</p>
-  <p style="margin:0;font-size:12px;color:#bbb;">Cancun, Quintana Roo, Mexico</p>
+<tr><td style="background:#1A1A2E;padding:24px 40px;text-align:center;">
+  <p style="margin:0 0 4px;font-size:13px;color:rgba(255,255,255,0.7);">TT & More — Reliable Cancun Airport Transportation Since 1993</p>
+  <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.4);">Cancun, Quintana Roo, Mexico</p>
 </td></tr>
 
 </table>
@@ -232,8 +232,8 @@ function buildEmail3({ firstName, destination }) {
 <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
 
 <!-- Header -->
-<tr><td style="background:#0a0a12;padding:32px 40px;text-align:center;">
-  <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">TT <span style="color:#22c55e;">&</span> More</h1>
+<tr><td style="background:#1A1A2E;padding:32px 40px;text-align:center;">
+  <img src="https://ttandmore.com/ttlogo1.png" alt="TT &amp; More" width="180" style="display:block;margin:0 auto 8px;max-width:180px;height:auto;">
   <p style="margin:8px 0 0;color:rgba(255,255,255,0.7);font-size:14px;">Private Tours & Transportation</p>
 </td></tr>
 
@@ -255,14 +255,14 @@ function buildEmail3({ firstName, destination }) {
         <div style="background:#f8f9fa;border-radius:8px;padding:16px;border:1px solid #e9ecef;">
           <p style="margin:0 0 4px;font-size:14px;font-weight:600;color:#333;">Chichén Itzá Express</p>
           <p style="margin:0;font-size:12px;color:#666;">7th Wonder of the World</p>
-          <a href="https://ttandmore.com/chichen-itza-tour/" style="font-size:12px;color:#22c55e;">View tour &rarr;</a>
+          <a href="https://ttandmore.com/chichen-itza-tour/" style="font-size:12px;color:#9333EA;">View tour &rarr;</a>
         </div>
       </td>
       <td style="padding:8px;width:50%;vertical-align:top;">
         <div style="background:#f8f9fa;border-radius:8px;padding:16px;border:1px solid #e9ecef;">
           <p style="margin:0 0 4px;font-size:14px;font-weight:600;color:#333;">Chichén Itzá + Ik-Kil</p>
           <p style="margin:0;font-size:12px;color:#666;">Ruins + cenote swim</p>
-          <a href="https://ttandmore.com/chichen-itza-cenote-ik-kil/" style="font-size:12px;color:#22c55e;">View tour &rarr;</a>
+          <a href="https://ttandmore.com/chichen-itza-cenote-ik-kil/" style="font-size:12px;color:#9333EA;">View tour &rarr;</a>
         </div>
       </td>
     </tr>
@@ -271,14 +271,14 @@ function buildEmail3({ firstName, destination }) {
         <div style="background:#f8f9fa;border-radius:8px;padding:16px;border:1px solid #e9ecef;">
           <p style="margin:0 0 4px;font-size:14px;font-weight:600;color:#333;">Tulum Express</p>
           <p style="margin:0;font-size:12px;color:#666;">Clifftop Mayan ruins</p>
-          <a href="https://ttandmore.com/tulum/" style="font-size:12px;color:#22c55e;">View tour &rarr;</a>
+          <a href="https://ttandmore.com/tulum/" style="font-size:12px;color:#9333EA;">View tour &rarr;</a>
         </div>
       </td>
       <td style="padding:8px;width:50%;vertical-align:top;">
         <div style="background:#f8f9fa;border-radius:8px;padding:16px;border:1px solid #e9ecef;">
           <p style="margin:0 0 4px;font-size:14px;font-weight:600;color:#333;">Tulum + Akumal Snorkel</p>
           <p style="margin:0;font-size:12px;color:#666;">Swim with sea turtles</p>
-          <a href="https://ttandmore.com/tulum-akumal-snorkel/" style="font-size:12px;color:#22c55e;">View tour &rarr;</a>
+          <a href="https://ttandmore.com/tulum-akumal-snorkel/" style="font-size:12px;color:#9333EA;">View tour &rarr;</a>
         </div>
       </td>
     </tr>
@@ -287,14 +287,14 @@ function buildEmail3({ firstName, destination }) {
         <div style="background:#f8f9fa;border-radius:8px;padding:16px;border:1px solid #e9ecef;">
           <p style="margin:0 0 4px;font-size:14px;font-weight:600;color:#333;">Cobá Express</p>
           <p style="margin:0;font-size:12px;color:#666;">Climb the tallest pyramid</p>
-          <a href="https://ttandmore.com/coba/" style="font-size:12px;color:#22c55e;">View tour &rarr;</a>
+          <a href="https://ttandmore.com/coba/" style="font-size:12px;color:#9333EA;">View tour &rarr;</a>
         </div>
       </td>
       <td style="padding:8px;width:50%;vertical-align:top;">
         <div style="background:#f8f9fa;border-radius:8px;padding:16px;border:1px solid #e9ecef;">
           <p style="margin:0 0 4px;font-size:14px;font-weight:600;color:#333;">Ek Balam + Cenote</p>
           <p style="margin:0;font-size:12px;color:#666;">Off-the-beaten-path gem</p>
-          <a href="https://ttandmore.com/ek-balam-cenote-xcanche/" style="font-size:12px;color:#22c55e;">View tour &rarr;</a>
+          <a href="https://ttandmore.com/ek-balam-cenote-xcanche/" style="font-size:12px;color:#9333EA;">View tour &rarr;</a>
         </div>
       </td>
     </tr>
@@ -307,20 +307,20 @@ function buildEmail3({ firstName, destination }) {
 
   <table width="100%" cellpadding="0" cellspacing="0">
     <tr><td align="center" style="padding:0 0 8px;">
-      <a href="${whatsappLink}" target="_blank" style="display:inline-block;background:#22c55e;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:15px;font-weight:600;">
+      <a href="${whatsappLink}" target="_blank" style="display:inline-block;background:#9333EA;color:#ffffff;text-decoration:none;padding:14px 28px;border-radius:8px;font-size:15px;font-weight:600;">
         Add a Tour to Your Trip
       </a>
     </td></tr>
     <tr><td align="center">
-      <p style="margin:0;font-size:13px;color:#999;">Or call us: <a href="tel:+529983000307" style="color:#2563eb;">+52 (998) 300 0307</a></p>
+      <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.7);">Or call us: <a href="tel:+529983000307" style="color:#2563eb;">+52 (998) 300 0307</a></p>
     </td></tr>
   </table>
 </td></tr>
 
 <!-- Footer -->
-<tr><td style="background:#f8f9fa;padding:24px 40px;text-align:center;border-top:1px solid #e9ecef;">
-  <p style="margin:0 0 4px;font-size:13px;color:#999;">TT & More — Reliable Cancun Airport Transportation Since 1993</p>
-  <p style="margin:0;font-size:12px;color:#bbb;">Cancun, Quintana Roo, Mexico | <a href="https://ttandmore.com" style="color:#bbb;">ttandmore.com</a></p>
+<tr><td style="background:#1A1A2E;padding:24px 40px;text-align:center;">
+  <p style="margin:0 0 4px;font-size:13px;color:rgba(255,255,255,0.7);">TT & More — Reliable Cancun Airport Transportation Since 1993</p>
+  <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.4);">Cancun, Quintana Roo, Mexico | <a href="https://ttandmore.com" style="color:#bbb;">ttandmore.com</a></p>
 </td></tr>
 
 </table>

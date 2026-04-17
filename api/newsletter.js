@@ -47,7 +47,7 @@ export default async function handler(req, res) {
       name: `Newsletter ${month} ${year}`,
       subject,
       htmlContent,
-      sender: { name: 'TT & More', email: 'bookings@ttandmore.com' },
+      sender: { name: 'TT & More', email: 'info@jegodigital.com' },
       replyTo: 'contact@ttandmore.com',
       recipients: { listIds: [2] }, // TT&More Clients list
       // inlineImageActivation omitted — we use external image URLs
@@ -160,7 +160,7 @@ function buildNewsletter({ month, year, highlights, featuredTour, promoCode, pro
         <p style="margin:0;font-size:14px;color:#333;line-height:1.5;">Peak season is coming — book your airport transfer early to guarantee availability!</p>
       </td></tr>
       <tr><td style="padding:8px 0;border-bottom:1px solid #f0f0f0;">
-        <p style="margin:0;font-size:14px;color:#333;line-height:1.5;">New blog post: <a href="https://ttandmore.com/blog/" style="color:#22c55e;">Cancún Travel Tips & Guides</a></p>
+        <p style="margin:0;font-size:14px;color:#333;line-height:1.5;">New blog post: <a href="https://ttandmore.com/blog/" style="color:#9333EA;">Cancún Travel Tips & Guides</a></p>
       </td></tr>
       <tr><td style="padding:8px 0;">
         <p style="margin:0;font-size:14px;color:#333;line-height:1.5;">33 years of safe, private transportation — and counting!</p>
@@ -176,7 +176,7 @@ function buildNewsletter({ month, year, highlights, featuredTour, promoCode, pro
     <tr><td style="padding:20px 24px;text-align:center;">
       <p style="margin:0 0 8px;font-size:18px;font-weight:700;color:#b45309;">${promoDiscount} OFF Your Next Booking!</p>
       <p style="margin:0 0 12px;font-size:14px;color:#666;">Use code <strong style="font-size:16px;color:#333;background:#fef3c7;padding:2px 8px;border-radius:4px;">${promoCode}</strong> when you book via WhatsApp</p>
-      <a href="${whatsappLink}" style="display:inline-block;background:#22c55e;color:#fff;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:14px;font-weight:600;">Book Now</a>
+      <a href="${whatsappLink}" style="display:inline-block;background:#FACC15;color:#1A1A2E;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:14px;font-weight:700;">Book Now</a>
     </td></tr>
     </table>`;
   }
@@ -191,13 +191,13 @@ function buildNewsletter({ month, year, highlights, featuredTour, promoCode, pro
 <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
 
 <!-- Header -->
-<tr><td style="background:#0a0a12;padding:32px 40px;text-align:center;">
-  <h1 style="margin:0;color:#ffffff;font-size:24px;font-weight:700;">TT <span style="color:#22c55e;">&</span> More</h1>
+<tr><td style="background:#1A1A2E;padding:32px 40px;text-align:center;">
+  <img src="https://ttandmore.com/ttlogo1.png" alt="TT &amp; More" width="180" style="display:block;margin:0 auto 8px;max-width:180px;height:auto;">
   <p style="margin:8px 0 0;color:rgba(255,255,255,0.7);font-size:14px;">Monthly Newsletter — ${month} ${year}</p>
 </td></tr>
 
 <!-- Green bar -->
-<tr><td style="background:#22c55e;padding:12px 40px;text-align:center;">
+<tr><td style="background:#9333EA;padding:12px 40px;text-align:center;">
   <p style="margin:0;color:#ffffff;font-size:15px;font-weight:600;">What's New in Cancún & Riviera Maya</p>
 </td></tr>
 
@@ -217,12 +217,12 @@ function buildNewsletter({ month, year, highlights, featuredTour, promoCode, pro
   </table>
 
   <!-- Featured Tour -->
-  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;margin-bottom:24px;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#FAF5FF;border-radius:8px;border:1px solid #E9D5FF;margin-bottom:24px;">
   <tr><td style="padding:24px;">
-    <p style="margin:0 0 4px;font-size:12px;font-weight:600;color:#16a34a;text-transform:uppercase;letter-spacing:0.5px;">Featured Tour</p>
+    <p style="margin:0 0 4px;font-size:12px;font-weight:600;color:#7E22CE;text-transform:uppercase;letter-spacing:0.5px;">Featured Tour</p>
     <p style="margin:0 0 8px;font-size:20px;font-weight:700;color:#333;">${tour.emoji} ${tour.name}</p>
     <p style="margin:0 0 16px;font-size:14px;color:#555;line-height:1.5;">${tour.tagline}. Private transportation from your hotel, bilingual driver, air-conditioned vehicle. An unforgettable day in the Yucatán Peninsula.</p>
-    <a href="${tour.url}" style="display:inline-block;background:#22c55e;color:#fff;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:14px;font-weight:600;">See Tour Details &rarr;</a>
+    <a href="${tour.url}" style="display:inline-block;background:#FACC15;color:#1A1A2E;text-decoration:none;padding:10px 24px;border-radius:6px;font-size:14px;font-weight:700;">See Tour Details &rarr;</a>
   </td></tr>
   </table>
 
@@ -230,13 +230,13 @@ function buildNewsletter({ month, year, highlights, featuredTour, promoCode, pro
   <p style="margin:0 0 12px;font-size:14px;font-weight:600;color:#333;">Quick Links</p>
   <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
     <tr>
-      <td style="padding:4px 0;"><a href="https://ttandmore.com/book/" style="color:#22c55e;text-decoration:none;font-size:14px;">Book a Transfer</a></td>
+      <td style="padding:4px 0;"><a href="https://ttandmore.com/book/" style="color:#9333EA;text-decoration:none;font-size:14px;">Book a Transfer</a></td>
     </tr>
     <tr>
-      <td style="padding:4px 0;"><a href="https://ttandmore.com/#tours" style="color:#22c55e;text-decoration:none;font-size:14px;">Browse All Tours</a></td>
+      <td style="padding:4px 0;"><a href="https://ttandmore.com/#tours" style="color:#9333EA;text-decoration:none;font-size:14px;">Browse All Tours</a></td>
     </tr>
     <tr>
-      <td style="padding:4px 0;"><a href="https://ttandmore.com/blog/" style="color:#22c55e;text-decoration:none;font-size:14px;">Travel Tips Blog</a></td>
+      <td style="padding:4px 0;"><a href="https://ttandmore.com/blog/" style="color:#9333EA;text-decoration:none;font-size:14px;">Travel Tips Blog</a></td>
     </tr>
   </table>
 
@@ -248,7 +248,7 @@ function buildNewsletter({ month, year, highlights, featuredTour, promoCode, pro
       </a>
     </td></tr>
     <tr><td align="center" style="padding-top:12px;">
-      <p style="margin:0;font-size:13px;color:#999;">
+      <p style="margin:0;font-size:13px;color:rgba(255,255,255,0.7);">
         <a href="tel:+529983000307" style="color:#2563eb;">+52 (998) 300 0307</a> · <a href="mailto:contact@ttandmore.com" style="color:#2563eb;">contact@ttandmore.com</a>
       </p>
     </td></tr>
@@ -256,11 +256,11 @@ function buildNewsletter({ month, year, highlights, featuredTour, promoCode, pro
 </td></tr>
 
 <!-- Footer -->
-<tr><td style="background:#f8f9fa;padding:24px 40px;text-align:center;border-top:1px solid #e9ecef;">
-  <p style="margin:0 0 4px;font-size:13px;color:#999;">TT & More — Reliable Cancun Airport Transportation Since 1993</p>
-  <p style="margin:0 0 8px;font-size:12px;color:#bbb;">Cancun, Quintana Roo, Mexico</p>
-  <p style="margin:0;font-size:11px;color:#ccc;">
-    <a href="https://ttandmore.com" style="color:#ccc;">Visit Website</a> ·
+<tr><td style="background:#1A1A2E;padding:24px 40px;text-align:center;">
+  <p style="margin:0 0 4px;font-size:13px;color:rgba(255,255,255,0.7);">TT & More — Reliable Cancun Airport Transportation Since 1993</p>
+  <p style="margin:0 0 8px;font-size:12px;color:rgba(255,255,255,0.4);">Cancun, Quintana Roo, Mexico</p>
+  <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.3);">
+    <a href="https://ttandmore.com" style="color:#FACC15;text-decoration:none;">Visit Website</a> ·
     You received this because you booked with TT & More.
   </p>
 </td></tr>
