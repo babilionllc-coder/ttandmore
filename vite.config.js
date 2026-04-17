@@ -1,3 +1,4 @@
+// Build trigger: 2026-04-17T16:30 — booking form Brevo integration
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 
@@ -60,3 +61,4 @@ export default defineConfig({
     open: true,
   },
 });
+
