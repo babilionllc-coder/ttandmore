@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TT & More — Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a12;--bg2:#12121e;--bg3:#1a1a2e;--bg4:#22223a;
+  --purple:#9333EA;--purple-dim:#7928ca;--gold:#FACC15;--gold-dim:#d4a90a;
+  --teal:#0EA5E9;--green:#22c55e;--red:#ef4444;--orange:#f97316;
+  --text:#f1f5f9;--text2:#94a3b8;--text3:#64748b;
+  --border:#2a2a3e;--radius:10px;
+}
+html,body{height:100%;font-family:'Inter',sans-serif;background:var(--bg);color:var(--text)}
+a{color:var(--teal);text-decoration:none}
+
+/* Layout */
+.app{display:flex;height:100vh;overflow:hidden}
+.sidebar{width:240px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;transition:transform .3s}
+.sidebar-header{padding:20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.sidebar-header h1{font-family:'DM Serif Display',serif;font-size:1.2rem}
+.sidebar-header span{color:var(--gold);font-size:.7rem;background:rgba(250,204,21,.15);padding:2px 8px;border-radius:12px}
+.sidebar-nav{flex:1;padding:12px;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius);cursor:pointer;color:var(--text2);font-size:.875rem;transition:all .2s;margin-bottom:2px}
+.nav-item:hover{background:var(--bg3);color:var(--text)}
+.nav-item.active{background:rgba(147,51,234,.15);color:var(--purple);font-weight:600}
+.nav-item svg{width:18px;height:18px;flex-shrink:0}
+.sidebar-footer{padding:16px;border-top:1px solid var(--border);font-size:.75rem;color:var(--text3)}
+
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:60px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;flex-shrink:0}
+.topbar h2{font-size:1.1rem;font-weight:600}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.btn{padding:8px 16px;border-radius:var(--radius);border:none;cursor:pointer;font-size:.8rem;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:all .2s}
+.btn-primary{background:var(--purple);color:#fff}.btn-primary:hover{background:var(--purple-dim)}
+.btn-gold{background:var(--gold);color:#000}.btn-gold:hover{background:var(--gold-dim)}
+.btn-outline{background:transparent;color:var(--text2);border:1px solid var(--border)}.btn-outline:hover{border-color:var(--text2)}
+.btn-danger{background:var(--red);color:#fff}.btn-danger:hover{opacity:.85}
+.btn-sm{padding:5px 10px;font-size:.75rem}
+
+.content{flex:1;overflow-y:auto;padding:24px}
+.hamburger{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:4px}
+
+/* Cards */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.stat-card .label{font-size:.75rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.stat-card .value{font-size:1.8rem;font-weight:700}
+.stat-card .sub{font-size:.75rem;color:var(--text2);margin-top:4px}
+.stat-card.purple .value{color:var(--purple)}
+.stat-card.gold .value{color:var(--gold)}
+.stat-card.teal .value{color:var(--teal)}
+.stat-card.green .value{color:var(--green)}
+
+/* Table */
+.table-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.table-toolbar{padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+.search-box{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;color:var(--text);font-size:.85rem;width:280px}
+.search-box:focus{outline:none;border-color:var(--purple)}
+.filter-group{display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:.75rem;cursor:pointer;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{border-color:var(--purple);color:var(--purple);background:rgba(147,51,234,.1)}
+
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:12px 16px;font-size:.7rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);background:var(--bg3);border-bottom:1px solid var(--border);position:sticky;top:0}
+td{padding:12px 16px;font-size:.85rem;border-bottom:1px solid var(--border);max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tr:hover td{background:rgba(147,51,234,.03)}
+.table-scroll{overflow-x:auto;max-height:calc(100vh - 320px)}
+
+.badge{padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:600;display:inline-block}
+.badge-green{background:rgba(34,197,94,.15);color:var(--green)}
+.badge-blue{background:rgba(14,165,233,.15);color:var(--teal)}
+.badge-yellow{background:rgba(250,204,21,.15);color:var(--gold)}
+.badge-red{background:rgba(239,68,68,.15);color:var(--red)}
+.badge-purple{background:rgba(147,51,234,.15);color:var(--purple)}
+.badge-gray{background:rgba(100,116,139,.15);color:var(--text3)}
+
+/* Modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(4px)}
+.modal-overlay.show{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:12px;width:90%;max-width:600px;max-height:85vh;overflow-y:auto}
+.modal-header{padding:20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-header h3{font-size:1rem;font-weight:600}
+.modal-close{background:none;border:none;color:var(--text3);cursor:pointer;font-size:1.2rem}
+.modal-body{padding:20px}
+.modal-footer{padding:16px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
+
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:.8rem;color:var(--text2);margin-bottom:6px;font-weight:500}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;color:var(--text);font-size:.85rem;font-family:inherit}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--purple)}
+.form-group textarea{min-height:80px;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* Toast */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:14px 20px;font-size:.85rem;z-index:2000;transform:translateY(100px);opacity:0;transition:all .3s}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-left:3px solid var(--green)}
+.toast.error{border-left:3px solid var(--red)}
+
+/* Loading */
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--purple);border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-state{text-align:center;padding:60px;color:var(--text3)}
+
+/* Empty state */
+.empty-state{text-align:center;padding:60px 20px;color:var(--text3)}
+.empty-state svg{width:48px;height:48px;margin-bottom:12px;opacity:.4}
+.empty-state p{margin-bottom:16px}
+
+/* Responsive */
+@media(max-width:768px){
+  .sidebar{position:fixed;z-index:100;transform:translateX(-100%);height:100%}
+  .sidebar.open{transform:translateX(0)}
+  .hamburger{display:block}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .search-box{width:100%}
+  .form-row{grid-template-columns:1fr}
+  .table-toolbar{flex-direction:column;align-items:stretch}
+}
+
+/* Connection status */
+.connection-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.connection-dot.connected{background:var(--green)}
+.connection-dot.disconnected{background:var(--red)}
+
+/* Today's schedule */
+.schedule-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:16px}
+.schedule-card .card-header{padding:16px;border-bottom:1px solid var(--border);font-weight:600;font-size:.9rem;display:flex;justify-content:space-between;align-items:center}
+.schedule-item{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px}
+.schedule-item:last-child{border-bottom:none}
+.schedule-time{font-size:.8rem;color:var(--gold);font-weight:600;min-width:70px}
+.schedule-info{flex:1}
+.schedule-info .name{font-size:.85rem;font-weight:500}
+.schedule-info .details{font-size:.75rem;color:var(--text3);margin-top:2px}
+.schedule-info .route{font-size:.75rem;color:var(--teal);margin-top:2px}
+
+/* Action buttons in table */
+.row-actions{display:flex;gap:4px}
+.row-actions button{background:none;border:none;color:var(--text3);cursor:pointer;padding:4px;border-radius:4px;transition:all .15s}
+.row-actions button:hover{color:var(--text);background:var(--bg3)}
+
+/* Section title */
+.section-title{font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin:24px 0 12px;font-weight:600}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div>
+        <h1>TT & More</h1>
+        <span>Admin Panel</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Dashboard
+      </div>
+      <div class="nav-item" data-page="reservas" onclick="navigate('reservas')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 4H5a2 2 0 00-2 2v14l4-4h12a2 2 0 002-2V6a2 2 0 00-2-2z"/></svg>
+        Reservas
+      </div>
+      <div class="nav-item" data-page="conductores" onclick="navigate('conductores')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Conductores
+      </div>
+      <div class="nav-item" data-page="vehiculos" onclick="navigate('vehiculos')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14M5 17a2 2 0 01-2-2V8a2 2 0 012-2h2l2-3h6l2 3h2a2 2 0 012 2v7a2 2 0 01-2 2M5 17l-1 3m15-3l1 3"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>
+        Vehículos
+      </div>
+      <div class="nav-item" data-page="clientes" onclick="navigate('clientes')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        Clientes
+      </div>
+      <div style="height:1px;background:var(--border);margin:12px 0"></div>
+      <div class="nav-item" data-page="settings" onclick="navigate('settings')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Settings
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+        <span class="connection-dot" id="connDot"></span>
+        <span id="connStatus">Checking...</span>
+      </div>
+      TT & More © 2025
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <h2 id="pageTitle">Dashboard</h2>
+      </div>
+      <div class="topbar-right">
+        <button class="btn btn-outline btn-sm" onclick="refreshData()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg> Refresh</button>
+        <span id="lastSync" style="font-size:.7rem;color:var(--text3)"></span>
+      </div>
+    </header>
+    <div class="content" id="content">
+      <div class="loading-state"><div class="spinner"></div><p style="margin-top:12px">Loading...</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modalTitle">Edit</h3>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-footer" id="modalFooter"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+const CONFIG = {
+  baseId: 'app9JpWjv6OFEZJ30',
+  tables: {
+    reservas:    { id: 'tblfPXyQvtSXh1Igb', name: 'Reservas' },
+    conductores: { id: 'tbll9J9ljPBNsjl79', name: 'Conductores' },
+    vehiculos:   { id: 'tbl9ffR942a86EvbV', name: 'Vehículos' },
+    clientes:    { id: 'tbldAgC7rb6krBSmh', name: 'Clientes' }
+  }
+};
+
+let TOKEN = localStorage.getItem('ttm_airtable_token') || '';
+let CACHE = {};
+let currentPage = 'dashboard';
+let currentFilter = 'all';
+
+// ============================================================
+// AIRTABLE API
+// ============================================================
+async function airtableFetch(tableKey, options = {}) {
+  const table = CONFIG.tables[tableKey];
+  if (!table || !TOKEN) return null;
+  const url = new URL(`https://api.airtable.com/v0/${CONFIG.baseId}/${encodeURIComponent(table.name)}`);
+  if (options.recordId) url.pathname += '/' + options.recordId;
+  if (options.params) Object.entries(options.params).forEach(([k,v]) => url.searchParams.set(k,v));
+  
+  const fetchOpts = {
+    headers: { 'Authorization': 'Bearer ' + TOKEN, 'Content-Type': 'application/json' }
+  };
+  if (options.method) fetchOpts.method = options.method;
+  if (options.body) fetchOpts.body = JSON.stringify(options.body);
+  
+  const res = await fetch(url.toString(), fetchOpts);
+  if (!res.ok) throw new Error(`Airtable error: ${res.status}`);
+  return res.json();
+}
+
+async function listRecords(tableKey, opts = {}) {
+  let allRecords = [];
+  let offset;
+  do {
+    const params = { pageSize: '100', ...opts };
+    if (offset) params.offset = offset;
+    const data = await airtableFetch(tableKey, { params });
+    if (!data) return [];
+    allRecords = allRecords.concat(data.records || []);
+    offset = data.offset;
+  } while (offset);
+  return allRecords;
+}
+
+async function createRecord(tableKey, fields) {
+  return airtableFetch(tableKey, { method: 'POST', body: { fields } });
+}
+
+async function updateRecord(tableKey, recordId, fields) {
+  return airtableFetch(tableKey, { method: 'PATCH', recordId, body: { fields } });
+}
+
+async function deleteRecord(tableKey, recordId) {
+  return airtableFetch(tableKey, { method: 'DELETE', recordId });
+}
+
+// ============================================================
+// DATA LOADING
+// ============================================================
+async function loadAllData() {
+  try {
+    const [reservas, conductores, vehiculos, clientes] = await Promise.all([
+      listRecords('reservas', { sort: [{ field: 'Arrival Date Time', direction: 'desc' }].map((s,i) => [`sort[${i}][field]`,s.field,`sort[${i}][direction]`,s.direction]).flat().reduce((o,v,i,a) => (i%2===0 && (o[a[i]]=a[i+1]),o), {}) }),
+      listRecords('conductores'),
+      listRecords('vehiculos'),
+      listRecords('clientes')
+    ]);
+    CACHE = { reservas, conductores, vehiculos, clientes };
+    document.getElementById('lastSync').textContent = 'Synced: ' + new Date().toLocaleTimeString();
+    updateConnectionStatus(true);
+    return true;
+  } catch(e) {
+    console.error('Load error:', e);
+    updateConnectionStatus(false);
+    return false;
+  }
+}
+
+function updateConnectionStatus(connected) {
+  const dot = document.getElementById('connDot');
+  const status = document.getElementById('connStatus');
+  dot.className = 'connection-dot ' + (connected ? 'connected' : 'disconnected');
+  status.textContent = connected ? 'Connected to Airtable' : 'Disconnected';
+}
+
+async function refreshData() {
+  toast('Refreshing data...', 'success');
+  await loadAllData();
+  renderPage(currentPage);
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function navigate(page) {
+  currentPage = page;
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.toggle('active', n.dataset.page === page));
+  document.getElementById('sidebar').classList.remove('open');
+  const titles = { dashboard:'Dashboard', reservas:'Reservas', conductores:'Conductores', vehiculos:'Vehículos', clientes:'Clientes', settings:'Settings' };
+  document.getElementById('pageTitle').textContent = titles[page] || page;
+  renderPage(page);
+}
+
+function renderPage(page) {
+  const el = document.getElementById('content');
+  switch(page) {
+    case 'dashboard': renderDashboard(el); break;
+    case 'reservas': renderReservas(el); break;
+    case 'conductores': renderConductores(el); break;
+    case 'vehiculos': renderVehiculos(el); break;
+    case 'clientes': renderClientes(el); break;
+    case 'settings': renderSettings(el); break;
+  }
+}
+
+// ============================================================
+// HELPERS
+// ============================================================
+function f(record, field) {
+  const v = record?.fields?.[field];
+  if (v === undefined || v === null) return '';
+  return v;
+}
+
+function fmtDate(iso) {
+  if (!iso) return '—';
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-US', { month:'short', day:'numeric' }) + ' ' + d.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
+}
+
+function fmtDateShort(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+}
+
+function fmtTime(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
+}
+
+function statusBadge(status) {
+  const map = {
+    'Confirmado':'badge-green','Completado':'badge-green',
+    'Pendiente':'badge-yellow',
+    'En Proceso':'badge-blue',
+    'Cancelado':'badge-red',
+    'Disponible':'badge-green','Active':'badge-green',
+    'En servicio':'badge-blue',
+    'Mantenimiento':'badge-yellow',
+    'Fuera de servicio':'badge-red','Inactivo':'badge-red'
+  };
+  return `<span class="badge ${map[status]||'badge-gray'}">${status || '—'}</span>`;
+}
+
+function toast(msg, type='success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  setTimeout(() => t.className = 'toast', 3000);
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('show');
+}
+
+function openModal(title, bodyHtml, footerHtml) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = bodyHtml;
+  document.getElementById('modalFooter').innerHTML = footerHtml;
+  document.getElementById('modalOverlay').classList.add('show');
+}
+
+function linkedName(records, ids) {
+  if (!ids || !ids.length) return '—';
+  const rec = records.find(r => r.id === ids[0]);
+  if (!rec) return '—';
+  // Get primary field value
+  const fields = rec.fields;
+  return fields[Object.keys(fields)[0]] || '—';
+}
+
+function isToday(iso) {
+  if (!iso) return false;
+  const d = new Date(iso);
+  const t = new Date();
+  return d.toDateString() === t.toDateString();
+}
+
+function isFuture(iso) {
+  if (!iso) return false;
+  return new Date(iso) > new Date();
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+function renderDashboard(el) {
+  const reservas = CACHE.reservas || [];
+  const conductores = CACHE.conductores || [];
+  const vehiculos = CACHE.vehiculos || [];
+  const clientes = CACHE.clientes || [];
+
+  const today = reservas.filter(r => isToday(f(r,'Arrival Date Time')));
+  const upcoming = reservas.filter(r => isFuture(f(r,'Arrival Date Time'))).sort((a,b) => new Date(f(a,'Arrival Date Time')) - new Date(f(b,'Arrival Date Time')));
+  const confirmed = reservas.filter(r => f(r,'Estado del Servicio') === 'Confirmado').length;
+  const pending = reservas.filter(r => f(r,'Estado del Servicio') === 'Pendiente').length;
+  const activeDrivers = conductores.filter(r => f(r,'Estado') === 'Disponible' || f(r,'Estado') === 'En servicio').length;
+  const availableVehicles = vehiculos.filter(r => f(r,'Estado del Vehículo') === 'Disponible').length;
+  
+  // Revenue calc
+  let totalRevenue = 0;
+  reservas.forEach(r => { const t = parseFloat(f(r,'Total')); if (!isNaN(t)) totalRevenue += t; });
+
+  el.innerHTML = `
+    <div class="stats-grid">
+      <div class="stat-card purple">
+        <div class="label">Today's Transfers</div>
+        <div class="value">${today.length}</div>
+        <div class="sub">${upcoming.slice(0,5).length} upcoming</div>
+      </div>
+      <div class="stat-card gold">
+        <div class="label">Total Reservations</div>
+        <div class="value">${reservas.length}</div>
+        <div class="sub">${confirmed} confirmed · ${pending} pending</div>
+      </div>
+      <div class="stat-card teal">
+        <div class="label">Active Fleet</div>
+        <div class="value">${activeDrivers} / ${conductores.length}</div>
+        <div class="sub">${availableVehicles} vehicles available</div>
+      </div>
+      <div class="stat-card green">
+        <div class="label">Revenue (All Time)</div>
+        <div class="value">$${totalRevenue.toLocaleString()}</div>
+        <div class="sub">${clientes.length} total clients</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="schedule-card">
+        <div class="card-header">
+          Today's Schedule
+          <span class="badge badge-purple">${today.length} transfers</span>
+        </div>
+        ${today.length === 0 ? '<div style="padding:24px;text-align:center;color:var(--text3)">No transfers scheduled today</div>' :
+          today.sort((a,b) => new Date(f(a,'Arrival Date Time')) - new Date(f(b,'Arrival Date Time'))).map(r => `
+          <div class="schedule-item">
+            <div class="schedule-time">${fmtTime(f(r,'Arrival Date Time'))}</div>
+            <div class="schedule-info">
+              <div class="name">${f(r,'Titular Name')} ${f(r,'Titular Last Name')}</div>
+              <div class="details">${f(r,'Airline')} ${f(r,'Flight #')} · ${f(r,'Tipo de Traslado')} · ${f(r,'Passengers') || '—'} pax</div>
+              <div class="route">${f(r,'Terminal') || '—'} → ${f(r,'Hotel') || f(r,'Destino - Tarifa') || '—'}</div>
+            </div>
+            ${statusBadge(f(r,'Estado del Servicio'))}
+          </div>`).join('')}
+      </div>
+
+      <div class="schedule-card">
+        <div class="card-header">
+          Upcoming Transfers
+          <span class="badge badge-blue">${upcoming.length} queued</span>
+        </div>
+        ${upcoming.slice(0,8).map(r => `
+          <div class="schedule-item">
+            <div class="schedule-time">${fmtDate(f(r,'Arrival Date Time'))}</div>
+            <div class="schedule-info">
+              <div class="name">${f(r,'Titular Name')} ${f(r,'Titular Last Name')}</div>
+              <div class="details">${f(r,'Tipo de Traslado')} · ${f(r,'Destino - Tarifa') || '—'}</div>
+            </div>
+            ${statusBadge(f(r,'Estado del Servicio'))}
+          </div>`).join('') || '<div style="padding:24px;text-align:center;color:var(--text3)">No upcoming transfers</div>'}
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top:24px">Recent Reservations</div>
+    <div class="table-wrap">
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>#</th><th>Client</th><th>Type</th><th>Destination</th><th>Date</th><th>Flight</th><th>Status</th></tr></thead>
+          <tbody>
+            ${reservas.slice(0,10).map(r => `<tr style="cursor:pointer" onclick="navigate('reservas')">
+              <td>${f(r,'Reserva')}</td>
+              <td><strong>${f(r,'Titular Name')} ${f(r,'Titular Last Name')}</strong></td>
+              <td>${f(r,'Tipo de Traslado')}</td>
+              <td>${f(r,'Destino - Tarifa') || '—'}</td>
+              <td>${fmtDate(f(r,'Arrival Date Time'))}</td>
+              <td>${f(r,'Airline')} ${f(r,'Flight #')}</td>
+              <td>${statusBadge(f(r,'Estado del Servicio'))}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+// ============================================================
+// RESERVAS
+// ============================================================
+function renderReservas(el) {
+  let records = CACHE.reservas || [];
+  
+  el.innerHTML = `
+    <div class="table-wrap">
+      <div class="table-toolbar">
+        <input class="search-box" placeholder="Search by name, flight, hotel..." id="resSearch" oninput="filterReservas()">
+        <div style="display:flex;gap:8px;align-items:center">
+          <div class="filter-group" id="resFilters">
+            <button class="filter-btn active" data-filter="all" onclick="setResFilter('all')">All (${records.length})</button>
+            <button class="filter-btn" data-filter="Confirmado" onclick="setResFilter('Confirmado')">Confirmed</button>
+            <button class="filter-btn" data-filter="Pendiente" onclick="setResFilter('Pendiente')">Pending</button>
+            <button class="filter-btn" data-filter="En Proceso" onclick="setResFilter('En Proceso')">In Progress</button>
+            <button class="filter-btn" data-filter="Completado" onclick="setResFilter('Completado')">Completed</button>
+            <button class="filter-btn" data-filter="Cancelado" onclick="setResFilter('Cancelado')">Cancelled</button>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="openReservaModal()">+ New</button>
+        </div>
+      </div>
+      <div class="table-scroll" id="resTableBody"></div>
+    </div>
+  `;
+  currentFilter = 'all';
+  filterReservas();
+}
+
+function setResFilter(filter) {
+  currentFilter = filter;
+  document.querySelectorAll('#resFilters .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+  filterReservas();
+}
+
+function filterReservas() {
+  const search = (document.getElementById('resSearch')?.value || '').toLowerCase();
+  let records = CACHE.reservas || [];
+  
+  if (currentFilter !== 'all') records = records.filter(r => f(r,'Estado del Servicio') === currentFilter);
+  if (search) records = records.filter(r => 
+    `${f(r,'Titular Name')} ${f(r,'Titular Last Name')} ${f(r,'Hotel')} ${f(r,'Airline')} ${f(r,'Flight #')} ${f(r,'Destino - Tarifa')}`.toLowerCase().includes(search)
+  );
+  
+  document.getElementById('resTableBody').innerHTML = `
+    <table>
+      <thead><tr><th>#</th><th>Client</th><th>Type</th><th>Destination</th><th>Hotel</th><th>Date/Time</th><th>Flight</th><th>Pax</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${records.length === 0 ? '<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--text3)">No reservations found</td></tr>' :
+          records.map(r => `<tr>
+            <td><strong>${f(r,'Reserva')}</strong></td>
+            <td>${f(r,'Titular Name')} ${f(r,'Titular Last Name')}</td>
+            <td><span class="badge badge-blue">${f(r,'Tipo de Traslado')}</span></td>
+            <td>${f(r,'Destino - Tarifa') || '—'}</td>
+            <td>${f(r,'Hotel') || '—'}</td>
+            <td>${fmtDate(f(r,'Arrival Date Time'))}</td>
+            <td>${f(r,'Airline')} ${f(r,'Flight #')}</td>
+            <td>${f(r,'Passengers') || f(r,'Adultos') || '—'}</td>
+            <td>$${f(r,'Total') || '0'}</td>
+            <td>${statusBadge(f(r,'Estado del Servicio'))}</td>
+            <td class="row-actions">
+              <button onclick="viewReserva('${r.id}')" title="View">👁</button>
+              <button onclick="editReserva('${r.id}')" title="Edit">✏️</button>
+            </td>
+          </tr>`).join('')}
+      </tbody>
+    </table>
+  `;
+}
+
+function openReservaModal(record) {
+  const r = record || { fields: {} };
+  const isEdit = !!record;
+  const conductores = CACHE.conductores || [];
+  const vehiculos = CACHE.vehiculos || [];
+  
+  const body = `
+    <div class="form-row">
+      <div class="form-group"><label>Titular Name</label><input id="rf_name" value="${f(r,'Titular Name')}"></div>
+      <div class="form-group"><label>Titular Last Name</label><input id="rf_lastname" value="${f(r,'Titular Last Name')}"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Phone</label><input id="rf_phone" value="${f(r,'Telefono Titular')}"></div>
+      <div class="form-group"><label>Total ($USD)</label><input id="rf_total" type="text" value="${f(r,'Total')}"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Transfer Type</label>
+        <select id="rf_type">
+          <option value="">Select...</option>
+          ${['One Way Arrival','One Way Departure','Round Trip'].map(o => `<option ${f(r,'Tipo de Traslado')===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+      <div class="form-group"><label>Status</label>
+        <select id="rf_status">
+          ${['Pendiente','Confirmado','En Proceso','Completado','Cancelado'].map(o => `<option ${f(r,'Estado del Servicio')===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Destination</label>
+        <select id="rf_dest">
+          <option value="">Select...</option>
+          ${['Cancún Downtown','Cancún Hotel Zone','Puerto Juarez - Isla Mujeres','Playa Mujeres','Costa Mujeres','Puerto Morelos','Playa Paraiso','Playa del Carmen','Puerto Aventuras','Akumal','Bahía Principe','Tulum Downtown','Chiquilá - Isla Holbox'].map(o => `<option ${f(r,'Destino - Tarifa')===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+      <div class="form-group"><label>Terminal</label>
+        <select id="rf_terminal">
+          <option value="">Select...</option>
+          ${['T1','T2','T3','T4'].map(o => `<option ${f(r,'Terminal')===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Arrival Date/Time</label><input id="rf_arrival" type="datetime-local" value="${f(r,'Arrival Date Time') ? new Date(f(r,'Arrival Date Time')).toISOString().slice(0,16) : ''}"></div>
+      <div class="form-group"><label>Passengers</label>
+        <select id="rf_pax">
+          <option value="">Select...</option>
+          ${['1-3','4-7','8-10'].map(o => `<option ${f(r,'Passengers - Selector')===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Airline</label><input id="rf_airline" value="${f(r,'Airline')}"></div>
+      <div class="form-group"><label>Flight #</label><input id="rf_flight" value="${f(r,'Flight #')}"></div>
+    </div>
+    <div class="form-group"><label>Hotel</label><input id="rf_hotel" value="${f(r,'Hotel')}"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Adults</label><input id="rf_adults" type="number" value="${f(r,'Adultos')}"></div>
+      <div class="form-group"><label>Children</label><input id="rf_children" type="number" value="${f(r,'Niños')}"></div>
+    </div>
+    <div class="form-group"><label>Special Request</label><textarea id="rf_special">${f(r,'Special Request')}</textarea></div>
+    <div class="form-group"><label>Notes</label><textarea id="rf_notes">${f(r,'Notas Adicionales')}</textarea></div>
+  `;
+  
+  const footer = `
+    ${isEdit ? `<button class="btn btn-danger btn-sm" onclick="deleteReservaConfirm('${r.id}')">Delete</button>` : ''}
+    <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+    <button class="btn btn-primary" onclick="saveReserva('${isEdit ? r.id : ''}')">${isEdit ? 'Update' : 'Create'} Reservation</button>
+  `;
+  
+  openModal(isEdit ? `Edit Reservation #${f(r,'Reserva')}` : 'New Reservation', body, footer);
+}
+
+async function saveReserva(recordId) {
+  const fields = {
+    'Titular Name': document.getElementById('rf_name').value,
+    'Titular Last Name': document.getElementById('rf_lastname').value,
+    'Telefono Titular': document.getElementById('rf_phone').value,
+    'Total': document.getElementById('rf_total').value,
+    'Tipo de Traslado': document.getElementById('rf_type').value || undefined,
+    'Estado del Servicio': document.getElementById('rf_status').value || undefined,
+    'Destino - Tarifa': document.getElementById('rf_dest').value || undefined,
+    'Terminal': document.getElementById('rf_terminal').value || undefined,
+    'Arrival Date Time': document.getElementById('rf_arrival').value ? new Date(document.getElementById('rf_arrival').value).toISOString() : undefined,
+    'Passengers - Selector': document.getElementById('rf_pax').value || undefined,
+    'Airline': document.getElementById('rf_airline').value,
+    'Flight #': document.getElementById('rf_flight').value,
+    'Hotel': document.getElementById('rf_hotel').value,
+    'Adultos': parseInt(document.getElementById('rf_adults').value) || undefined,
+    'Niños': parseInt(document.getElementById('rf_children').value) || undefined,
+    'Special Request': document.getElementById('rf_special').value,
+    'Notas Adicionales': document.getElementById('rf_notes').value,
+  };
+  // Remove undefined
+  Object.keys(fields).forEach(k => fields[k] === undefined && delete fields[k]);
+  
+  try {
+    if (recordId) await updateRecord('reservas', recordId, fields);
+    else await createRecord('reservas', fields);
+    closeModal();
+    toast(recordId ? 'Reservation updated!' : 'Reservation created!');
+    await refreshData();
+  } catch(e) {
+    toast('Error: ' + e.message, 'error');
+  }
+}
+
+function editReserva(id) {
+  const record = (CACHE.reservas || []).find(r => r.id === id);
+  if (record) openReservaModal(record);
+}
+
+function viewReserva(id) {
+  const r = (CACHE.reservas || []).find(rec => rec.id === id);
+  if (!r) return;
+  const body = `
+    <div style="display:grid;gap:12px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div><span style="color:var(--text3);font-size:.75rem">Reservation #</span><div style="font-weight:600;font-size:1.1rem">${f(r,'Reserva')}</div></div>
+        <div><span style="color:var(--text3);font-size:.75rem">Status</span><div>${statusBadge(f(r,'Estado del Servicio'))}</div></div>
+      </div>
+      <div style="height:1px;background:var(--border)"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div><span style="color:var(--text3);font-size:.75rem">Client</span><div>${f(r,'Titular Name')} ${f(r,'Titular Last Name')}</div></div>
+        <div><span style="color:var(--text3);font-size:.75rem">Phone</span><div>${f(r,'Telefono Titular') || '—'}</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div><span style="color:var(--text3);font-size:.75rem">Transfer Type</span><div>${f(r,'Tipo de Traslado')}</div></div>
+        <div><span style="color:var(--text3);font-size:.75rem">Total</span><div style="font-weight:600;color:var(--gold)">$${f(r,'Total') || '0'}</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div><span style="color:var(--text3);font-size:.75rem">Arrival</span><div>${fmtDate(f(r,'Arrival Date Time'))}</div></div>
+        <div><span style="color:var(--text3);font-size:.75rem">Flight</span><div>${f(r,'Airline')} ${f(r,'Flight #')}</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div><span style="color:var(--text3);font-size:.75rem">Destination</span><div>${f(r,'Destino - Tarifa') || '—'}</div></div>
+        <div><span style="color:var(--text3);font-size:.75rem">Terminal</span><div>${f(r,'Terminal') || '—'}</div></div>
+      </div>
+      <div><span style="color:var(--text3);font-size:.75rem">Hotel</span><div>${f(r,'Hotel') || '—'}</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+        <div><span style="color:var(--text3);font-size:.75rem">Adults</span><div>${f(r,'Adultos') || '—'}</div></div>
+        <div><span style="color:var(--text3);font-size:.75rem">Children</span><div>${f(r,'Niños') || '—'}</div></div>
+        <div><span style="color:var(--text3);font-size:.75rem">Luggage</span><div>${f(r,'Maletas') || '—'}</div></div>
+      </div>
+      ${f(r,'Return Date Time') ? `<div style="height:1px;background:var(--border)"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div><span style="color:var(--text3);font-size:.75rem">Return</span><div>${fmtDate(f(r,'Return Date Time'))}</div></div>
+        <div><span style="color:var(--text3);font-size:.75rem">Return Flight</span><div>${f(r,'Return Airline')} ${f(r,'Return Flight #')}</div></div>
+      </div>` : ''}
+      ${f(r,'Special Request') ? `<div><span style="color:var(--text3);font-size:.75rem">Special Request</span><div style="background:var(--bg3);padding:10px;border-radius:8px;margin-top:4px;font-size:.85rem">${f(r,'Special Request')}</div></div>` : ''}
+      ${f(r,'Notas Adicionales') ? `<div><span style="color:var(--text3);font-size:.75rem">Notes</span><div style="background:var(--bg3);padding:10px;border-radius:8px;margin-top:4px;font-size:.85rem">${f(r,'Notas Adicionales')}</div></div>` : ''}
+    </div>
+  `;
+  openModal(`Reservation #${f(r,'Reserva')}`, body, `<button class="btn btn-primary btn-sm" onclick="editReserva('${r.id}')">Edit</button> <button class="btn btn-outline btn-sm" onclick="closeModal()">Close</button>`);
+}
+
+async function deleteReservaConfirm(id) {
+  if (!confirm('Delete this reservation? This cannot be undone.')) return;
+  try {
+    await deleteRecord('reservas', id);
+    closeModal();
+    toast('Reservation deleted');
+    await refreshData();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+// ============================================================
+// CONDUCTORES
+// ============================================================
+function renderConductores(el) {
+  const records = CACHE.conductores || [];
+  el.innerHTML = `
+    <div class="table-wrap">
+      <div class="table-toolbar">
+        <input class="search-box" placeholder="Search drivers..." id="drvSearch" oninput="filterConductores()">
+        <button class="btn btn-primary btn-sm" onclick="openConductorModal()">+ Add Driver</button>
+      </div>
+      <div class="table-scroll" id="drvTableBody"></div>
+    </div>
+  `;
+  filterConductores();
+}
+
+function filterConductores() {
+  const search = (document.getElementById('drvSearch')?.value || '').toLowerCase();
+  let records = CACHE.conductores || [];
+  if (search) records = records.filter(r => `${f(r,'Nombre completo')} ${f(r,'Teléfono')} ${f(r,'Correo electrónico')}`.toLowerCase().includes(search));
+  
+  document.getElementById('drvTableBody').innerHTML = `
+    <table>
+      <thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>License</th><th>License Exp.</th><th>Status</th><th>Reservations</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${records.map(r => `<tr>
+          <td><strong>${f(r,'Nombre completo')}</strong></td>
+          <td>${f(r,'Teléfono') || '—'}</td>
+          <td>${f(r,'Correo electrónico') || '—'}</td>
+          <td>${f(r,'Licencia de conducir') || '—'}</td>
+          <td>${fmtDateShort(f(r,'Fecha de vencimiento de licencia'))}</td>
+          <td>${statusBadge(f(r,'Estado'))}</td>
+          <td>${f(r,'Total de Reservas Asignadas') || 0}</td>
+          <td class="row-actions">
+            <button onclick="editConductor('${r.id}')" title="Edit">✏️</button>
+          </td>
+        </tr>`).join('') || '<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text3)">No drivers found</td></tr>'}
+      </tbody>
+    </table>
+  `;
+}
+
+function openConductorModal(record) {
+  const r = record || { fields: {} };
+  const isEdit = !!record;
+  const body = `
+    <div class="form-group"><label>Full Name</label><input id="df_name" value="${f(r,'Nombre completo')}"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Phone</label><input id="df_phone" value="${f(r,'Teléfono')}"></div>
+      <div class="form-group"><label>Email</label><input id="df_email" value="${f(r,'Correo electrónico')}"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>License #</label><input id="df_license" value="${f(r,'Licencia de conducir')}"></div>
+      <div class="form-group"><label>License Expiry</label><input id="df_licexp" type="date" value="${f(r,'Fecha de vencimiento de licencia') || ''}"></div>
+    </div>
+    <div class="form-group"><label>Status</label>
+      <select id="df_status">
+        ${['Disponible','En servicio','Inactivo'].map(o => `<option ${f(r,'Estado')===o?'selected':''}>${o}</option>`).join('')}
+      </select>
+    </div>
+  `;
+  openModal(isEdit ? `Edit: ${f(r,'Nombre completo')}` : 'Add Driver', body,
+    `${isEdit ? `<button class="btn btn-danger btn-sm" onclick="deleteConductor('${r.id}')">Delete</button>` : ''}
+     <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveConductor('${isEdit?r.id:''}')">${isEdit?'Update':'Add'}</button>`
+  );
+}
+
+async function saveConductor(id) {
+  const fields = {
+    'Nombre completo': document.getElementById('df_name').value,
+    'Teléfono': document.getElementById('df_phone').value,
+    'Correo electrónico': document.getElementById('df_email').value,
+    'Licencia de conducir': document.getElementById('df_license').value,
+    'Fecha de vencimiento de licencia': document.getElementById('df_licexp').value || undefined,
+    'Estado': document.getElementById('df_status').value,
+  };
+  Object.keys(fields).forEach(k => fields[k] === undefined && delete fields[k]);
+  try {
+    if (id) await updateRecord('conductores', id, fields);
+    else await createRecord('conductores', fields);
+    closeModal(); toast(id ? 'Driver updated!' : 'Driver added!'); await refreshData();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+function editConductor(id) { const r = (CACHE.conductores||[]).find(x=>x.id===id); if(r) openConductorModal(r); }
+async function deleteConductor(id) { if(!confirm('Delete this driver?')) return; try { await deleteRecord('conductores',id); closeModal(); toast('Driver deleted'); await refreshData(); } catch(e) { toast('Error: '+e.message,'error'); } }
+
+// ============================================================
+// VEHICULOS
+// ============================================================
+function renderVehiculos(el) {
+  const records = CACHE.vehiculos || [];
+  el.innerHTML = `
+    <div class="table-wrap">
+      <div class="table-toolbar">
+        <input class="search-box" placeholder="Search vehicles..." id="vehSearch" oninput="filterVehiculos()">
+        <button class="btn btn-primary btn-sm" onclick="openVehiculoModal()">+ Add Vehicle</button>
+      </div>
+      <div class="table-scroll" id="vehTableBody"></div>
+    </div>
+  `;
+  filterVehiculos();
+}
+
+function filterVehiculos() {
+  const search = (document.getElementById('vehSearch')?.value || '').toLowerCase();
+  let records = CACHE.vehiculos || [];
+  if (search) records = records.filter(r => `${f(r,'Nombre del Vehículo')} ${f(r,'Tipo de Vehículo')} ${f(r,'Matrícula')} ${f(r,'Color')}`.toLowerCase().includes(search));
+  
+  document.getElementById('vehTableBody').innerHTML = `
+    <table>
+      <thead><tr><th>Name</th><th>Type</th><th>Capacity</th><th>Plate</th><th>Color</th><th>Status</th><th>Reservations</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${records.map(r => `<tr>
+          <td><strong>${f(r,'Nombre del Vehículo')}</strong></td>
+          <td><span class="badge badge-blue">${f(r,'Tipo de Vehículo') || '—'}</span></td>
+          <td>${f(r,'Capacidad de Pasajeros') || '—'} pax</td>
+          <td>${f(r,'Matrícula') || '—'}</td>
+          <td>${f(r,'Color') || '—'}</td>
+          <td>${statusBadge(f(r,'Estado del Vehículo'))}</td>
+          <td>${f(r,'Total de Reservas Asignadas') || 0}</td>
+          <td class="row-actions">
+            <button onclick="editVehiculo('${r.id}')" title="Edit">✏️</button>
+          </td>
+        </tr>`).join('') || '<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text3)">No vehicles found</td></tr>'}
+      </tbody>
+    </table>
+  `;
+}
+
+function openVehiculoModal(record) {
+  const r = record || { fields: {} };
+  const isEdit = !!record;
+  const body = `
+    <div class="form-group"><label>Vehicle Name</label><input id="vf_name" value="${f(r,'Nombre del Vehículo')}"></div>
+    <div class="form-row">
+      <div class="form-group"><label>Type</label>
+        <select id="vf_type">
+          <option value="">Select...</option>
+          ${['Sedán','SUV','Van','Minibús','Bus'].map(o => `<option ${f(r,'Tipo de Vehículo')===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+      <div class="form-group"><label>Capacity</label><input id="vf_cap" type="number" value="${f(r,'Capacidad de Pasajeros')}"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Plate #</label><input id="vf_plate" value="${f(r,'Matrícula')}"></div>
+      <div class="form-group"><label>Color</label><input id="vf_color" value="${f(r,'Color')}"></div>
+    </div>
+    <div class="form-group"><label>Status</label>
+      <select id="vf_status">
+        ${['Disponible','En servicio','Mantenimiento','Fuera de servicio'].map(o => `<option ${f(r,'Estado del Vehículo')===o?'selected':''}>${o}</option>`).join('')}
+      </select>
+    </div>
+  `;
+  openModal(isEdit ? `Edit: ${f(r,'Nombre del Vehículo')}` : 'Add Vehicle', body,
+    `${isEdit ? `<button class="btn btn-danger btn-sm" onclick="deleteVehiculo('${r.id}')">Delete</button>` : ''}
+     <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveVehiculo('${isEdit?r.id:''}')">${isEdit?'Update':'Add'}</button>`
+  );
+}
+
+async function saveVehiculo(id) {
+  const fields = {
+    'Nombre del Vehículo': document.getElementById('vf_name').value,
+    'Tipo de Vehículo': document.getElementById('vf_type').value || undefined,
+    'Capacidad de Pasajeros': parseInt(document.getElementById('vf_cap').value) || undefined,
+    'Matrícula': document.getElementById('vf_plate').value,
+    'Color': document.getElementById('vf_color').value,
+    'Estado del Vehículo': document.getElementById('vf_status').value,
+  };
+  Object.keys(fields).forEach(k => fields[k] === undefined && delete fields[k]);
+  try {
+    if (id) await updateRecord('vehiculos', id, fields);
+    else await createRecord('vehiculos', fields);
+    closeModal(); toast(id ? 'Vehicle updated!' : 'Vehicle added!'); await refreshData();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+function editVehiculo(id) { const r = (CACHE.vehiculos||[]).find(x=>x.id===id); if(r) openVehiculoModal(r); }
+async function deleteVehiculo(id) { if(!confirm('Delete this vehicle?')) return; try { await deleteRecord('vehiculos',id); closeModal(); toast('Vehicle deleted'); await refreshData(); } catch(e) { toast('Error: '+e.message,'error'); } }
+
+// ============================================================
+// CLIENTES
+// ============================================================
+function renderClientes(el) {
+  const records = CACHE.clientes || [];
+  el.innerHTML = `
+    <div class="table-wrap">
+      <div class="table-toolbar">
+        <input class="search-box" placeholder="Search clients..." id="cliSearch" oninput="filterClientes()">
+        <button class="btn btn-primary btn-sm" onclick="openClienteModal()">+ Add Client</button>
+      </div>
+      <div class="table-scroll" id="cliTableBody"></div>
+    </div>
+  `;
+  filterClientes();
+}
+
+function filterClientes() {
+  const search = (document.getElementById('cliSearch')?.value || '').toLowerCase();
+  let records = CACHE.clientes || [];
+  if (search) records = records.filter(r => `${f(r,'Nombre')} ${f(r,'Apellido')} ${f(r,'Email')} ${f(r,'Teléfono')}`.toLowerCase().includes(search));
+  
+  document.getElementById('cliTableBody').innerHTML = `
+    <table>
+      <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>ID Document</th><th>Total Reservations</th><th>Actions</th></tr></thead>
+      <tbody>
+        ${records.map(r => `<tr>
+          <td><strong>${f(r,'Nombre')} ${f(r,'Apellido')}</strong></td>
+          <td>${f(r,'Email') || '—'}</td>
+          <td>${f(r,'Teléfono') || '—'}</td>
+          <td>${f(r,'Documento de Identidad') || '—'}</td>
+          <td>${f(r,'Total de Reservas') || 0}</td>
+          <td class="row-actions">
+            <button onclick="editCliente('${r.id}')" title="Edit">✏️</button>
+          </td>
+        </tr>`).join('') || '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text3)">No clients found</td></tr>'}
+      </tbody>
+    </table>
+  `;
+}
+
+function openClienteModal(record) {
+  const r = record || { fields: {} };
+  const isEdit = !!record;
+  const body = `
+    <div class="form-row">
+      <div class="form-group"><label>First Name</label><input id="cf_name" value="${f(r,'Nombre')}"></div>
+      <div class="form-group"><label>Last Name</label><input id="cf_last" value="${f(r,'Apellido')}"></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Email</label><input id="cf_email" type="email" value="${f(r,'Email')}"></div>
+      <div class="form-group"><label>Phone</label><input id="cf_phone" value="${f(r,'Teléfono')}"></div>
+    </div>
+    <div class="form-group"><label>ID Document</label><input id="cf_doc" value="${f(r,'Documento de Identidad')}"></div>
+  `;
+  openModal(isEdit ? `Edit: ${f(r,'Nombre')} ${f(r,'Apellido')}` : 'Add Client', body,
+    `${isEdit ? `<button class="btn btn-danger btn-sm" onclick="deleteCliente('${r.id}')">Delete</button>` : ''}
+     <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+     <button class="btn btn-primary" onclick="saveCliente('${isEdit?r.id:''}')">${isEdit?'Update':'Add'}</button>`
+  );
+}
+
+async function saveCliente(id) {
+  const fields = {
+    'Nombre': document.getElementById('cf_name').value,
+    'Apellido': document.getElementById('cf_last').value,
+    'Email': document.getElementById('cf_email').value,
+    'Teléfono': document.getElementById('cf_phone').value,
+    'Documento de Identidad': document.getElementById('cf_doc').value,
+  };
+  try {
+    if (id) await updateRecord('clientes', id, fields);
+    else await createRecord('clientes', fields);
+    closeModal(); toast(id ? 'Client updated!' : 'Client added!'); await refreshData();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+function editCliente(id) { const r = (CACHE.clientes||[]).find(x=>x.id===id); if(r) openClienteModal(r); }
+async function deleteCliente(id) { if(!confirm('Delete this client?')) return; try { await deleteRecord('clientes',id); closeModal(); toast('Client deleted'); await refreshData(); } catch(e) { toast('Error: '+e.message,'error'); } }
+
+// ============================================================
+// SETTINGS
+// ============================================================
+function renderSettings(el) {
+  el.innerHTML = `
+    <div style="max-width:600px">
+      <div class="schedule-card">
+        <div class="card-header">Airtable Connection</div>
+        <div style="padding:20px">
+          <div class="form-group">
+            <label>Personal Access Token</label>
+            <input id="set_token" type="password" value="${TOKEN}" placeholder="patXXXXXX.XXXXX">
+            <div style="font-size:.7rem;color:var(--text3);margin-top:4px">Your Airtable PAT with read/write access</div>
+          </div>
+          <div class="form-group">
+            <label>Base ID</label>
+            <input id="set_base" value="${CONFIG.baseId}" placeholder="appXXXXXXXXXXX">
+            <div style="font-size:.7rem;color:var(--text3);margin-top:4px">Found in your Airtable base URL</div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-primary" onclick="saveSettings()">Save & Connect</button>
+            <button class="btn btn-outline" onclick="testConnection()">Test Connection</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="schedule-card" style="margin-top:16px">
+        <div class="card-header">Data Summary</div>
+        <div style="padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div><span style="color:var(--text3);font-size:.75rem">Reservations</span><div style="font-size:1.2rem;font-weight:600">${(CACHE.reservas||[]).length}</div></div>
+          <div><span style="color:var(--text3);font-size:.75rem">Drivers</span><div style="font-size:1.2rem;font-weight:600">${(CACHE.conductores||[]).length}</div></div>
+          <div><span style="color:var(--text3);font-size:.75rem">Vehicles</span><div style="font-size:1.2rem;font-weight:600">${(CACHE.vehiculos||[]).length}</div></div>
+          <div><span style="color:var(--text3);font-size:.75rem">Clients</span><div style="font-size:1.2rem;font-weight:600">${(CACHE.clientes||[]).length}</div></div>
+        </div>
+      </div>
+
+      <div class="schedule-card" style="margin-top:16px">
+        <div class="card-header">Quick Actions</div>
+        <div style="padding:20px;display:flex;flex-wrap:wrap;gap:8px">
+          <button class="btn btn-outline btn-sm" onclick="window.open('https://airtable.com/${CONFIG.baseId}','_blank')">Open in Airtable</button>
+          <button class="btn btn-outline btn-sm" onclick="refreshData()">Force Refresh</button>
+          <button class="btn btn-outline btn-sm" onclick="exportCSV()">Export Reservas CSV</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function saveSettings() {
+  TOKEN = document.getElementById('set_token').value.trim();
+  CONFIG.baseId = document.getElementById('set_base').value.trim();
+  localStorage.setItem('ttm_airtable_token', TOKEN);
+  localStorage.setItem('ttm_airtable_base', CONFIG.baseId);
+  toast('Settings saved! Reconnecting...');
+  init();
+}
+
+async function testConnection() {
+  try {
+    const data = await airtableFetch('reservas', { params: { maxRecords: '1' } });
+    if (data && data.records) {
+      toast('Connection successful! Found data.', 'success');
+      updateConnectionStatus(true);
+    }
+  } catch(e) {
+    toast('Connection failed: ' + e.message, 'error');
+    updateConnectionStatus(false);
+  }
+}
+
+function exportCSV() {
+  const records = CACHE.reservas || [];
+  if (!records.length) { toast('No data to export', 'error'); return; }
+  const headers = ['Reserva','Titular Name','Titular Last Name','Tipo de Traslado','Destino - Tarifa','Hotel','Arrival Date Time','Airline','Flight #','Terminal','Total','Estado del Servicio','Passengers','Adultos','Niños'];
+  const rows = records.map(r => headers.map(h => `"${(f(r,h)+'').replace(/"/g,'""')}"`).join(','));
+  const csv = [headers.join(','), ...rows].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `ttandmore-reservas-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  toast('CSV exported!');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+async function init() {
+  // Load saved config
+  const savedBase = localStorage.getItem('ttm_airtable_base');
+  if (savedBase) CONFIG.baseId = savedBase;
+  
+  if (!TOKEN) {
+    document.getElementById('content').innerHTML = `
+      <div class="empty-state" style="padding:80px 20px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <h3 style="margin-bottom:8px">Welcome to TT & More Admin</h3>
+        <p>Connect your Airtable to get started</p>
+        <button class="btn btn-primary" style="margin-top:16px" onclick="navigate('settings')">Open Settings</button>
+      </div>
+    `;
+    updateConnectionStatus(false);
+    return;
+  }
+  
+  document.getElementById('content').innerHTML = '<div class="loading-state"><div class="spinner"></div><p style="margin-top:12px">Loading data from Airtable...</p></div>';
+  
+  const ok = await loadAllData();
+  if (ok) {
+    renderPage(currentPage);
+  } else {
+    document.getElementById('content').innerHTML = `
+      <div class="empty-state" style="padding:80px 20px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        <h3 style="margin-bottom:8px;color:var(--red)">Connection Failed</h3>
+        <p>Check your Airtable token and base ID</p>
+        <button class="btn btn-primary" style="margin-top:16px" onclick="navigate('settings')">Open Settings</button>
+      </div>
+    `;
+  }
+}
+
+// Boot
+init();
+</script>
+</body>
+</html>
