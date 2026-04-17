@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TT & More — Admin Panel</title>
+<meta name="theme-color" content="#0a0a12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TT&More">
+<link rel="manifest" href="/admin/manifest.json">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a12' width='100' height='100' rx='20'/%3E%3Ctext x='50' y='68' font-family='sans-serif' font-size='50' font-weight='bold' fill='%23FACC15' text-anchor='middle'%3ETT%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230a0a12' width='100' height='100' rx='20'/%3E%3Ctext x='50' y='68' font-family='sans-serif' font-size='50' font-weight='bold' fill='%23FACC15' text-anchor='middle'%3ETT%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -170,8 +177,76 @@ tr:hover td{background:rgba(147,51,234,.03)}
 .form-error{border-color:var(--red) !important}
 
 /* Print reservation */
+/* Alert banner */
+.alert-banner{background:linear-gradient(135deg,rgba(147,51,234,.15),rgba(250,204,21,.1));border:1px solid rgba(147,51,234,.3);border-radius:var(--radius);padding:14px 20px;margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.alert-banner .alert-icon{width:40px;height:40px;border-radius:50%;background:var(--purple);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem}
+.alert-banner .alert-content{flex:1}
+.alert-banner .alert-title{font-weight:600;font-size:.9rem}
+.alert-banner .alert-sub{font-size:.8rem;color:var(--text2);margin-top:2px}
+.alert-banner .alert-actions{display:flex;gap:6px;flex-shrink:0}
+
+/* Quick status buttons */
+.status-quick{display:inline-flex;align-items:center;gap:2px;cursor:pointer;position:relative}
+.status-quick select{appearance:none;background:transparent;border:none;color:inherit;font:inherit;cursor:pointer;padding-right:14px;font-size:.7rem;font-weight:600}
+.status-quick::after{content:'▾';position:absolute;right:2px;font-size:.6rem;color:var(--text3);pointer-events:none}
+.status-dropdown{padding:4px 8px;border-radius:16px;font-size:.7rem;font-weight:600;border:1px solid var(--border);background:var(--bg3);color:var(--text);cursor:pointer;appearance:none;-webkit-appearance:none}
+.status-dropdown.s-confirmado{background:rgba(34,197,94,.15);color:var(--green);border-color:rgba(34,197,94,.3)}
+.status-dropdown.s-pendiente{background:rgba(250,204,21,.15);color:var(--gold);border-color:rgba(250,204,21,.3)}
+.status-dropdown.s-enproceso{background:rgba(14,165,233,.15);color:var(--teal);border-color:rgba(14,165,233,.3)}
+.status-dropdown.s-completado{background:rgba(34,197,94,.15);color:var(--green);border-color:rgba(34,197,94,.3)}
+.status-dropdown.s-cancelado{background:rgba(239,68,68,.15);color:var(--red);border-color:rgba(239,68,68,.3)}
+
+/* Row time highlighting */
+tr.row-past td{opacity:.5}
+tr.row-soon td{background:rgba(147,51,234,.06)}
+tr.row-soon td:first-child{border-left:3px solid var(--purple)}
+
+/* Collapsible form sections */
+.form-section{margin-bottom:8px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.form-section-header{padding:10px 14px;background:var(--bg3);cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:.8rem;font-weight:600;user-select:none}
+.form-section-header:hover{background:var(--bg4)}
+.form-section-header .chevron{transition:transform .2s;font-size:.7rem;color:var(--text3)}
+.form-section-header.collapsed .chevron{transform:rotate(-90deg)}
+.form-section-body{padding:16px}
+.form-section-body.hidden{display:none}
+
+/* Schedule card quick actions */
+.schedule-actions{display:flex;gap:4px;margin-left:auto;flex-shrink:0}
+.schedule-actions button{background:var(--bg3);border:1px solid var(--border);color:var(--text2);cursor:pointer;padding:4px 8px;border-radius:6px;font-size:.65rem;transition:all .15s;display:flex;align-items:center;gap:3px}
+.schedule-actions button:hover{border-color:var(--purple);color:var(--purple)}
+
+/* Mobile card layout */
+.res-cards{display:none}
+.res-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px}
+.res-card.card-soon{border-left:3px solid var(--purple)}
+.res-card.card-past{opacity:.55}
+.res-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.res-card-id{font-weight:700;font-size:.85rem}
+.res-card-client{font-weight:600;font-size:.95rem;margin-bottom:2px}
+.res-card-detail{font-size:.8rem;color:var(--text2);display:flex;align-items:center;gap:6px;margin-bottom:4px}
+.res-card-detail svg{width:14px;height:14px;flex-shrink:0;opacity:.5}
+.res-card-bottom{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.res-card-bottom button,.res-card-bottom a{padding:6px 12px;border-radius:8px;font-size:.75rem;font-weight:600;border:1px solid var(--border);background:var(--bg3);color:var(--text2);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:all .15s}
+.res-card-bottom button:hover,.res-card-bottom a:hover{border-color:var(--purple);color:var(--purple)}
+
+@media(max-width:768px){
+  .sidebar{position:fixed;z-index:100;transform:translateX(-100%);height:100%}
+  .sidebar.open{transform:translateX(0)}
+  .hamburger{display:block}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .search-box{width:100%}
+  .form-row{grid-template-columns:1fr}
+  .table-toolbar{flex-direction:column;align-items:stretch}
+  /* Show cards, hide table on mobile */
+  .table-scroll{display:none}
+  .res-cards{display:block}
+  .schedule-card-grid{grid-template-columns:1fr !important}
+  .alert-banner{flex-direction:column;text-align:center}
+  .alert-banner .alert-actions{justify-content:center}
+}
+
 @media print{
-  .sidebar,.topbar,.modal-overlay,.toast{display:none !important}
+  .sidebar,.topbar,.modal-overlay,.toast,.alert-banner{display:none !important}
   .app{display:block}
   .content{padding:0}
   body{background:#fff;color:#000}
@@ -506,6 +581,27 @@ async function doQuickAssign(reservaId, field, value) {
   } catch(e) { toast('Error: ' + e.message, 'error'); }
 }
 
+async function quickStatusChange(recordId, newStatus) {
+  try {
+    await updateRecord('reservas', recordId, { 'Estado del Servicio': newStatus });
+    toast(`Status → ${newStatus}`);
+    // Update cache locally for instant feedback
+    const rec = (CACHE.reservas||[]).find(r => r.id === recordId);
+    if (rec) rec.fields['Estado del Servicio'] = newStatus;
+    // Soft refresh just the current view without full reload
+    filterReservas();
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
+}
+
+// Collapsible form sections
+function toggleSection(headerEl) {
+  headerEl.classList.toggle('collapsed');
+  const body = headerEl.nextElementSibling;
+  if (body && body.classList.contains('form-section-body')) {
+    body.classList.toggle('hidden');
+  }
+}
+
 // Date filter helpers
 let dateFilterStart = '';
 let dateFilterEnd = '';
@@ -574,10 +670,14 @@ function renderDashboard(el) {
   const vehiculos = CACHE.vehiculos || [];
   const clientes = CACHE.clientes || [];
 
+  const now = new Date();
+  const in24h = new Date(now.getTime() + 24*60*60*1000);
   const today = reservas.filter(r => isToday(f(r,'Arrival Date Time')));
+  const next24h = reservas.filter(r => { const d = f(r,'Arrival Date Time'); if (!d) return false; const dt = new Date(d); return dt > now && dt <= in24h; }).sort((a,b) => new Date(f(a,'Arrival Date Time')) - new Date(f(b,'Arrival Date Time')));
   const upcoming = reservas.filter(r => isFuture(f(r,'Arrival Date Time'))).sort((a,b) => new Date(f(a,'Arrival Date Time')) - new Date(f(b,'Arrival Date Time')));
   const confirmed = reservas.filter(r => f(r,'Estado del Servicio') === 'Confirmado').length;
   const pending = reservas.filter(r => f(r,'Estado del Servicio') === 'Pendiente').length;
+  const unassigned = upcoming.filter(r => !f(r,'Conductor') || !(f(r,'Conductor')).length).length;
   const activeDrivers = conductores.filter(r => f(r,'Estado') === 'Disponible' || f(r,'Estado') === 'En servicio').length;
   const idleDrivers = conductores.filter(r => f(r,'Estado') === 'Disponible').length;
   const availableVehicles = vehiculos.filter(r => f(r,'Estado del Vehículo') === 'Disponible').length;
@@ -587,7 +687,29 @@ function renderDashboard(el) {
   let totalRevenue = 0;
   reservas.forEach(r => { const t = parseFloat(f(r,'Total')); if (!isNaN(t)) totalRevenue += t; });
 
+  // Alert banner
+  const nextTransfer = next24h[0];
+  const alertHtml = next24h.length > 0 ? `
+    <div class="alert-banner">
+      <div class="alert-icon">🚐</div>
+      <div class="alert-content">
+        <div class="alert-title">${next24h.length} transfer${next24h.length>1?'s':''} in the next 24 hours</div>
+        <div class="alert-sub">Next: ${f(nextTransfer,'Titular Name')} ${f(nextTransfer,'Titular Last Name')} → ${f(nextTransfer,'Destino - Tarifa')} at ${fmtTime(f(nextTransfer,'Arrival Date Time'))}${unassigned ? ` · <span style="color:var(--red)">${unassigned} unassigned</span>` : ''}</div>
+      </div>
+      <div class="alert-actions">
+        <button class="btn btn-primary btn-sm" onclick="navigate('reservas')">View All</button>
+      </div>
+    </div>` : (upcoming.length > 0 ? `
+    <div class="alert-banner" style="border-color:rgba(14,165,233,.3);background:linear-gradient(135deg,rgba(14,165,233,.08),rgba(14,165,233,.03))">
+      <div class="alert-icon" style="background:var(--teal)">📋</div>
+      <div class="alert-content">
+        <div class="alert-title">No transfers in the next 24 hours</div>
+        <div class="alert-sub">Next up: ${f(upcoming[0],'Titular Name')} ${f(upcoming[0],'Titular Last Name')} → ${f(upcoming[0],'Destino - Tarifa')} on ${fmtDate(f(upcoming[0],'Arrival Date Time'))}</div>
+      </div>
+    </div>` : '');
+
   el.innerHTML = `
+    ${alertHtml}
     <div class="stats-grid">
       <div class="stat-card purple">
         <div class="label">Today's Transfers</div>
@@ -611,23 +733,36 @@ function renderDashboard(el) {
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div class="schedule-card-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
       <div class="schedule-card">
         <div class="card-header">
-          Today's Schedule
-          <span class="badge badge-purple">${today.length} transfers</span>
+          ${today.length > 0 ? "Today's Schedule" : 'Next 24 Hours'}
+          <span class="badge badge-purple">${today.length > 0 ? today.length + ' today' : next24h.length + ' upcoming'}</span>
         </div>
-        ${today.length === 0 ? '<div style="padding:24px;text-align:center;color:var(--text3)">No transfers scheduled today</div>' :
-          today.sort((a,b) => new Date(f(a,'Arrival Date Time')) - new Date(f(b,'Arrival Date Time'))).map(r => `
-          <div class="schedule-item">
+        ${(today.length > 0 ? today : next24h).length === 0
+          ? '<div style="padding:24px;text-align:center;color:var(--text3)">No transfers in the next 24 hours ✓</div>'
+          : (today.length > 0 ? today : next24h).sort((a,b) => new Date(f(a,'Arrival Date Time')) - new Date(f(b,'Arrival Date Time'))).map(r => {
+            const phone = (f(r,'Telefono Titular')+'').replace(/\D/g,'');
+            const waNum = phone ? (phone.startsWith('52')?phone:'52'+phone) : '';
+            const driverName = getLinkedName('conductores', f(r,'Conductor'));
+            return `
+          <div class="schedule-item" style="flex-wrap:wrap">
             <div class="schedule-time">${fmtTime(f(r,'Arrival Date Time'))}</div>
             <div class="schedule-info">
               <div class="name">${f(r,'Titular Name')} ${f(r,'Titular Last Name')}</div>
               <div class="details">${f(r,'Airline')} ${f(r,'Flight #')} · ${f(r,'Tipo de Traslado')} · ${f(r,'Passengers') || '—'} pax</div>
               <div class="route">${f(r,'Terminal') || '—'} → ${f(r,'Hotel') || f(r,'Destino - Tarifa') || '—'}</div>
+              ${driverName !== '—' ? `<div style="font-size:.7rem;color:var(--green);margin-top:2px">🚘 ${driverName}</div>` : `<div style="font-size:.7rem;color:var(--red);margin-top:2px">⚠ No driver assigned</div>`}
             </div>
-            ${statusBadge(f(r,'Estado del Servicio'))}
-          </div>`).join('')}
+            <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+              ${statusBadge(f(r,'Estado del Servicio'))}
+              <div class="schedule-actions">
+                ${waNum ? `<a href="https://wa.me/${waNum}" target="_blank" style="background:#25D366;color:#fff;border-color:#25D366;text-decoration:none;padding:4px 8px;border-radius:6px;font-size:.65rem;display:flex;align-items:center;gap:3px">WA</a>` : ''}
+                ${driverName === '—' ? `<button onclick="quickAssignDriver('${r.id}')">Assign</button>` : ''}
+                <button onclick="viewReserva('${r.id}')">View</button>
+              </div>
+            </div>
+          </div>`}).join('')}
       </div>
 
       <div class="schedule-card">
@@ -635,15 +770,24 @@ function renderDashboard(el) {
           Upcoming Transfers
           <span class="badge badge-blue">${upcoming.length} queued</span>
         </div>
-        ${upcoming.slice(0,8).map(r => `
+        ${upcoming.slice(0,8).map(r => {
+          const driverName = getLinkedName('conductores', f(r,'Conductor'));
+          return `
           <div class="schedule-item">
             <div class="schedule-time">${fmtDate(f(r,'Arrival Date Time'))}</div>
             <div class="schedule-info">
               <div class="name">${f(r,'Titular Name')} ${f(r,'Titular Last Name')}</div>
               <div class="details">${f(r,'Tipo de Traslado')} · ${f(r,'Destino - Tarifa') || '—'}</div>
+              ${driverName === '—' ? `<div style="font-size:.7rem;color:var(--red)">⚠ Unassigned</div>` : `<div style="font-size:.7rem;color:var(--green)">🚘 ${driverName}</div>`}
             </div>
-            ${statusBadge(f(r,'Estado del Servicio'))}
-          </div>`).join('') || '<div style="padding:24px;text-align:center;color:var(--text3)">No upcoming transfers</div>'}
+            <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end">
+              ${statusBadge(f(r,'Estado del Servicio'))}
+              <div class="schedule-actions">
+                ${driverName === '—' ? `<button onclick="quickAssignDriver('${r.id}')">Assign</button>` : ''}
+                <button onclick="viewReserva('${r.id}')">View</button>
+              </div>
+            </div>
+          </div>`}).join('') || '<div style="padding:24px;text-align:center;color:var(--text3)">No upcoming transfers</div>'}
       </div>
     </div>
 
@@ -704,6 +848,7 @@ function renderReservas(el) {
         <span id="dateResultCount" style="font-size:.7rem;color:var(--text3);margin-left:auto"></span>
       </div>
       <div class="table-scroll" id="resTableBody"></div>
+      <div class="res-cards" id="resCards"></div>
     </div>
   `;
   currentFilter = 'all';
@@ -738,22 +883,51 @@ function filterReservas() {
   if (countEl) countEl.textContent = `${records.length} reservation${records.length!==1?'s':''}`;
 
   
+  const now = new Date();
+  const in24h = new Date(now.getTime() + 24*60*60*1000);
+  const waSvg = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.387 0-4.588-.822-6.328-2.2l-.442-.36-3.276 1.098 1.098-3.276-.36-.442A9.935 9.935 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>`;
+
+  function rowClass(r) {
+    const d = f(r,'Arrival Date Time');
+    if (!d) return '';
+    const dt = new Date(d);
+    if (dt < now) return 'row-past';
+    if (dt <= in24h) return 'row-soon';
+    return '';
+  }
+
+  function statusSelect(r) {
+    const st = f(r,'Estado del Servicio') || 'Pendiente';
+    const cls = 's-' + st.toLowerCase().replace(/\s/g,'');
+    return `<select class="status-dropdown ${cls}" onchange="quickStatusChange('${r.id}',this.value)">
+      ${['Pendiente','Confirmado','En Proceso','Completado','Cancelado'].map(o =>
+        `<option value="${o}" ${st===o?'selected':''}>${o}</option>`
+      ).join('')}
+    </select>`;
+  }
+
+  function waLink(r) {
+    const phone = (f(r,'Telefono Titular')+'').replace(/\D/g,'');
+    if (!phone) return '';
+    const num = phone.startsWith('52') ? phone : '52'+phone;
+    return `https://wa.me/${num}?text=${encodeURIComponent('Hola! Confirmamos su traslado con TT&More para el '+fmtDate(f(r,'Arrival Date Time'))+'. ¿Alguna pregunta?')}`;
+  }
+
+  // Desktop table
   document.getElementById('resTableBody').innerHTML = `
     <table>
       <thead><tr><th>#</th><th>Client</th><th>Type</th><th>Destination</th><th>Date/Time</th><th>Flight</th><th>Driver</th><th>Vehicle</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead>
       <tbody>
         ${records.length === 0 ? '<tr><td colspan="11" style="text-align:center;padding:40px;color:var(--text3)">No reservations found</td></tr>' :
           records.map(r => {
-            const phone = (f(r,'Telefono Titular')+'').replace(/\D/g,'');
             const driverName = getLinkedName('conductores', f(r,'Conductor'));
             const vehicleName = getLinkedName('vehiculos', f(r,'Vehículo'));
-            return `<tr>
+            const wa = waLink(r);
+            return `<tr class="${rowClass(r)}">
             <td><strong>${f(r,'Reserva')}</strong></td>
             <td>
               ${f(r,'Titular Name')} ${f(r,'Titular Last Name')}
-              ${phone ? `<br><a class="wa-btn" href="https://wa.me/${phone.startsWith('52')?phone:'52'+phone}?text=${encodeURIComponent('Hola! Confirmamos su traslado con TT&More para el '+fmtDate(f(r,'Arrival Date Time'))+'. ¿Alguna pregunta?')}" target="_blank">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.952 11.952 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.387 0-4.588-.822-6.328-2.2l-.442-.36-3.276 1.098 1.098-3.276-.36-.442A9.935 9.935 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
-                WA</a>` : ''}
+              ${wa ? `<br><a class="wa-btn" href="${wa}" target="_blank">${waSvg} WA</a>` : ''}
             </td>
             <td><span class="badge badge-blue">${f(r,'Tipo de Traslado')}</span></td>
             <td>${f(r,'Destino - Tarifa') || '—'}</td>
@@ -762,7 +936,7 @@ function filterReservas() {
             <td>${driverName !== '—' ? `<span class="assign-badge assigned">${driverName}</span>` : `<button class="btn btn-outline btn-sm" style="font-size:.65rem;padding:2px 8px" onclick="quickAssignDriver('${r.id}')">Assign</button>`}</td>
             <td>${vehicleName !== '—' ? `<span class="assign-badge assigned">${vehicleName}</span>` : `<button class="btn btn-outline btn-sm" style="font-size:.65rem;padding:2px 8px" onclick="quickAssignVehicle('${r.id}')">Assign</button>`}</td>
             <td>$${f(r,'Total') || '0'}</td>
-            <td>${statusBadge(f(r,'Estado del Servicio'))}</td>
+            <td>${statusSelect(r)}</td>
             <td class="row-actions">
               <button onclick="viewReserva('${r.id}')" title="View">👁</button>
               <button onclick="editReserva('${r.id}')" title="Edit">✏️</button>
@@ -771,6 +945,38 @@ function filterReservas() {
       </tbody>
     </table>
   `;
+
+  // Mobile cards
+  document.getElementById('resCards').innerHTML = records.length === 0
+    ? '<div style="text-align:center;padding:40px;color:var(--text3)">No reservations found</div>'
+    : records.map(r => {
+      const driverName = getLinkedName('conductores', f(r,'Conductor'));
+      const vehicleName = getLinkedName('vehiculos', f(r,'Vehículo'));
+      const wa = waLink(r);
+      const cardClass = rowClass(r) === 'row-soon' ? 'card-soon' : rowClass(r) === 'row-past' ? 'card-past' : '';
+      return `<div class="res-card ${cardClass}">
+        <div class="res-card-top">
+          <div>
+            <div class="res-card-client">${f(r,'Titular Name')} ${f(r,'Titular Last Name')}</div>
+            <div class="res-card-id">#${f(r,'Reserva')} · <span class="badge badge-blue" style="font-size:.65rem">${f(r,'Tipo de Traslado')}</span></div>
+          </div>
+          ${statusSelect(r)}
+        </div>
+        <div class="res-card-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> ${f(r,'Destino - Tarifa') || '—'}</div>
+        <div class="res-card-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> ${fmtDate(f(r,'Arrival Date Time'))}</div>
+        <div class="res-card-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg> ${f(r,'Airline')} ${f(r,'Flight #')}</div>
+        ${driverName !== '—' ? `<div class="res-card-detail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ${driverName} ${vehicleName !== '—' ? '· '+vehicleName : ''}</div>` : ''}
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px">
+          <span style="font-weight:700;color:var(--gold)">$${f(r,'Total') || '0'}</span>
+        </div>
+        <div class="res-card-bottom">
+          <button onclick="viewReserva('${r.id}')">View</button>
+          <button onclick="editReserva('${r.id}')">Edit</button>
+          ${wa ? `<a href="${wa}" target="_blank">${waSvg} WhatsApp</a>` : ''}
+          ${driverName === '—' ? `<button onclick="quickAssignDriver('${r.id}')">Assign Driver</button>` : ''}
+        </div>
+      </div>`;
+    }).join('');
 }
 
 function openReservaModal(record) {
@@ -780,61 +986,80 @@ function openReservaModal(record) {
   const vehiculos = CACHE.vehiculos || [];
   
   const body = `
-    <div class="form-row">
-      <div class="form-group"><label>Titular Name</label><input id="rf_name" value="${f(r,'Titular Name')}"></div>
-      <div class="form-group"><label>Titular Last Name</label><input id="rf_lastname" value="${f(r,'Titular Last Name')}"></div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label>Phone</label><input id="rf_phone" value="${f(r,'Telefono Titular')}"></div>
-      <div class="form-group"><label>Total ($USD)</label><input id="rf_total" type="text" value="${f(r,'Total')}"></div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label>Transfer Type</label>
-        <select id="rf_type">
-          <option value="">Select...</option>
-          ${['One Way Arrival','One Way Departure','Round Trip'].map(o => `<option ${f(r,'Tipo de Traslado')===o?'selected':''}>${o}</option>`).join('')}
-        </select>
+    <div class="form-section">
+      <div class="form-section-header" onclick="toggleSection(this)">
+        👤 Client & Trip Info <span class="chevron">▼</span>
       </div>
-      <div class="form-group"><label>Status</label>
-        <select id="rf_status">
-          ${['Pendiente','Confirmado','En Proceso','Completado','Cancelado'].map(o => `<option ${f(r,'Estado del Servicio')===o?'selected':''}>${o}</option>`).join('')}
-        </select>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group"><label>Destination</label>
-        <select id="rf_dest">
-          <option value="">Select...</option>
-          ${['Cancún Downtown','Cancún Hotel Zone','Puerto Juarez - Isla Mujeres','Playa Mujeres','Costa Mujeres','Puerto Morelos','Playa Paraiso','Playa del Carmen','Puerto Aventuras','Akumal','Bahía Principe','Tulum Downtown','Chiquilá - Isla Holbox'].map(o => `<option ${f(r,'Destino - Tarifa')===o?'selected':''}>${o}</option>`).join('')}
-        </select>
-      </div>
-      <div class="form-group"><label>Terminal</label>
-        <select id="rf_terminal">
-          <option value="">Select...</option>
-          ${['T1','T2','T3','T4'].map(o => `<option ${f(r,'Terminal')===o?'selected':''}>${o}</option>`).join('')}
-        </select>
+      <div class="form-section-body">
+        <div class="form-row">
+          <div class="form-group required"><label>Client Name</label><input id="rf_name" value="${f(r,'Titular Name')}" placeholder="First name"></div>
+          <div class="form-group"><label>Last Name</label><input id="rf_lastname" value="${f(r,'Titular Last Name')}"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Phone</label><input id="rf_phone" value="${f(r,'Telefono Titular')}" placeholder="+52..."></div>
+          <div class="form-group"><label>Total ($USD)</label><input id="rf_total" type="text" value="${f(r,'Total')}"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Transfer Type</label>
+            <select id="rf_type">
+              <option value="">Select...</option>
+              ${['One Way Arrival','One Way Departure','Round Trip'].map(o => `<option ${f(r,'Tipo de Traslado')===o?'selected':''}>${o}</option>`).join('')}
+            </select>
+          </div>
+          <div class="form-group"><label>Status</label>
+            <select id="rf_status">
+              ${['Pendiente','Confirmado','En Proceso','Completado','Cancelado'].map(o => `<option ${f(r,'Estado del Servicio')===o?'selected':''}>${o}</option>`).join('')}
+            </select>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group"><label>Arrival Date/Time</label><input id="rf_arrival" type="datetime-local" value="${f(r,'Arrival Date Time') ? new Date(f(r,'Arrival Date Time')).toISOString().slice(0,16) : ''}"></div>
-      <div class="form-group"><label>Passengers</label>
-        <select id="rf_pax">
-          <option value="">Select...</option>
-          ${['1-3','4-7','8-10'].map(o => `<option ${f(r,'Passengers - Selector')===o?'selected':''}>${o}</option>`).join('')}
-        </select>
+
+    <div class="form-section">
+      <div class="form-section-header" onclick="toggleSection(this)">
+        ✈️ Trip Details <span class="chevron">▼</span>
+      </div>
+      <div class="form-section-body">
+        <div class="form-row">
+          <div class="form-group required"><label>Destination</label>
+            <select id="rf_dest">
+              <option value="">Select...</option>
+              ${['Cancún Downtown','Cancún Hotel Zone','Puerto Juarez - Isla Mujeres','Playa Mujeres','Costa Mujeres','Puerto Morelos','Playa Paraiso','Playa del Carmen','Puerto Aventuras','Akumal','Bahía Principe','Tulum Downtown','Chiquilá - Isla Holbox'].map(o => `<option ${f(r,'Destino - Tarifa')===o?'selected':''}>${o}</option>`).join('')}
+            </select>
+          </div>
+          <div class="form-group"><label>Terminal</label>
+            <select id="rf_terminal">
+              <option value="">Select...</option>
+              ${['T1','T2','T3','T4'].map(o => `<option ${f(r,'Terminal')===o?'selected':''}>${o}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group required"><label>Arrival Date/Time</label><input id="rf_arrival" type="datetime-local" value="${f(r,'Arrival Date Time') ? new Date(f(r,'Arrival Date Time')).toISOString().slice(0,16) : ''}"></div>
+          <div class="form-group"><label>Passengers</label>
+            <select id="rf_pax">
+              <option value="">Select...</option>
+              ${['1-3','4-7','8-10'].map(o => `<option ${f(r,'Passengers - Selector')===o?'selected':''}>${o}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Airline</label><input id="rf_airline" value="${f(r,'Airline')}"></div>
+          <div class="form-group"><label>Flight #</label><input id="rf_flight" value="${f(r,'Flight #')}"></div>
+        </div>
+        <div class="form-group"><label>Hotel</label><input id="rf_hotel" value="${f(r,'Hotel')}"></div>
+        <div class="form-row">
+          <div class="form-group"><label>Adults</label><input id="rf_adults" type="number" value="${f(r,'Adultos')}"></div>
+          <div class="form-group"><label>Children</label><input id="rf_children" type="number" value="${f(r,'Niños')}"></div>
+        </div>
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group"><label>Airline</label><input id="rf_airline" value="${f(r,'Airline')}"></div>
-      <div class="form-group"><label>Flight #</label><input id="rf_flight" value="${f(r,'Flight #')}"></div>
-    </div>
-    <div class="form-group"><label>Hotel</label><input id="rf_hotel" value="${f(r,'Hotel')}"></div>
-    <div class="form-row">
-      <div class="form-group"><label>Adults</label><input id="rf_adults" type="number" value="${f(r,'Adultos')}"></div>
-      <div class="form-group"><label>Children</label><input id="rf_children" type="number" value="${f(r,'Niños')}"></div>
-    </div>
-    <div style="height:1px;background:var(--border);margin:16px 0"></div>
-    <div style="font-size:.8rem;font-weight:600;color:var(--teal);margin-bottom:12px">ASSIGNMENT</div>
+
+    <div class="form-section">
+      <div class="form-section-header" onclick="toggleSection(this)">
+        🚘 Assignment <span class="chevron">▼</span>
+      </div>
+      <div class="form-section-body">
     <div class="form-row">
       <div class="form-group"><label>Driver</label>
         <select id="rf_driver">
@@ -855,26 +1080,41 @@ function openReservaModal(record) {
         </select>
       </div>
     </div>
-    ${f(r,'Tipo de Traslado') === 'Round Trip' || !isEdit ? `
-    <div style="height:1px;background:var(--border);margin:16px 0"></div>
-    <div style="font-size:.8rem;font-weight:600;color:var(--gold);margin-bottom:12px">RETURN TRIP (Round Trip only)</div>
-    <div class="form-row">
-      <div class="form-group"><label>Return Date/Time</label><input id="rf_return" type="datetime-local" value="${f(r,'Return Date Time') ? new Date(f(r,'Return Date Time')).toISOString().slice(0,16) : ''}"></div>
-      <div class="form-group"><label>Return Terminal</label>
-        <select id="rf_return_terminal">
-          <option value="">Select...</option>
-          ${['T1','T2','T3','T4'].map(o => `<option ${f(r,'Return Terminal')===o?'selected':''}>${o}</option>`).join('')}
-        </select>
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group"><label>Return Airline</label><input id="rf_return_airline" value="${f(r,'Return Airline') || ''}"></div>
-      <div class="form-group"><label>Return Flight #</label><input id="rf_return_flight" value="${f(r,'Return Flight #') || ''}"></div>
+
+    ${f(r,'Tipo de Traslado') === 'Round Trip' || !isEdit ? `
+    <div class="form-section">
+      <div class="form-section-header ${isEdit && f(r,'Return Date Time') ? '' : 'collapsed'}" onclick="toggleSection(this)">
+        🔄 Return Trip <span class="chevron">▼</span>
+      </div>
+      <div class="form-section-body ${isEdit && f(r,'Return Date Time') ? '' : 'hidden'}">
+        <div class="form-row">
+          <div class="form-group"><label>Return Date/Time</label><input id="rf_return" type="datetime-local" value="${f(r,'Return Date Time') ? new Date(f(r,'Return Date Time')).toISOString().slice(0,16) : ''}"></div>
+          <div class="form-group"><label>Return Terminal</label>
+            <select id="rf_return_terminal">
+              <option value="">Select...</option>
+              ${['T1','T2','T3','T4'].map(o => `<option ${f(r,'Return Terminal')===o?'selected':''}>${o}</option>`).join('')}
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Return Airline</label><input id="rf_return_airline" value="${f(r,'Return Airline') || ''}"></div>
+          <div class="form-group"><label>Return Flight #</label><input id="rf_return_flight" value="${f(r,'Return Flight #') || ''}"></div>
+        </div>
+      </div>
     </div>
     ` : ''}
-    <div style="height:1px;background:var(--border);margin:16px 0"></div>
-    <div class="form-group"><label>Special Request</label><textarea id="rf_special">${f(r,'Special Request')}</textarea></div>
-    <div class="form-group"><label>Notes</label><textarea id="rf_notes">${f(r,'Notas Adicionales')}</textarea></div>
+
+    <div class="form-section">
+      <div class="form-section-header ${f(r,'Special Request') || f(r,'Notas Adicionales') ? '' : 'collapsed'}" onclick="toggleSection(this)">
+        📝 Notes & Requests <span class="chevron">▼</span>
+      </div>
+      <div class="form-section-body ${f(r,'Special Request') || f(r,'Notas Adicionales') ? '' : 'hidden'}">
+        <div class="form-group"><label>Special Request</label><textarea id="rf_special">${f(r,'Special Request')}</textarea></div>
+        <div class="form-group"><label>Notes</label><textarea id="rf_notes">${f(r,'Notas Adicionales')}</textarea></div>
+      </div>
+    </div>
   `;
   
   const footer = `
