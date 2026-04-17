@@ -169,7 +169,7 @@ async function showDriverPicker() {
         <p>Choose your name to see your assigned transfers</p>
         <div class="driver-list">
           ${drivers.map(d => {
-            const name = f(d, 'Nombre del Conductor');
+            const name = f(d, 'Nombre completo');
             const initials = name.split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
             return `<button class="driver-btn" onclick="selectDriver('${d.id}','${name.replace(/'/g,"\\'")}')">
               <div class="avatar">${initials}</div>
@@ -213,7 +213,7 @@ async function loadData() {
 
     // Filter reservas assigned to this driver
     const mine = reservas.filter(r => {
-      const linked = r.fields['Conductor'];
+      const linked = r.fields['Conductor Asignado'];
       return Array.isArray(linked) && linked.includes(driverId);
     });
 
@@ -246,7 +246,7 @@ async function loadData() {
 
     // Get vehicle names
     function vehicleName(r) {
-      const vIds = r.fields['Vehículo'];
+      const vIds = r.fields['Vehículo Asignado'];
       if (!Array.isArray(vIds) || !vIds.length) return '';
       const v = vehicles.find(v => v.id === vIds[0]);
       return v ? `${f(v, 'Nombre del Vehículo')} (${f(v, 'Tipo de Vehículo')})` : '';
