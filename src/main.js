@@ -348,7 +348,6 @@ if (quoteWidget) {
       msg += (lang === 'es' ? 'Hola, quiero una cotización.' : 'Hi, I would like a quote.');
     }
 
-    if (typeof gtag === 'function') gtag('event', 'booking_submit', { event_category: 'conversion', event_label: dest, value: 1 });
     window.open(`https://wa.me/529983000307?text=${encodeURIComponent(msg)}`, '_blank');
   });
 
@@ -356,16 +355,87 @@ if (quoteWidget) {
   updateQuote();
 }
 
-// ---- Legacy booking forms (non-hero) WhatsApp fallback ----
+// ---- Booking forms → /api/booking (Airtable + Brevo) then WhatsApp ----
 document.querySelectorAll('.booking-form').forEach(form => {
   if (form.closest('.quote-widget')) return; // handled above
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form).entries());
+    const submitBtn = form.querySelector('[type="submit"]');
+    const originalText = submitBtn ? submitBtn.innerHTML : '';
+
+    // Show loading state
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span style="display:inline-flex;align-items:center;gap:8px;">Processing... <svg width="16" height="16" viewBox="0 0 24 24" style="animation:spin 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31 31"/></svg></span>';
+    }
+
+    // Build WhatsApp message (always used as final step)
     let m = `🚐 *TT & More Booking Request*\n\n`;
     Object.entries(data).forEach(([k, v]) => { if (v) m += `${k}: ${v}\n`; });
-    if (typeof gtag === 'function') gtag('event', 'booking_submit', { event_category: 'conversion', event_label: 'legacy_form', value: 1 });
-    window.open(`https://wa.me/529983000307?text=${encodeURIComponent(m)}`, '_blank');
+    const waUrl = `https://wa.me/529983000307?text=${encodeURIComponent(m)}`;
+
+    // Map form fields to Airtable fields
+    const destMap = {
+      'cancun-hotel-zone': 'Cancún Zona Hotelera',
+      'playa-del-carmen': 'Playa del Carmen',
+      'tulum': 'Tulum',
+      'puerto-morelos': 'Puerto Morelos',
+      'costa-mujeres': 'Costa Mujeres',
+      'holbox': 'Holbox',
+      'isla-mujeres': 'Isla Mujeres',
+      'akumal': 'Akumal',
+      'bacalar': 'Bacalar',
+      'merida': 'Mérida',
+    };
+    const serviceMap = {
+      'airport-hotel': 'Airport → Hotel',
+      'hotel-airport': 'Hotel → Airport',
+      'round-trip': 'Round Trip',
+      'hotel-hotel': 'Hotel → Hotel',
+    };
+
+    const fields = {
+      'Nombre del Cliente': data.name || '',
+      'Email': data.email || '',
+      'Phone': data.phone || '',
+      'Destino - Tarifa': destMap[data.destination] || data.destination || '',
+      'Tipo de Traslado': serviceMap[data.service] || data.service || '',
+      'Fecha de Llegada': data.date || '',
+      'Hotel': data.hotel || '',
+      'Passengers - Selector': data.passengers || '',
+      'Flight #': data.flight || '',
+      'Hora de llegada': data.arrival_time || '',
+      'Notas': data.notes || '',
+      'Status': 'Pendiente',
+    };
+
+    // Fire API call (non-blocking — WhatsApp opens regardless)
+    try {
+      await fetch('/api/booking', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fields,
+          email: data.email,
+          clientName: data.name,
+          destination: destMap[data.destination] || data.destination,
+          date: data.date,
+          phone: data.phone,
+        }),
+      });
+    } catch (err) {
+      console.warn('Booking API error (WhatsApp fallback):', err.message);
+    }
+
+    // Always open WhatsApp
+    window.open(waUrl, '_blank');
+
+    // Reset button
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+    }
   });
 });
 
@@ -391,7 +461,6 @@ if (chatToggle && chatWidget) {
     const isVisible = chatWidget.classList.contains('active');
     
     if (isVisible) {
-      if (typeof gtag === 'function') gtag('event', 'chat_open', { event_category: 'engagement' });
       if (!welcomeAnimated) {
         welcomeAnimated = true;
         const welcomeEl = document.getElementById('initial-welcome-msg');
