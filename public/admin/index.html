@@ -300,7 +300,7 @@ async function deleteRecord(tableKey, recordId) {
 async function loadAllData() {
   try {
     const [reservas, conductores, vehiculos, clientes] = await Promise.all([
-      listRecords('reservas', { sort: [{ field: 'Arrival Date Time', direction: 'desc' }].map((s,i) => [`sort[${i}][field]`,s.field,`sort[${i}][direction]`,s.direction]).flat().reduce((o,v,i,a) => (i%2===0 && (o[a[i]]=a[i+1]),o), {}) }),
+      listRecords('reservas', { 'sort[0][field]': 'Arrival Date Time', 'sort[0][direction]': 'desc' }),
       listRecords('conductores'),
       listRecords('vehiculos'),
       listRecords('clientes')
