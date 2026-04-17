@@ -348,6 +348,7 @@ if (quoteWidget) {
       msg += (lang === 'es' ? 'Hola, quiero una cotización.' : 'Hi, I would like a quote.');
     }
 
+    if (typeof gtag === 'function') gtag('event', 'booking_submit', { event_category: 'conversion', event_label: dest, value: 1 });
     window.open(`https://wa.me/529983000307?text=${encodeURIComponent(msg)}`, '_blank');
   });
 
@@ -363,6 +364,7 @@ document.querySelectorAll('.booking-form').forEach(form => {
     const data = Object.fromEntries(new FormData(form).entries());
     let m = `🚐 *TT & More Booking Request*\n\n`;
     Object.entries(data).forEach(([k, v]) => { if (v) m += `${k}: ${v}\n`; });
+    if (typeof gtag === 'function') gtag('event', 'booking_submit', { event_category: 'conversion', event_label: 'legacy_form', value: 1 });
     window.open(`https://wa.me/529983000307?text=${encodeURIComponent(m)}`, '_blank');
   });
 });
@@ -389,6 +391,7 @@ if (chatToggle && chatWidget) {
     const isVisible = chatWidget.classList.contains('active');
     
     if (isVisible) {
+      if (typeof gtag === 'function') gtag('event', 'chat_open', { event_category: 'engagement' });
       if (!welcomeAnimated) {
         welcomeAnimated = true;
         const welcomeEl = document.getElementById('initial-welcome-msg');
