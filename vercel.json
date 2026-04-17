@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/email-reminders",
-      "schedule": "0 */6 * * *"
+      "schedule": "0 7 * * *"
     },
     {
       "path": "/api/welcome-drip",
