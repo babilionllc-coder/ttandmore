@@ -19,7 +19,7 @@ import fetch from 'node-fetch';
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
 import { resolve } from 'path';
 
-const DOMAIN = process.env.DOMAIN || 'ttandmore.com';
+const DOMAIN = process.env.DOMAIN || 'www.ttandmore.com';
 const INDEXNOW_KEY = process.env.INDEXNOW_KEY || 'ca7c6a94b42842e5985b351469cfce82';
 const SERVICE_ACCOUNT_JSON = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
 
