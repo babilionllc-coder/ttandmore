@@ -16,7 +16,7 @@
 import { readdirSync, writeFileSync, statSync, existsSync } from 'fs';
 import { resolve, relative, join } from 'path';
 
-const DOMAIN = process.env.DOMAIN || 'ttandmore.com';
+const DOMAIN = process.env.DOMAIN || 'www.ttandmore.com';
 const SOURCE_DIR = process.env.SOURCE_DIR || 'src';
 const OUTPUT_DIR = process.env.OUTPUT_DIR || 'public';
 const SECONDARY_LANG_PREFIX = process.env.SECONDARY_LANG_PREFIX ?? 'es';

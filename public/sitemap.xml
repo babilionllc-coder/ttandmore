@@ -1,324 +1,312 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-
-  <!-- ============ HOMEPAGE ============ -->
   <url>
-    <loc>https://ttandmore.com/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/"/>
+    <loc>https://www.ttandmore.com/blog/best-chichen-itza-tours-from-cancun/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/best-chichen-itza-tours-from-cancun/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/best-chichen-itza-tours-from-cancun/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/best-chichen-itza-tours-from-cancun/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/"/>
-  </url>
-
-  <!-- ============ SERVICE PAGES ============ -->
-  <url>
-    <loc>https://ttandmore.com/book/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/book/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/book/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/book/"/>
+    <loc>https://www.ttandmore.com/blog/cancun-airport-pickup-guide/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/cancun-airport-pickup-guide/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/cancun-airport-pickup-guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/cancun-airport-pickup-guide/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/book/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/book/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/book/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/book/"/>
+    <loc>https://www.ttandmore.com/blog/cancun-airport-to-playa-del-carmen/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/cancun-airport-to-playa-del-carmen/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/cancun-airport-to-playa-del-carmen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/cancun-airport-to-playa-del-carmen/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/hotel-to-hotel/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/hotel-to-hotel/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/hotel-to-hotel/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/hotel-to-hotel/"/>
+    <loc>https://www.ttandmore.com/blog/cancun-airport-to-tulum/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/cancun-airport-to-tulum/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/cancun-airport-to-tulum/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/cancun-airport-to-tulum/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/hotel-to-hotel/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/hotel-to-hotel/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/hotel-to-hotel/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/hotel-to-hotel/"/>
+    <loc>https://www.ttandmore.com/blog/cancun-airport-transportation-guide/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/cancun-airport-transportation-guide/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/cancun-airport-transportation-guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/cancun-airport-transportation-guide/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/groups/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/groups/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/groups/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/groups/"/>
+    <loc>https://www.ttandmore.com/blog/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/groups/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/groups/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/groups/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/groups/"/>
-  </url>
-
-  <!-- ============ TOUR PAGES ============ -->
-  <url>
-    <loc>https://ttandmore.com/chichen-itza-tour/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/chichen-itza-tour/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/chichen-itza-tour/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/chichen-itza-tour/"/>
+    <loc>https://www.ttandmore.com/blog/where-to-stay-cancun-riviera-maya/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/where-to-stay-cancun-riviera-maya/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/where-to-stay-cancun-riviera-maya/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/where-to-stay-cancun-riviera-maya/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/chichen-itza-tour/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/chichen-itza-tour/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/chichen-itza-tour/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/chichen-itza-tour/"/>
+    <loc>https://www.ttandmore.com/book/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/book/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/book/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/book/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/chichen-itza-cenote-selva-maya/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/chichen-itza-cenote-selva-maya/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/chichen-itza-cenote-selva-maya/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/chichen-itza-cenote-selva-maya/"/>
+    <loc>https://www.ttandmore.com/chichen-itza-cenote-ik-kil/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/chichen-itza-cenote-ik-kil/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/chichen-itza-cenote-ik-kil/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/chichen-itza-cenote-ik-kil/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/chichen-itza-cenote-selva-maya/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/chichen-itza-cenote-selva-maya/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/chichen-itza-cenote-selva-maya/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/chichen-itza-cenote-selva-maya/"/>
+    <loc>https://www.ttandmore.com/chichen-itza-cenote-selva-maya/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/chichen-itza-cenote-selva-maya/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/chichen-itza-cenote-selva-maya/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/chichen-itza-cenote-selva-maya/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/chichen-itza-cenote-ik-kil/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/chichen-itza-cenote-ik-kil/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/chichen-itza-cenote-ik-kil/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/chichen-itza-cenote-ik-kil/"/>
+    <loc>https://www.ttandmore.com/chichen-itza-ek-balam/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/chichen-itza-ek-balam/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/chichen-itza-ek-balam/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/chichen-itza-ek-balam/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/chichen-itza-cenote-ik-kil/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/chichen-itza-cenote-ik-kil/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/chichen-itza-cenote-ik-kil/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/chichen-itza-cenote-ik-kil/"/>
+    <loc>https://www.ttandmore.com/chichen-itza-tour/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/chichen-itza-tour/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/chichen-itza-tour/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/chichen-itza-tour/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/chichen-itza-ek-balam/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/chichen-itza-ek-balam/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/chichen-itza-ek-balam/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/chichen-itza-ek-balam/"/>
+    <loc>https://www.ttandmore.com/coba/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/coba/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/coba/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/coba/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/chichen-itza-ek-balam/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/chichen-itza-ek-balam/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/chichen-itza-ek-balam/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/chichen-itza-ek-balam/"/>
+    <loc>https://www.ttandmore.com/ek-balam-cenote-xcanche/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/ek-balam-cenote-xcanche/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/ek-balam-cenote-xcanche/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/ek-balam-cenote-xcanche/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/tulum/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/tulum/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/tulum/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/tulum/"/>
+    <loc>https://www.ttandmore.com/es/blog/best-chichen-itza-tours-from-cancun/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/best-chichen-itza-tours-from-cancun/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/best-chichen-itza-tours-from-cancun/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/best-chichen-itza-tours-from-cancun/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/tulum/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/tulum/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/tulum/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/tulum/"/>
+    <loc>https://www.ttandmore.com/es/blog/cancun-airport-pickup-guide/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/cancun-airport-pickup-guide/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/cancun-airport-pickup-guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/cancun-airport-pickup-guide/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/tulum-akumal-snorkel/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/tulum-akumal-snorkel/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/tulum-akumal-snorkel/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/tulum-akumal-snorkel/"/>
+    <loc>https://www.ttandmore.com/es/blog/cancun-airport-to-playa-del-carmen/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/cancun-airport-to-playa-del-carmen/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/cancun-airport-to-playa-del-carmen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/cancun-airport-to-playa-del-carmen/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/tulum-akumal-snorkel/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/tulum-akumal-snorkel/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/tulum-akumal-snorkel/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/tulum-akumal-snorkel/"/>
+    <loc>https://www.ttandmore.com/es/blog/cancun-airport-to-tulum/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/cancun-airport-to-tulum/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/cancun-airport-to-tulum/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/cancun-airport-to-tulum/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/tulum-coba/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/tulum-coba/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/tulum-coba/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/tulum-coba/"/>
+    <loc>https://www.ttandmore.com/es/blog/cancun-airport-transportation-guide/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/cancun-airport-transportation-guide/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/cancun-airport-transportation-guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/cancun-airport-transportation-guide/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/tulum-coba/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/tulum-coba/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/tulum-coba/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/tulum-coba/"/>
+    <loc>https://www.ttandmore.com/es/blog/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/tulum-gran-cenote-tulum/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/tulum-gran-cenote-tulum/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/tulum-gran-cenote-tulum/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/tulum-gran-cenote-tulum/"/>
+    <loc>https://www.ttandmore.com/es/blog/where-to-stay-cancun-riviera-maya/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/blog/where-to-stay-cancun-riviera-maya/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/blog/where-to-stay-cancun-riviera-maya/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/blog/where-to-stay-cancun-riviera-maya/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/tulum-gran-cenote-tulum/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/tulum-gran-cenote-tulum/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/tulum-gran-cenote-tulum/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/tulum-gran-cenote-tulum/"/>
+    <loc>https://www.ttandmore.com/es/book/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/book/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/book/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/book/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/coba/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/coba/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/coba/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/coba/"/>
+    <loc>https://www.ttandmore.com/es/chichen-itza-cenote-ik-kil/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/chichen-itza-cenote-ik-kil/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/chichen-itza-cenote-ik-kil/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/chichen-itza-cenote-ik-kil/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/coba/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/coba/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/coba/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/coba/"/>
+    <loc>https://www.ttandmore.com/es/chichen-itza-cenote-selva-maya/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/chichen-itza-cenote-selva-maya/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/chichen-itza-cenote-selva-maya/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/chichen-itza-cenote-selva-maya/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/ek-balam-cenote-xcanche/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/ek-balam-cenote-xcanche/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/ek-balam-cenote-xcanche/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/ek-balam-cenote-xcanche/"/>
+    <loc>https://www.ttandmore.com/es/chichen-itza-ek-balam/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/chichen-itza-ek-balam/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/chichen-itza-ek-balam/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/chichen-itza-ek-balam/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/ek-balam-cenote-xcanche/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/ek-balam-cenote-xcanche/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/ek-balam-cenote-xcanche/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/ek-balam-cenote-xcanche/"/>
-  </url>
-
-  <!-- ============ BLOG ============ -->
-  <url>
-    <loc>https://ttandmore.com/blog/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/"/>
+    <loc>https://www.ttandmore.com/es/chichen-itza-tour/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/chichen-itza-tour/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/chichen-itza-tour/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/chichen-itza-tour/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/blog/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/"/>
+    <loc>https://www.ttandmore.com/es/coba/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/coba/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/coba/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/coba/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/blog/cancun-airport-transportation-guide/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/cancun-airport-transportation-guide/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/cancun-airport-transportation-guide/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/cancun-airport-transportation-guide/"/>
+    <loc>https://www.ttandmore.com/es/ek-balam-cenote-xcanche/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/ek-balam-cenote-xcanche/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/ek-balam-cenote-xcanche/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/ek-balam-cenote-xcanche/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/blog/cancun-airport-transportation-guide/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/cancun-airport-transportation-guide/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/cancun-airport-transportation-guide/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/cancun-airport-transportation-guide/"/>
+    <loc>https://www.ttandmore.com/es/groups/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/groups/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/groups/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/groups/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/blog/cancun-airport-to-playa-del-carmen/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/cancun-airport-to-playa-del-carmen/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/cancun-airport-to-playa-del-carmen/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/cancun-airport-to-playa-del-carmen/"/>
+    <loc>https://www.ttandmore.com/es/hotel-to-hotel/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/hotel-to-hotel/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/hotel-to-hotel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/hotel-to-hotel/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/blog/cancun-airport-to-playa-del-carmen/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/cancun-airport-to-playa-del-carmen/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/cancun-airport-to-playa-del-carmen/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/cancun-airport-to-playa-del-carmen/"/>
+    <loc>https://www.ttandmore.com/es/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/blog/best-chichen-itza-tours-from-cancun/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/best-chichen-itza-tours-from-cancun/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/best-chichen-itza-tours-from-cancun/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/best-chichen-itza-tours-from-cancun/"/>
+    <loc>https://www.ttandmore.com/es/terms-and-conditions/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/terms-and-conditions/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/terms-and-conditions/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/terms-and-conditions/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/blog/best-chichen-itza-tours-from-cancun/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/best-chichen-itza-tours-from-cancun/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/best-chichen-itza-tours-from-cancun/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/best-chichen-itza-tours-from-cancun/"/>
+    <loc>https://www.ttandmore.com/es/tulum/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/tulum/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/tulum/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/tulum/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/blog/cancun-airport-to-tulum/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/cancun-airport-to-tulum/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/cancun-airport-to-tulum/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/cancun-airport-to-tulum/"/>
+    <loc>https://www.ttandmore.com/es/tulum-akumal-snorkel/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/tulum-akumal-snorkel/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/tulum-akumal-snorkel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/tulum-akumal-snorkel/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/blog/cancun-airport-to-tulum/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/cancun-airport-to-tulum/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/cancun-airport-to-tulum/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/cancun-airport-to-tulum/"/>
-  </url>
-
-  <url>
-    <loc>https://ttandmore.com/blog/cancun-airport-pickup-guide/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/cancun-airport-pickup-guide/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/cancun-airport-pickup-guide/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/cancun-airport-pickup-guide/"/>
+    <loc>https://www.ttandmore.com/es/tulum-coba/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/tulum-coba/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/tulum-coba/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/tulum-coba/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/blog/cancun-airport-pickup-guide/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/cancun-airport-pickup-guide/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/cancun-airport-pickup-guide/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/cancun-airport-pickup-guide/"/>
+    <loc>https://www.ttandmore.com/es/tulum-gran-cenote-tulum/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/tulum-gran-cenote-tulum/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/tulum-gran-cenote-tulum/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/tulum-gran-cenote-tulum/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/blog/where-to-stay-cancun-riviera-maya/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/where-to-stay-cancun-riviera-maya/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/where-to-stay-cancun-riviera-maya/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/where-to-stay-cancun-riviera-maya/"/>
+    <loc>https://www.ttandmore.com/groups/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/groups/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/groups/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/groups/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/blog/where-to-stay-cancun-riviera-maya/</loc>
-    <lastmod>2026-04-16</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/blog/where-to-stay-cancun-riviera-maya/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/blog/where-to-stay-cancun-riviera-maya/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/blog/where-to-stay-cancun-riviera-maya/"/>
-  </url>
-
-  <!-- ============ TERMS ============ -->
-  <url>
-    <loc>https://ttandmore.com/terms-and-conditions/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/terms-and-conditions/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/terms-and-conditions/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/terms-and-conditions/"/>
+    <loc>https://www.ttandmore.com/hotel-to-hotel/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/hotel-to-hotel/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/hotel-to-hotel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/hotel-to-hotel/"/>
   </url>
   <url>
-    <loc>https://ttandmore.com/es/terms-and-conditions/</loc>
-    <lastmod>2026-04-15</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ttandmore.com/terms-and-conditions/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://ttandmore.com/es/terms-and-conditions/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ttandmore.com/terms-and-conditions/"/>
+    <loc>https://www.ttandmore.com/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/"/>
   </url>
-
+  <url>
+    <loc>https://www.ttandmore.com/terms-and-conditions/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/terms-and-conditions/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/terms-and-conditions/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/terms-and-conditions/"/>
+  </url>
+  <url>
+    <loc>https://www.ttandmore.com/tulum/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/tulum/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/tulum/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/tulum/"/>
+  </url>
+  <url>
+    <loc>https://www.ttandmore.com/tulum-akumal-snorkel/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/tulum-akumal-snorkel/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/tulum-akumal-snorkel/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/tulum-akumal-snorkel/"/>
+  </url>
+  <url>
+    <loc>https://www.ttandmore.com/tulum-coba/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/tulum-coba/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/tulum-coba/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/tulum-coba/"/>
+  </url>
+  <url>
+    <loc>https://www.ttandmore.com/tulum-gran-cenote-tulum/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.ttandmore.com/tulum-gran-cenote-tulum/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.ttandmore.com/es/tulum-gran-cenote-tulum/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ttandmore.com/tulum-gran-cenote-tulum/"/>
+  </url>
 </urlset>

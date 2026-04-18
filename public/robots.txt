@@ -1,5 +1,6 @@
-# robots.txt for ttandmore.com
+# robots.txt for www.ttandmore.com
 # Cancun airport transportation & Riviera Maya tours
+# Canonical host is www (non-www redirects 307 → www)
 
 User-agent: *
 Allow: /
@@ -30,7 +31,7 @@ User-agent: CCBot
 Allow: /
 
 # Sitemap
-Sitemap: https://ttandmore.com/sitemap.xml
+Sitemap: https://www.ttandmore.com/sitemap.xml
 
 # Host preference
-Host: https://ttandmore.com
+Host: https://www.ttandmore.com

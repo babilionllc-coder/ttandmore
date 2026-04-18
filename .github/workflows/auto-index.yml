@@ -53,7 +53,7 @@ jobs:
 
       - name: Regenerate sitemap.xml
         env:
-          DOMAIN: ttandmore.com
+          DOMAIN: www.ttandmore.com
           SOURCE_DIR: .             # repo root IS the Vite src for this project
           OUTPUT_DIR: public
           SECONDARY_LANG_PREFIX: es
@@ -65,7 +65,7 @@ jobs:
         env:
           GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
           INDEXNOW_KEY: ca7c6a94b42842e5985b351469cfce82
-          DOMAIN: ttandmore.com
+          DOMAIN: www.ttandmore.com
         run: node .agents/scripts/force_index.js 2>&1 | tee /tmp/indexing-output.log
 
       - name: Print ALL log output (visible without auth)
