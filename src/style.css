@@ -2808,11 +2808,21 @@ button {
   }
 
   .tour-layout {
-    grid-template-columns: 1fr;
+    /* minmax(0, 1fr) instead of 1fr — fixes grid children refusing to shrink
+       below their content width (default min-width: auto), which was causing
+       horizontal overflow on mobile (560px child in a 485px viewport). */
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tour-layout > * {
+    min-width: 0;
   }
 
   .tour-booking-card {
     position: static;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .nav__list {
