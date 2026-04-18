@@ -3009,13 +3009,113 @@ button {
 
 @media (max-width: 480px) {
   body.blog-page .tour-hero {
-    min-height: 38vh;
+    min-height: 32vh;
+  }
+  body.blog-page .tour-hero__content {
+    padding: var(--space-6) 0 var(--space-5) !important;
   }
   body.blog-page .tour-hero__title {
     font-size: var(--text-3xl);
+    margin-bottom: var(--space-3) !important;
   }
   body.blog-page .blog-stats > div > div:first-child {
     font-size: var(--text-2xl) !important;
+  }
+}
+
+/* ==================== BLOG POST: MOBILE POLISH ==================== */
+/* Tighter rendering for the long-form post view on phones */
+@media (max-width: 768px) {
+  /* Article container: a couple more pixels of breathing room */
+  body.blog-page.blog-post .tour-content,
+  body.blog-page .tour-content {
+    padding-top: var(--space-6);
+    padding-bottom: var(--space-8);
+  }
+
+  /* Author bar: avatar + meta in a single tight row */
+  body.blog-page .blog-author-bar {
+    align-items: center;
+    padding: var(--space-3) 0 !important;
+    margin-bottom: var(--space-5) !important;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  body.blog-page .blog-author-bar > * {
+    flex: 0 1 auto;
+  }
+
+  /* Table scroll affordance — gradient fade on the right edge so
+     users see the table is horizontally scrollable */
+  body.blog-page .blog-table-wrap {
+    position: relative;
+  }
+  body.blog-page .blog-table-wrap::after {
+    content: "";
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 36px;
+    pointer-events: none;
+    background: linear-gradient(
+      to right,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.85) 60%,
+      rgba(255,255,255,1) 100%
+    );
+    border-radius: 0;
+  }
+
+  /* Booking sidebar card: trim padding + font on mobile so
+     it stops feeling like dead weight at the end of the article */
+  body.blog-page .tour-booking-card {
+    padding: var(--space-5) !important;
+    margin-top: var(--space-6);
+  }
+  body.blog-page .tour-booking-card h3,
+  body.blog-page .tour-booking-card .tour-booking-card__title {
+    font-size: var(--text-xl) !important;
+  }
+
+  /* Inline image breaks inside the article: tighter edges */
+  body.blog-page .tour-description img,
+  body.blog-page .tour-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+  }
+}
+
+/* ==================== BLOG INDEX: MOBILE POLISH ==================== */
+/* The list of post cards is gradient-heavy — shrink the gradient
+   header on phones so users see more cards per scroll */
+@media (max-width: 640px) {
+  /* Card grid: tighter gap on mobile */
+  body.blog-index main section > .container > div[style*="display:grid"][style*="auto-fill"] {
+    gap: var(--space-5) !important;
+  }
+  /* Each gradient hero block (inline-styled height:200px) */
+  body.blog-index a[href*="/blog/"] > div[style*="height:200px"][style*="linear-gradient"] {
+    height: 130px !important;
+    padding: var(--space-4) !important;
+  }
+  body.blog-index a[href*="/blog/"] > div[style*="height:200px"][style*="linear-gradient"] > span {
+    font-size: var(--text-xl) !important;
+    line-height: 1.25 !important;
+  }
+  /* Card body: tighter inner padding */
+  body.blog-index a[href*="/blog/"] > div[style*="padding:var(--space-6)"] {
+    padding: var(--space-4) !important;
+  }
+  /* H2 title inside card a notch smaller so 3-line titles don't dominate */
+  body.blog-index a[href*="/blog/"] h2 {
+    font-size: var(--text-lg) !important;
+    line-height: 1.3 !important;
+    margin-bottom: var(--space-2) !important;
+  }
+  /* Hero header on the index itself: less top/bottom padding */
+  body.blog-index main > section:first-of-type {
+    padding-top: var(--space-12) !important;
+    padding-bottom: var(--space-8) !important;
   }
 }
 
