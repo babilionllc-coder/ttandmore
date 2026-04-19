@@ -282,72 +282,120 @@
                     <div class="drinks-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--space-2);">
                       <!-- Coca-Cola -->
                       <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
-                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#e1001f 0%,#a00016 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">COCA</span>
+                        <svg width="44" height="62" viewBox="0 0 44 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.2));">
+  <defs>
+    <linearGradient id="coke-body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a00016"/>
+      <stop offset="20%" stop-color="#e1001f"/>
+      <stop offset="50%" stop-color="#e1001f"/>
+      <stop offset="80%" stop-color="#e1001f"/>
+      <stop offset="100%" stop-color="#a00016"/>
+    </linearGradient>
+    <linearGradient id="coke-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4d4d4"/>
+      <stop offset="100%" stop-color="#7a7a7a"/>
+    </linearGradient>
+  </defs>
+  <!-- Body -->
+  <rect x="5" y="7" width="34" height="48" fill="url(#coke-body)" rx="1.2"/>
+  <!-- Top rim metal -->
+  <ellipse cx="22" cy="7" rx="17" ry="2.6" fill="url(#coke-top)"/>
+  <ellipse cx="22" cy="6.8" rx="14" ry="1.6" fill="#2a2a2a"/>
+  <!-- Tab -->
+  <rect x="17" y="5" width="10" height="1.3" fill="#9a9a9a" rx="0.5"/>
+  <!-- Bottom lip -->
+  <ellipse cx="22" cy="55" rx="17" ry="2" fill="#a00016" opacity="0.4"/>
+  <!-- Brand text -->
+  <text x="22" y="34" font-family="'Helvetica Neue', Arial Black, sans-serif" font-weight="900" font-size="6.5" fill="#ffffff" text-anchor="middle" letter-spacing="0.2">Coca-Cola</text>
+  <!-- Left highlight -->
+  <rect x="7" y="9" width="2" height="44" fill="white" opacity="0.32" rx="1"/>
+  <!-- Right shadow -->
+  <rect x="35" y="9" width="2.5" height="44" fill="black" opacity="0.18" rx="1"/>
+</svg>
                         <div style="flex:1;min-width:0;">
                           <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Coca-Cola</div>
                           <div style="font-size:11px;color:var(--text-muted);">$2 USD</div>
                         </div>
                         <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
                           <button type="button" class="drink-minus" aria-label="Remove" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
-                          <input type="number" class="drink-count" data-price="2" name="drink_coke" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <input type="number" class="drink-count" data-price="2" name="drink_coca" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
                           <button type="button" class="drink-plus" aria-label="Add" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
                         </div>
                       </div>
-                      <!-- Coca-Cola Light -->
+                      <!-- Coca Zero -->
                       <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
-                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#b8b8b8 0%,#7a7a7a 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">LIGHT</span>
+                        <svg width="44" height="62" viewBox="0 0 44 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.2));">
+  <defs>
+    <linearGradient id="cokez-body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="20%" stop-color="#2a2a2a"/>
+      <stop offset="50%" stop-color="#2a2a2a"/>
+      <stop offset="80%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="cokez-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4d4d4"/>
+      <stop offset="100%" stop-color="#7a7a7a"/>
+    </linearGradient>
+  </defs>
+  <!-- Body -->
+  <rect x="5" y="7" width="34" height="48" fill="url(#cokez-body)" rx="1.2"/>
+  <!-- Top rim metal -->
+  <ellipse cx="22" cy="7" rx="17" ry="2.6" fill="url(#cokez-top)"/>
+  <ellipse cx="22" cy="6.8" rx="14" ry="1.6" fill="#2a2a2a"/>
+  <!-- Tab -->
+  <rect x="17" y="5" width="10" height="1.3" fill="#9a9a9a" rx="0.5"/>
+  <!-- Bottom lip -->
+  <ellipse cx="22" cy="55" rx="17" ry="2" fill="#0a0a0a" opacity="0.4"/>
+  <!-- Brand text -->
+  <text x="22" y="22" font-family="'Helvetica Neue', Arial Black, sans-serif" font-weight="900" font-size="4.5" fill="#ffffff" text-anchor="middle" letter-spacing="0.3">Coca-Cola</text><text x="22" y="34" font-family="'Helvetica Neue', Arial Black, sans-serif" font-weight="900" font-size="6.5" fill="#ffffff" text-anchor="middle" letter-spacing="0.2">ZERO</text>
+  <!-- Left highlight -->
+  <rect x="7" y="9" width="2" height="44" fill="white" opacity="0.32" rx="1"/>
+  <!-- Right shadow -->
+  <rect x="35" y="9" width="2.5" height="44" fill="black" opacity="0.18" rx="1"/>
+</svg>
                         <div style="flex:1;min-width:0;">
-                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Coca-Cola Light</div>
+                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Coca Zero</div>
                           <div style="font-size:11px;color:var(--text-muted);">$2 USD</div>
                         </div>
                         <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
                           <button type="button" class="drink-minus" aria-label="Remove" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
-                          <input type="number" class="drink-count" data-price="2" name="drink_coke_light" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
-                          <button type="button" class="drink-plus" aria-label="Add" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
-                        </div>
-                      </div>
-                      <!-- Coca-Cola Zero -->
-                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
-                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#0a0a0a 0%,#2a2a2a 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">ZERO</span>
-                        <div style="flex:1;min-width:0;">
-                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Coca-Cola Zero</div>
-                          <div style="font-size:11px;color:var(--text-muted);">$2 USD</div>
-                        </div>
-                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
-                          <button type="button" class="drink-minus" aria-label="Remove" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
-                          <input type="number" class="drink-count" data-price="2" name="drink_coke_zero" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
-                          <button type="button" class="drink-plus" aria-label="Add" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
-                        </div>
-                      </div>
-                      <!-- Pepsi -->
-                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
-                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#004B93 0%,#002f66 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">PEPSI</span>
-                        <div style="flex:1;min-width:0;">
-                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Pepsi</div>
-                          <div style="font-size:11px;color:var(--text-muted);">$2 USD</div>
-                        </div>
-                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
-                          <button type="button" class="drink-minus" aria-label="Remove" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
-                          <input type="number" class="drink-count" data-price="2" name="drink_pepsi" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
-                          <button type="button" class="drink-plus" aria-label="Add" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
-                        </div>
-                      </div>
-                      <!-- Pepsi Light -->
-                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
-                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#6ba8d8 0%,#3d7bb8 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">LIGHT</span>
-                        <div style="flex:1;min-width:0;">
-                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Pepsi Light</div>
-                          <div style="font-size:11px;color:var(--text-muted);">$2 USD</div>
-                        </div>
-                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
-                          <button type="button" class="drink-minus" aria-label="Remove" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
-                          <input type="number" class="drink-count" data-price="2" name="drink_pepsi_light" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <input type="number" class="drink-count" data-price="2" name="drink_coca_zero" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
                           <button type="button" class="drink-plus" aria-label="Add" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
                         </div>
                       </div>
                       <!-- Sprite -->
                       <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
-                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#1e9e4a 0%,#167038 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">SPRITE</span>
+                        <svg width="44" height="62" viewBox="0 0 44 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.2));">
+  <defs>
+    <linearGradient id="spr-body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#006633"/>
+      <stop offset="20%" stop-color="#00a651"/>
+      <stop offset="50%" stop-color="#00a651"/>
+      <stop offset="80%" stop-color="#00a651"/>
+      <stop offset="100%" stop-color="#006633"/>
+    </linearGradient>
+    <linearGradient id="spr-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4d4d4"/>
+      <stop offset="100%" stop-color="#7a7a7a"/>
+    </linearGradient>
+  </defs>
+  <!-- Body -->
+  <rect x="5" y="7" width="34" height="48" fill="url(#spr-body)" rx="1.2"/>
+  <!-- Top rim metal -->
+  <ellipse cx="22" cy="7" rx="17" ry="2.6" fill="url(#spr-top)"/>
+  <ellipse cx="22" cy="6.8" rx="14" ry="1.6" fill="#2a2a2a"/>
+  <!-- Tab -->
+  <rect x="17" y="5" width="10" height="1.3" fill="#9a9a9a" rx="0.5"/>
+  <!-- Bottom lip -->
+  <ellipse cx="22" cy="55" rx="17" ry="2" fill="#006633" opacity="0.4"/>
+  <!-- Brand text -->
+  <text x="22" y="34" font-family="'Helvetica Neue', Arial Black, sans-serif" font-weight="900" font-size="6.5" fill="#fff200" text-anchor="middle" letter-spacing="0.2">Sprite</text>
+  <!-- Left highlight -->
+  <rect x="7" y="9" width="2" height="44" fill="white" opacity="0.32" rx="1"/>
+  <!-- Right shadow -->
+  <rect x="35" y="9" width="2.5" height="44" fill="black" opacity="0.18" rx="1"/>
+</svg>
                         <div style="flex:1;min-width:0;">
                           <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Sprite</div>
                           <div style="font-size:11px;color:var(--text-muted);">$2 USD</div>
@@ -360,7 +408,36 @@
                       </div>
                       <!-- Fanta -->
                       <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
-                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#ff7a00 0%,#cc5c00 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">FANTA</span>
+                        <svg width="44" height="62" viewBox="0 0 44 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.2));">
+  <defs>
+    <linearGradient id="fan-body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#cc5c00"/>
+      <stop offset="20%" stop-color="#ff8c1a"/>
+      <stop offset="50%" stop-color="#ff8c1a"/>
+      <stop offset="80%" stop-color="#ff8c1a"/>
+      <stop offset="100%" stop-color="#cc5c00"/>
+    </linearGradient>
+    <linearGradient id="fan-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4d4d4"/>
+      <stop offset="100%" stop-color="#7a7a7a"/>
+    </linearGradient>
+  </defs>
+  <!-- Body -->
+  <rect x="5" y="7" width="34" height="48" fill="url(#fan-body)" rx="1.2"/>
+  <!-- Top rim metal -->
+  <ellipse cx="22" cy="7" rx="17" ry="2.6" fill="url(#fan-top)"/>
+  <ellipse cx="22" cy="6.8" rx="14" ry="1.6" fill="#2a2a2a"/>
+  <!-- Tab -->
+  <rect x="17" y="5" width="10" height="1.3" fill="#9a9a9a" rx="0.5"/>
+  <!-- Bottom lip -->
+  <ellipse cx="22" cy="55" rx="17" ry="2" fill="#cc5c00" opacity="0.4"/>
+  <!-- Brand text -->
+  <text x="22" y="34" font-family="'Helvetica Neue', Arial Black, sans-serif" font-weight="900" font-size="6.5" fill="#1e3a8a" text-anchor="middle" letter-spacing="0.2">Fanta</text>
+  <!-- Left highlight -->
+  <rect x="7" y="9" width="2" height="44" fill="white" opacity="0.32" rx="1"/>
+  <!-- Right shadow -->
+  <rect x="35" y="9" width="2.5" height="44" fill="black" opacity="0.18" rx="1"/>
+</svg>
                         <div style="flex:1;min-width:0;">
                           <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Fanta</div>
                           <div style="font-size:11px;color:var(--text-muted);">$2 USD</div>
@@ -371,45 +448,172 @@
                           <button type="button" class="drink-plus" aria-label="Add" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
                         </div>
                       </div>
-                      <!-- Dr Pepper -->
+                      <!-- Manzanita Sol -->
                       <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
-                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#6b2730 0%,#3f161b 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">DR P</span>
+                        <svg width="44" height="62" viewBox="0 0 44 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.2));">
+  <defs>
+    <linearGradient id="man-body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1b6b29"/>
+      <stop offset="20%" stop-color="#2ea349"/>
+      <stop offset="50%" stop-color="#2ea349"/>
+      <stop offset="80%" stop-color="#2ea349"/>
+      <stop offset="100%" stop-color="#1b6b29"/>
+    </linearGradient>
+    <linearGradient id="man-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4d4d4"/>
+      <stop offset="100%" stop-color="#7a7a7a"/>
+    </linearGradient>
+  </defs>
+  <!-- Body -->
+  <rect x="5" y="7" width="34" height="48" fill="url(#man-body)" rx="1.2"/>
+  <!-- Top rim metal -->
+  <ellipse cx="22" cy="7" rx="17" ry="2.6" fill="url(#man-top)"/>
+  <ellipse cx="22" cy="6.8" rx="14" ry="1.6" fill="#2a2a2a"/>
+  <!-- Tab -->
+  <rect x="17" y="5" width="10" height="1.3" fill="#9a9a9a" rx="0.5"/>
+  <!-- Bottom lip -->
+  <ellipse cx="22" cy="55" rx="17" ry="2" fill="#1b6b29" opacity="0.4"/>
+  <!-- Brand text -->
+  <text x="22" y="34" font-family="'Helvetica Neue', Arial Black, sans-serif" font-weight="900" font-size="6.5" fill="#ffd700" text-anchor="middle" letter-spacing="0.2">Manzanita</text><text x="22" y="46" font-family="'Helvetica Neue', Arial Black, sans-serif" font-weight="900" font-size="4.5" fill="#ffd700" text-anchor="middle" letter-spacing="0.3">SOL</text>
+  <!-- Left highlight -->
+  <rect x="7" y="9" width="2" height="44" fill="white" opacity="0.32" rx="1"/>
+  <!-- Right shadow -->
+  <rect x="35" y="9" width="2.5" height="44" fill="black" opacity="0.18" rx="1"/>
+</svg>
                         <div style="flex:1;min-width:0;">
-                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Dr Pepper</div>
+                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Manzanita Sol</div>
                           <div style="font-size:11px;color:var(--text-muted);">$2 USD</div>
                         </div>
                         <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
                           <button type="button" class="drink-minus" aria-label="Remove" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
-                          <input type="number" class="drink-count" data-price="2" name="drink_dr_pepper" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <input type="number" class="drink-count" data-price="2" name="drink_manzanita" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
                           <button type="button" class="drink-plus" aria-label="Add" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
                         </div>
                       </div>
-                      <!-- Cerveza -->
+                      <!-- Bottled water -->
                       <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
-                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#d4a017 0%,#8b6914 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.22);flex-shrink:0;letter-spacing:0.5px;">BEER</span>
-                        <div style="flex:1;min-width:0;">
-                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Beer</div>
-                          <div style="font-size:11px;color:var(--text-muted);">$3 USD</div>
-                        </div>
-                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
-                          <button type="button" class="drink-minus" aria-label="Remove" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
-                          <input type="number" class="drink-count" data-price="3" name="drink_beer" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
-                          <button type="button" class="drink-plus" aria-label="Add" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
-                        </div>
-                      </div>
-                      <!-- Agua -->
-                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
-                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#60a5fa 0%,#2563eb 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.22);flex-shrink:0;letter-spacing:0.5px;">WATER</span>
+                        <svg width="44" height="62" viewBox="0 0 44 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.18));">
+  <defs>
+    <linearGradient id="agua-body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c8e7fb"/>
+      <stop offset="35%" stop-color="#eaf6ff"/>
+      <stop offset="65%" stop-color="#eaf6ff"/>
+      <stop offset="100%" stop-color="#8fc4ea"/>
+    </linearGradient>
+    <linearGradient id="agua-lbl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="50%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+  </defs>
+  <!-- Cap -->
+  <rect x="17" y="2" width="10" height="7" fill="#1d4ed8" rx="1"/>
+  <!-- Neck -->
+  <path d="M18 9 L26 9 L27 16 L17 16 Z" fill="url(#agua-body)" stroke="#b3d9f2" stroke-width="0.4"/>
+  <!-- Body -->
+  <path d="M14 16 L30 16 L31 58 C31 59 30 60 29 60 L15 60 C14 60 13 59 13 58 Z" fill="url(#agua-body)" stroke="#a8cee6" stroke-width="0.5"/>
+  <!-- Label -->
+  <rect x="13" y="28" width="18" height="20" fill="url(#agua-lbl)" rx="1"/>
+  <!-- Label text -->
+  <text x="22" y="40" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="5" fill="#ffffff" text-anchor="middle" letter-spacing="0.2">AGUA</text>
+  <!-- Reflection -->
+  <rect x="15" y="18" width="1.5" height="38" fill="white" opacity="0.6" rx="0.5"/>
+</svg>
                         <div style="flex:1;min-width:0;">
                           <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Bottled water</div>
                           <div style="font-size:11px;color:var(--text-muted);">$1 USD</div>
                         </div>
                         <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
                           <button type="button" class="drink-minus" aria-label="Remove" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
-                          <input type="number" class="drink-count" data-price="1" name="drink_water" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <input type="number" class="drink-count" data-price="1" name="drink_agua" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
                           <button type="button" class="drink-plus" aria-label="Add" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
                         </div>
                       </div>
+                      <!-- XX Lager -->
+                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
+                        <svg width="44" height="62" viewBox="0 0 44 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.2));">
+  <defs>
+    <linearGradient id="xx-body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0f3b24"/>
+      <stop offset="20%" stop-color="#1a5c3a"/>
+      <stop offset="50%" stop-color="#1a5c3a"/>
+      <stop offset="80%" stop-color="#1a5c3a"/>
+      <stop offset="100%" stop-color="#0f3b24"/>
+    </linearGradient>
+    <linearGradient id="xx-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4d4d4"/>
+      <stop offset="100%" stop-color="#7a7a7a"/>
+    </linearGradient>
+  </defs>
+  <!-- Body -->
+  <rect x="5" y="7" width="34" height="48" fill="url(#xx-body)" rx="1.2"/>
+  <!-- Top rim metal -->
+  <ellipse cx="22" cy="7" rx="17" ry="2.6" fill="url(#xx-top)"/>
+  <ellipse cx="22" cy="6.8" rx="14" ry="1.6" fill="#2a2a2a"/>
+  <!-- Tab -->
+  <rect x="17" y="5" width="10" height="1.3" fill="#9a9a9a" rx="0.5"/>
+  <!-- Bottom lip -->
+  <ellipse cx="22" cy="55" rx="17" ry="2" fill="#0f3b24" opacity="0.4"/>
+  <!-- Brand text -->
+  <text x="22" y="22" font-family="'Helvetica Neue', Arial Black, sans-serif" font-weight="900" font-size="4.5" fill="#e11d48" text-anchor="middle" letter-spacing="0.3">DOS EQUIS</text><text x="22" y="34" font-family="'Helvetica Neue', Arial Black, sans-serif" font-weight="900" font-size="6.5" fill="#e11d48" text-anchor="middle" letter-spacing="0.2">XX</text><text x="22" y="46" font-family="'Helvetica Neue', Arial Black, sans-serif" font-weight="900" font-size="4.5" fill="#e11d48" text-anchor="middle" letter-spacing="0.3">LAGER</text>
+  <!-- Left highlight -->
+  <rect x="7" y="9" width="2" height="44" fill="white" opacity="0.32" rx="1"/>
+  <!-- Right shadow -->
+  <rect x="35" y="9" width="2.5" height="44" fill="black" opacity="0.18" rx="1"/>
+</svg>
+                        <div style="flex:1;min-width:0;">
+                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">XX Lager</div>
+                          <div style="font-size:11px;color:var(--text-muted);">$3 USD</div>
+                        </div>
+                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+                          <button type="button" class="drink-minus" aria-label="Remove" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
+                          <input type="number" class="drink-count" data-price="3" name="drink_xx_lager" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <button type="button" class="drink-plus" aria-label="Add" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
+                        </div>
+                      </div>
+                      <!-- Corona Extra -->
+                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
+                        <svg width="44" height="62" viewBox="0 0 44 62" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.2));">
+  <defs>
+    <linearGradient id="cor-body" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c49c20"/>
+      <stop offset="20%" stop-color="#f4d03f"/>
+      <stop offset="50%" stop-color="#f4d03f"/>
+      <stop offset="80%" stop-color="#f4d03f"/>
+      <stop offset="100%" stop-color="#c49c20"/>
+    </linearGradient>
+    <linearGradient id="cor-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4d4d4"/>
+      <stop offset="100%" stop-color="#7a7a7a"/>
+    </linearGradient>
+  </defs>
+  <!-- Body -->
+  <rect x="5" y="7" width="34" height="48" fill="url(#cor-body)" rx="1.2"/>
+  <!-- Top rim metal -->
+  <ellipse cx="22" cy="7" rx="17" ry="2.6" fill="url(#cor-top)"/>
+  <ellipse cx="22" cy="6.8" rx="14" ry="1.6" fill="#2a2a2a"/>
+  <!-- Tab -->
+  <rect x="17" y="5" width="10" height="1.3" fill="#9a9a9a" rx="0.5"/>
+  <!-- Bottom lip -->
+  <ellipse cx="22" cy="55" rx="17" ry="2" fill="#c49c20" opacity="0.4"/>
+  <!-- Brand text -->
+  <text x="22" y="22" font-family="'Helvetica Neue', Arial Black, sans-serif" font-weight="900" font-size="4.5" fill="#1e3a8a" text-anchor="middle" letter-spacing="0.3">CORONA</text><text x="22" y="34" font-family="'Helvetica Neue', Arial Black, sans-serif" font-weight="900" font-size="6.5" fill="#1e3a8a" text-anchor="middle" letter-spacing="0.2">EXTRA</text>
+  <!-- Left highlight -->
+  <rect x="7" y="9" width="2" height="44" fill="white" opacity="0.32" rx="1"/>
+  <!-- Right shadow -->
+  <rect x="35" y="9" width="2.5" height="44" fill="black" opacity="0.18" rx="1"/>
+</svg>
+                        <div style="flex:1;min-width:0;">
+                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Corona Extra</div>
+                          <div style="font-size:11px;color:var(--text-muted);">$3 USD</div>
+                        </div>
+                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+                          <button type="button" class="drink-minus" aria-label="Remove" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
+                          <input type="number" class="drink-count" data-price="3" name="drink_corona" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <button type="button" class="drink-plus" aria-label="Add" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
+                        </div>
+                      </div>
+
                     </div>
                     <div style="margin-top:var(--space-3);padding-top:var(--space-3);border-top:1px dashed rgba(0,0,0,0.12);display:flex;justify-content:space-between;align-items:center;">
                       <span style="color:var(--text-muted);font-size:var(--text-sm);">Drinks total:</span>
