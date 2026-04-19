@@ -269,17 +269,128 @@
                     </span>
                     <span style="font-weight:700;color:var(--brand-primary);">$30 USD</span>
                   </label>
-                  <label style="display:flex;align-items:center;gap:var(--space-3);font-size:var(--text-sm);cursor:pointer;padding:var(--space-3);border:1px solid rgba(0,0,0,0.08);border-radius:var(--radius-lg);background:#fff;">
-                    <input type="checkbox" name="cold_drinks" value="yes" style="accent-color:var(--brand-primary);width:18px;height:18px;flex-shrink:0;">
-                    <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--radius-md);background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);flex-shrink:0;">
-                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1e40af" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v2H8z"/><path d="M8 5l-1 4h10l-1-4"/><path d="M7 9h10l-1 11a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1L7 9z"/><path d="M9 13h6"/></svg>
-                    </span>
-                    <span style="flex:1;">
-                      <span style="display:block;font-weight:600;color:var(--text-primary);">Bebidas frías y refrigerios</span>
-                      <span style="display:block;font-size:var(--text-xs);color:var(--text-muted);">Pack de bebidas frías (agua, refrescos) para el camino</span>
-                    </span>
-                    <span style="font-weight:700;color:var(--brand-primary);">$10 USD</span>
-                  </label>
+                  <div style="padding:var(--space-4);border:1px solid rgba(0,0,0,0.08);border-radius:var(--radius-lg);background:#fff;">
+                    <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-4);">
+                      <span aria-hidden="true" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--radius-md);background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);flex-shrink:0;">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1e40af" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8v2H8z"/><path d="M8 5l-1 4h10l-1-4"/><path d="M7 9h10l-1 11a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1L7 9z"/><path d="M9 13h6"/></svg>
+                      </span>
+                      <div>
+                        <div style="font-weight:700;color:var(--text-primary);font-size:var(--text-base);">Bebidas frías para el trayecto</div>
+                        <div style="font-size:var(--text-xs);color:var(--text-muted);">$50 MXN c/u · 355 ml (12 oz) · toca + para añadir</div>
+                      </div>
+                    </div>
+                    <div class="drinks-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--space-2);">
+                      <!-- Coca-Cola -->
+                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
+                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#e1001f 0%,#a00016 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">COCA</span>
+                        <div style="flex:1;min-width:0;">
+                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Coca-Cola</div>
+                          <div style="font-size:11px;color:var(--text-muted);">$50 MXN</div>
+                        </div>
+                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+                          <button type="button" class="drink-minus" aria-label="Quitar" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
+                          <input type="number" class="drink-count" name="drink_coke" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <button type="button" class="drink-plus" aria-label="Añadir" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
+                        </div>
+                      </div>
+                      <!-- Coca-Cola Light -->
+                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
+                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#b8b8b8 0%,#7a7a7a 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">LIGHT</span>
+                        <div style="flex:1;min-width:0;">
+                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Coca-Cola Light</div>
+                          <div style="font-size:11px;color:var(--text-muted);">$50 MXN</div>
+                        </div>
+                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+                          <button type="button" class="drink-minus" aria-label="Quitar" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
+                          <input type="number" class="drink-count" name="drink_coke_light" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <button type="button" class="drink-plus" aria-label="Añadir" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
+                        </div>
+                      </div>
+                      <!-- Coca-Cola Zero -->
+                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
+                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#0a0a0a 0%,#2a2a2a 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">ZERO</span>
+                        <div style="flex:1;min-width:0;">
+                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Coca-Cola Zero</div>
+                          <div style="font-size:11px;color:var(--text-muted);">$50 MXN</div>
+                        </div>
+                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+                          <button type="button" class="drink-minus" aria-label="Quitar" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
+                          <input type="number" class="drink-count" name="drink_coke_zero" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <button type="button" class="drink-plus" aria-label="Añadir" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
+                        </div>
+                      </div>
+                      <!-- Pepsi -->
+                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
+                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#004B93 0%,#002f66 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">PEPSI</span>
+                        <div style="flex:1;min-width:0;">
+                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Pepsi</div>
+                          <div style="font-size:11px;color:var(--text-muted);">$50 MXN</div>
+                        </div>
+                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+                          <button type="button" class="drink-minus" aria-label="Quitar" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
+                          <input type="number" class="drink-count" name="drink_pepsi" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <button type="button" class="drink-plus" aria-label="Añadir" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
+                        </div>
+                      </div>
+                      <!-- Pepsi Light -->
+                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
+                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#6ba8d8 0%,#3d7bb8 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">LIGHT</span>
+                        <div style="flex:1;min-width:0;">
+                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Pepsi Light</div>
+                          <div style="font-size:11px;color:var(--text-muted);">$50 MXN</div>
+                        </div>
+                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+                          <button type="button" class="drink-minus" aria-label="Quitar" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
+                          <input type="number" class="drink-count" name="drink_pepsi_light" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <button type="button" class="drink-plus" aria-label="Añadir" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
+                        </div>
+                      </div>
+                      <!-- Sprite -->
+                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
+                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#1e9e4a 0%,#167038 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">SPRITE</span>
+                        <div style="flex:1;min-width:0;">
+                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Sprite</div>
+                          <div style="font-size:11px;color:var(--text-muted);">$50 MXN</div>
+                        </div>
+                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+                          <button type="button" class="drink-minus" aria-label="Quitar" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
+                          <input type="number" class="drink-count" name="drink_sprite" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <button type="button" class="drink-plus" aria-label="Añadir" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
+                        </div>
+                      </div>
+                      <!-- Fanta -->
+                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
+                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#ff7a00 0%,#cc5c00 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">FANTA</span>
+                        <div style="flex:1;min-width:0;">
+                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Fanta</div>
+                          <div style="font-size:11px;color:var(--text-muted);">$50 MXN</div>
+                        </div>
+                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+                          <button type="button" class="drink-minus" aria-label="Quitar" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
+                          <input type="number" class="drink-count" name="drink_fanta" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <button type="button" class="drink-plus" aria-label="Añadir" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
+                        </div>
+                      </div>
+                      <!-- Dr Pepper -->
+                      <div style="display:flex;align-items:center;gap:var(--space-2);padding:8px;border:1px solid rgba(0,0,0,0.06);border-radius:var(--radius-md);background:#fafafa;">
+                        <span style="display:inline-flex;align-items:center;justify-content:center;width:38px;height:52px;border-radius:6px;background:linear-gradient(180deg,#6b2730 0%,#3f161b 100%);color:#fff;font-weight:800;font-size:9px;line-height:1;box-shadow:inset 0 0 0 2px rgba(255,255,255,0.18);flex-shrink:0;letter-spacing:0.5px;">DR P</span>
+                        <div style="flex:1;min-width:0;">
+                          <div style="font-weight:600;font-size:13px;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Dr Pepper</div>
+                          <div style="font-size:11px;color:var(--text-muted);">$50 MXN</div>
+                        </div>
+                        <div class="drink-qty" style="display:flex;align-items:center;gap:4px;flex-shrink:0;">
+                          <button type="button" class="drink-minus" aria-label="Quitar" style="width:28px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;color:var(--text-primary);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">−</button>
+                          <input type="number" class="drink-count" name="drink_dr_pepper" value="0" min="0" max="20" readonly style="width:32px;height:28px;border:1px solid rgba(0,0,0,0.15);border-radius:6px;background:#fff;text-align:center;font-weight:600;font-size:13px;padding:0;-moz-appearance:textfield;">
+                          <button type="button" class="drink-plus" aria-label="Añadir" style="width:28px;height:28px;border:1px solid var(--brand-primary);border-radius:6px;background:var(--brand-primary);color:#000;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;line-height:1;">+</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="margin-top:var(--space-3);padding-top:var(--space-3);border-top:1px dashed rgba(0,0,0,0.12);display:flex;justify-content:space-between;align-items:center;">
+                      <span style="color:var(--text-muted);font-size:var(--text-sm);">Total de bebidas:</span>
+                      <strong id="drinks-total" style="color:var(--brand-primary);font-size:var(--text-base);">$0 MXN</strong>
+                    </div>
+                    <input type="hidden" name="drinks_total_mxn" id="drinks-total-input" value="0">
+                  </div>
                 </div>
               </div>
               <div style="display:flex;gap:var(--space-4);margin-top:var(--space-4);">
@@ -510,6 +621,39 @@
         prevStepEl.classList.add('active');
       }
     }
+
+    // Drinks counter (individual +/- per can)
+    (function(){
+      var PRICE = 50;
+      function updateDrinksTotal(){
+        var total = 0;
+        document.querySelectorAll('.drink-count').forEach(function(inp){
+          total += (parseInt(inp.value) || 0) * PRICE;
+        });
+        var el = document.getElementById('drinks-total');
+        if (el) el.textContent = '$' + total + ' MXN';
+        var hid = document.getElementById('drinks-total-input');
+        if (hid) hid.value = total;
+      }
+      document.querySelectorAll('.drink-plus').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var inp = btn.parentElement.querySelector('.drink-count');
+          if (!inp) return;
+          var v = Math.min((parseInt(inp.value)||0) + 1, 20);
+          inp.value = v;
+          updateDrinksTotal();
+        });
+      });
+      document.querySelectorAll('.drink-minus').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var inp = btn.parentElement.querySelector('.drink-count');
+          if (!inp) return;
+          var v = Math.max((parseInt(inp.value)||0) - 1, 0);
+          inp.value = v;
+          updateDrinksTotal();
+        });
+      });
+    })();
   </script>
 </body>
 </html>
